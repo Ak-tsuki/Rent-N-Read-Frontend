@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header__logo">
-        <img src={logo} alt="logo" className="header__logo--img" />
+       <Link></Link> <img src={logo} alt="logo" className="header__logo--img" />
       </div>
       <div
         className={`menu ${openMenu ? "menu--open" : ""}`}
@@ -23,7 +23,7 @@ const Header = () => {
         <div className="menu__line  "></div>
       </div>
       <nav className={`nav ${openMenu ? "nav--slide" : ""}`}>
-        <Link className="nav__links ">Home</Link>
+        <Link to="/" className="nav__links ">Home</Link>
         <Link className="nav__links">Books</Link>
         <Link className="nav__links">About</Link>
         <Link className="nav__btn nav__links">Sign In</Link>

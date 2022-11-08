@@ -5,13 +5,13 @@ import Footer from "./components/layout/Footer";
 import { BrowserRouter } from "react-router-dom";
 function App() {
   return (
-    <div className="App">
+    <>
       <BrowserRouter>
         <Header />
         <Body />
         <Footer />
       </BrowserRouter>
-    </div>
+    </>
   );
 }
 

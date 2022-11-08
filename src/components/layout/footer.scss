@@ -5,7 +5,7 @@
   align-items: center;
   padding: 60px;
   color: #fff;
-  background-color: #000;
+  background-color: #414141;
   position: relative;
   @media (max-width: 400px) {
     flex-direction: column;
@@ -66,6 +66,9 @@
   &__title {
     font-size: 20px;
     font-weight: 700;
+  }
+  &__contact {
+    font-size: 14px;
   }
   &__socials {
     display: flex;

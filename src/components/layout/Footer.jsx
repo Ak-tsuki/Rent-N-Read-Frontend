@@ -43,7 +43,7 @@ const Footer = () => {
               <input type="email" placeholder="Enter your email" />
             </div>
           </form>
-          <div className="contact__details">
+          <div className="newsletter__contact">
             +977- 9834223443 Dillibazar, Kathmandu
           </div>
           <div className="newsletter__socials">
@@ -51,7 +51,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer__copyright">
-          &copy; 2022 All rights reserved. N-Rental
+          &copy; 2022 All rights reserved. Rent N' Read
         </div>
       </section>
     </>

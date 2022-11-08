@@ -42,7 +42,7 @@ const Register = () => {
               Create an account
             </button>
           </form>
-          <button type="submit" className="register__google">
+          <button className="register__google">
             <AiFillGoogleCircle className="register__google--icon" size={30} />
             Sign up with google
           </button>

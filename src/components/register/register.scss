@@ -91,7 +91,7 @@
     width: 100%;
     padding: 15px;
     margin-bottom: 20px;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 21px;
     background: #ff6363;
     border-radius: 12px;
@@ -112,13 +112,16 @@
     justify-content: center;
     width: 100%;
     padding: 15px;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 21px;
     border-radius: 12px;
     background: #fff;
     color: #c1c1c1;
     border: 1px solid #b5b5b5;
     transition: all 0.3s;
+    @media (max-width: 940px) {
+      font-size: 18px;
+    }
     cursor: pointer;
     &:hover,
     &:focus {
@@ -130,9 +133,6 @@
       margin-right: 10px;
     }
   }
-  @media (max-width: 940px) {
-    font-size: 18px;
-  }
 }
 
 .login-link {
@@ -143,3 +143,4 @@
     text-decoration: underline;
   }
 }
+
