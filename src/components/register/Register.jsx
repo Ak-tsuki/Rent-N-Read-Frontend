@@ -31,8 +31,16 @@ const Register = () => {
       .then((response) => {
         console.log(response);
         if (response.status === 201) {
+          toast.success("User Registered Sucessfully", {
+            position: "top-center",
+            autoClose: 4000,
+          });
           window.location.replace("/login");
         } else {
+          toast.error("User Not Registered", {
+            position: "top-center",
+            autoClose: 4000,
+          });
         }
         console.log(response.data.msg);
       })
