@@ -17,8 +17,8 @@ const Login = () => {
         <h2 className="login__heading">Sign In to Rent N' Read</h2>
         <p className="login__sub-heading">
           Not registered?{" "}
-          <Link to="/" className="login-link">
-            Sign In
+          <Link to="/register" className="login-link">
+            Sign Up
           </Link>
         </p>
         <form className="login__form">
