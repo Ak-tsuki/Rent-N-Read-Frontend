@@ -12,19 +12,19 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
   const login = (e) => {
     e.preventDefault();
 
-    if (email.length == 0 || password.length == 0) {
+    if (username.length == 0 || password.length == 0) {
       setError(true);
     }
 
     const data = {
-      email: email,
+      username: username,
       password: password,
     };
     axios
@@ -80,11 +80,11 @@ const Login = () => {
               type="text"
               placeholder="Email"
               onChange={(e) => {
-                setEmail(e.target.value);
+                setUsername(e.target.value);
               }}
             />
-            {error && email.length <= 0 ? (
-              <label>Email cannot be empty</label>
+            {error && username.length <= 0 ? (
+              <label>Username cannot be empty</label>
             ) : (
               ""
             )}
