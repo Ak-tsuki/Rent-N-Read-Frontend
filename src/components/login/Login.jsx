@@ -14,9 +14,15 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const login = (e) => {
     e.preventDefault();
+
+    if (email.length == 0 || password.length == 0) {
+      setError(true);
+    }
+
     const data = {
       email: email,
       password: password,
@@ -67,7 +73,7 @@ const Login = () => {
             Sign Up
           </Link>
         </p>
-        <form className="login__form">
+        <form className="login__form" onSubmit={login}>
           <div className="login__input">
             <FaUserAlt size={20} className="login__input--icon" />
             <input
@@ -77,6 +83,11 @@ const Login = () => {
                 setEmail(e.target.value);
               }}
             />
+            {error && email.length <= 0 ? (
+              <label>Email cannot be empty</label>
+            ) : (
+              ""
+            )}
           </div>
           <div className="login__input">
             <ImKey size={20} className="login__input--icon" />
@@ -87,6 +98,11 @@ const Login = () => {
                 setPassword(e.target.value);
               }}
             />
+            {error && password.length <= 0 ? (
+              <label>Password cannot be empty</label>
+            ) : (
+              ""
+            )}
           </div>
           <button type="submit" className="login__btn" onClick={login}>
             Sign In
