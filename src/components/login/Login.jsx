@@ -5,7 +5,35 @@ import { ImKey } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import background from "../../assets/background.svg";
+import axios from "axios";
+import { useState } from "react";
+
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const login = (e) => {
+    e.preventDefault();
+    const data = {
+      email: email,
+      password: password,
+    };
+    axios
+      .post("http://localhost:90/user/login", data)
+      .then((res) => {
+        console.log(res);
+        if (res.data.token) {
+          console.log(res.data);
+          localStorage.setItem("user_type", res.data.user_type);
+          localStorage.setItem("token", res.data.token);
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <div className="login-container">
       {/* <img
@@ -24,13 +52,25 @@ const Login = () => {
         <form className="login__form">
           <div className="login__input">
             <FaUserAlt size={20} className="login__input--icon" />
-            <input type="text" placeholder="Username" />
+            <input
+              type="text"
+              placeholder="Email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
           </div>
           <div className="login__input">
             <ImKey size={20} className="login__input--icon" />
-            <input type="password" placeholder="Password" />
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
           </div>
-          <button type="submit" className="login__btn">
+          <button type="submit" className="login__btn" onClick={login}>
             Sign In
           </button>
         </form>
