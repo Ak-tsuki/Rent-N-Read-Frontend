@@ -24,9 +24,17 @@ const Login = () => {
         console.log(res);
         if (res.data.token) {
           console.log(res.data);
-          localStorage.setItem("user_type", res.data.user_type);
+          localStorage.setItem("userType", res.data.userType);
           localStorage.setItem("token", res.data.token);
-        } else {
+          if (localStorage.getItem("userType") === "admin") {
+            // console.log(res)
+            window.location.replace("/register");
+          } else {
+            console.log(res.data)
+            window.location.replace("/");
+          }
+        } 
+        else {
           console.log(res);
         }
       })
