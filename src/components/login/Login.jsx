@@ -65,7 +65,7 @@ const Login = () => {
         alt="background"
         className="login-container__background"
       /> */}
-      <div className="login">
+      <div className="login" data-test="register success">
         <h2 className="login__heading">Sign In to Rent N' Read</h2>
         <p className="login__sub-heading">
           Not registered?{" "}

@@ -46,8 +46,15 @@ const Register = () => {
             autoClose: 4000,
           });
           window.location.replace("/login");
-        } else {
-          toast.error("User Not Registered", {
+        } else if (response.status === 200) {
+          toast.error("Username Already Registered", {
+            toastId: "error",
+            position: "top-center",
+            autoClose: 4000,
+          });
+        } else if (response.status === 401) {
+          toast.error("Something Went Wrong, Please Try Again!!", {
+            toastId: "error",
             position: "top-center",
             autoClose: 4000,
           });
@@ -61,7 +68,7 @@ const Register = () => {
 
   return (
     <>
-      <div className="register-container">
+      <div className="register-container" data-test="register">
         <div className="register">
           <div className="register__image">
             <img
@@ -87,6 +94,7 @@ const Register = () => {
                   onChange={(e) => {
                     setUsername(e.target.value);
                   }}
+                  data-test="username"
                 />
                 {error && username.length <= 0 ? (
                   <label>Username cannot be empty</label>
@@ -104,6 +112,7 @@ const Register = () => {
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
+                  data-test="email"
                 />
                 {error && email.length <= 0 ? (
                   <label>Email cannot be empty</label>
@@ -121,6 +130,7 @@ const Register = () => {
                   onChange={(e) => {
                     setContactNo(e.target.value);
                   }}
+                  data-test="contactno"
                 />
                 {error && contact_no.length <= 0 ? (
                   <label>Contact number cannot be empty</label>
@@ -138,6 +148,7 @@ const Register = () => {
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
+                  data-test="password"
                 />
                 {error && password.length <= 0 ? (
                   <label>Password cannot be empty</label>
@@ -150,6 +161,7 @@ const Register = () => {
                 type="submit"
                 className="register__btn"
                 onClick={registerUser}
+                data-test="register-btn"
               >
                 Create an account
               </button>
