@@ -16,9 +16,19 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [contact_no, setContactNo] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const registerUser = (e) => {
     e.preventDefault();
+    if (
+      username.length == 0 ||
+      email.length == 0 ||
+      contact_no.length == 0 ||
+      password.length == 0
+    ) {
+      setError(true);
+    }
+
     const data = {
       username: username,
       contact_no: contact_no,
@@ -68,51 +78,74 @@ const Register = () => {
                 Sign In
               </Link>{" "}
             </h4>
-            <form>
+            <form onSubmit={registerUser}>
               <div className="register__input">
                 <FaUserAlt size={20} className="register__input--icon" />
                 <input
-                  required={true}
                   type="text"
                   placeholder="Username"
                   onChange={(e) => {
                     setUsername(e.target.value);
                   }}
                 />
+                {error && username.length <= 0 ? (
+                  <label>Username cannot be empty</label>
+                ) : (
+                  ""
+                )}
               </div>
+
               <div className="register__input">
                 <MdEmail size={20} className="register__input--icon" />
                 <input
-                  required={true}
+                  required
                   type="email"
                   placeholder="Email address"
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
                 />
+                {error && email.length <= 0 ? (
+                  <label>Email cannot be empty</label>
+                ) : (
+                  ""
+                )}
               </div>
+
               <div className="register__input">
                 <FaPhone size={20} className="register__input--icon" />
                 <input
-                  required={true}
+                  required
                   type="number"
                   placeholder="Contact No."
                   onChange={(e) => {
                     setContactNo(e.target.value);
                   }}
                 />
+                {error && contact_no.length <= 0 ? (
+                  <label>Contact number cannot be empty</label>
+                ) : (
+                  ""
+                )}
               </div>
+
               <div className="register__input">
                 <ImKey size={20} className="register__input--icon" />
                 <input
-                  required={true}
+                  required
                   type="password"
                   placeholder="Enter password"
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
                 />
+                {error && password.length <= 0 ? (
+                  <label>Password cannot be empty</label>
+                ) : (
+                  ""
+                )}
               </div>
+
               <button
                 type="submit"
                 className="register__btn"

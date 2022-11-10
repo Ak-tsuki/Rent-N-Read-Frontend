@@ -8,6 +8,9 @@ import background from "../../assets/background.svg";
 import axios from "axios";
 import { useState } from "react";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,15 +29,22 @@ const Login = () => {
           console.log(res.data);
           localStorage.setItem("userType", res.data.userType);
           localStorage.setItem("token", res.data.token);
+          toast.success("User Logged In  Sucessfully", {
+            position: "top-center",
+            autoClose: 4000,
+          });
           if (localStorage.getItem("userType") === "admin") {
             // console.log(res)
             window.location.replace("/register");
           } else {
-            console.log(res.data)
+            console.log(res.data);
             window.location.replace("/");
           }
-        } 
-        else {
+        } else {
+          toast.error("User Not Logged In", {
+            position: "top-center",
+            autoClose: 4000,
+          });
           console.log(res);
         }
       })
