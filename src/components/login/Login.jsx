@@ -48,6 +48,7 @@ const Login = () => {
           }
         } else {
           toast.error("User Not Logged In", {
+            toastId: "error",
             position: "top-center",
             autoClose: 4000,
           });
@@ -59,7 +60,7 @@ const Login = () => {
       });
   };
   return (
-    <div className="login-container">
+    <div className="login-container" data-test="login">
       {/* <img
         src={background}
         alt="background"
@@ -82,6 +83,7 @@ const Login = () => {
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
+              data-test="username"
             />
             {error && username.length <= 0 ? (
               <label>Username cannot be empty</label>
@@ -97,6 +99,7 @@ const Login = () => {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
+              data-test="password"
             />
             {error && password.length <= 0 ? (
               <label>Password cannot be empty</label>
@@ -104,7 +107,12 @@ const Login = () => {
               ""
             )}
           </div>
-          <button type="submit" className="login__btn" onClick={login}>
+          <button
+            type="submit"
+            className="login__btn"
+            onClick={login}
+            data-test="login-btn"
+          >
             Sign In
           </button>
         </form>
