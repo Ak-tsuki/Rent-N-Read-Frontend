@@ -42,7 +42,7 @@ const DashboardNav = ({ open }) => {
         />
         <p className="dash-nav__profile--username">{userDetails.username}</p>
       </div>
-      <Link className="dash-nav__link">
+      <Link className="dash-nav__link" to="/dashboard">
         {" "}
         <ImBooks className="dash-nav__link--icon" />
         My Books
