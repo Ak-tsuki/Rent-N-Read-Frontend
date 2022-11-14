@@ -21,10 +21,10 @@ const Register = () => {
   const registerUser = (e) => {
     e.preventDefault();
     if (
-      username.length == 0 ||
-      email.length == 0 ||
-      contact_no.length == 0 ||
-      password.length == 0
+      username.length === 0 ||
+      email.length === 0 ||
+      contact_no.length === 0 ||
+      password.length === 0
     ) {
       setError(true);
     }

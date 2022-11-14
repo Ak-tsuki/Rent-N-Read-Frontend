@@ -11,10 +11,11 @@ const Header = () => {
   };
   return (
     <div className="header">
-      <div className="header__logo">
-        <Link></Link>{" "}
-        <img src={logo} alt="logo" className="header__logo--img" />
-      </div>
+      <Link to="/home">
+        <div className="header__logo">
+          <img src={logo} alt="logo" className="header__logo--img" />
+        </div>
+      </Link>
       <div
         className={`menu ${openMenu ? "menu--open" : ""}`}
         onClick={menuClickHandler}

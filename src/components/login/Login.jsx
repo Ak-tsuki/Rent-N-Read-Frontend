@@ -4,11 +4,10 @@ import { FaUserAlt } from "react-icons/fa";
 import { ImKey } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { AiFillGoogleCircle } from "react-icons/ai";
-import background from "../../assets/background.svg";
 import axios from "axios";
 import { useState } from "react";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -19,7 +18,7 @@ const Login = () => {
   const login = (e) => {
     e.preventDefault();
 
-    if (username.length == 0 || password.length == 0) {
+    if (username.length === 0 || password.length === 0) {
       setError(true);
     }
 
@@ -79,7 +78,7 @@ const Login = () => {
             <FaUserAlt size={20} className="login__input--icon" />
             <input
               type="text"
-              placeholder="Email"
+              placeholder="Username"
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
