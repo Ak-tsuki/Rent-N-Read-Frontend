@@ -1,26 +1,19 @@
 import React from "react";
 import "./bookCard.scss";
 import { FaTrash, FaPenAlt } from "react-icons/fa";
-const BookCard = () => {
+const BookCard = ({ book }) => {
+  const { title, author, cost, image, desc } = book;
   return (
     <div className="book-card">
       <FaTrash className="book-card__delete" />
-      <img
-        src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1593147230l/48946798.jpg"
-        alt="book_img"
-        className="book-card__img"
-      />
+      <img src={image} alt="book_img" className="book-card__img" />
       <div className="book-details">
-        <h2 className="book-details__title">Anya and the Nightingale</h2>
-        <p className="book-details__author">Sofiya Pasternack</p>
-        <p className="book-details__desc">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis cras
-          pulvinar ultrices id nisl ornare nisi. Nisi, morbi consectetur nibh
-          dapibus maecenas elementum id nec. Velit vitae tellus ac feugiat non
-          ridiculus.
-        </p>
+        <h2 className="book-details__title">{title}</h2>
+        <p className="book-details__author">{author}</p>
+        <p className="book-details__desc">{desc}</p>
         <p className="book-details__cost">
-          Rent Cost: <span className="book-details__cost--amount">Rs 30</span>
+          Rent Cost:{" "}
+          <span className="book-details__cost--amount">Rs {cost}</span>
           /day
         </p>
         <div className="book-details__update">
