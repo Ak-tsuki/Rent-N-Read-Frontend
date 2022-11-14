@@ -20,7 +20,7 @@
 .nav {
   display: flex;
   transition: all 0.3s;
-  z-index: 10;
+  z-index: 100;
   &__links {
     display: inline-block;
     text-decoration: none;

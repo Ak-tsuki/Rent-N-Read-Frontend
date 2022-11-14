@@ -8,7 +8,7 @@ import { BsFillFileEarmarkPdfFill } from "react-icons/bs";
 import { GiSpeaker } from "react-icons/gi";
 import { RiExchangeBoxFill, RiMessage2Fill } from "react-icons/ri";
 import "./dashboard.scss";
-const DashboardNav = () => {
+const DashboardNav = ({ open }) => {
   const [userDetails, setUserDetails] = useState("");
   const config = {
     headers: {
@@ -29,12 +29,12 @@ const DashboardNav = () => {
   }, []);
 
   return (
-    <div className="dash-nav">
+    <div className={`dash-nav ${open ? "dash-nav__open" : "dash-nav__close"} `}>
       <div className="dash-nav__profile">
         <img
           src={
-            userDetails.profile
-              ? userDetails.profile
+            userDetails.profile_pic
+              ? userDetails.profile_pic
               : "https://www.pngitem.com/pimgs/m/421-4212341_default-avatar-svg-hd-png-download.png"
           }
           alt="profile_img"
