@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "../login/Login";
 import Register from "../register/Register";
 import Dashboard from "../dashboard/Dashboard";
+import MyBooks from "../dashboard/MyBooks";
 const Body = () => {
   return (
     <>
@@ -12,7 +13,7 @@ const Body = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />}>
-         
+          <Route path="mybooks" element={<MyBooks />} />
         </Route>
       </Routes>
     </>

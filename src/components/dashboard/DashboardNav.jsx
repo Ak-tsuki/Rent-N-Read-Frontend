@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
 import { ImBooks, ImCog } from "react-icons/im";
 import { GiOpenBook } from "react-icons/gi";
 import { BsFillFileEarmarkPdfFill } from "react-icons/bs";
@@ -7,39 +9,62 @@ import { GiSpeaker } from "react-icons/gi";
 import { RiExchangeBoxFill, RiMessage2Fill } from "react-icons/ri";
 import "./dashboard.scss";
 const DashboardNav = () => {
+  const [userDetails, setUserDetails] = useState("");
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:90/user/get", config)
+      .then((res) => {
+        setUserDetails(res.data.data);
+        console.log(userDetails.username);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   return (
     <div className="dash-nav">
       <div className="dash-nav__profile">
         <img
-          src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+          src={
+            userDetails.profile
+              ? userDetails.profile
+              : "https://www.pngitem.com/pimgs/m/421-4212341_default-avatar-svg-hd-png-download.png"
+          }
           alt="profile_img"
           className="dash-nav__profile--img"
         />
-        <p className="dash-nav__profile--username">Username</p>
+        <p className="dash-nav__profile--username">{userDetails.username}</p>
       </div>
       <Link className="dash-nav__link">
         {" "}
-        <ImBooks size={30} />
+        <ImBooks className="dash-nav__link--icon" />
         My Books
       </Link>
       <Link className="dash-nav__link">
         {" "}
-        <GiOpenBook size={30} />
+        <GiOpenBook className="dash-nav__link--icon" />
         Rent Requests
       </Link>
       <Link className="dash-nav__link">
         {" "}
-        <RiExchangeBoxFill size={30} />
+        <RiExchangeBoxFill className="dash-nav__link--icon" />
         Exchange Requests
       </Link>
       <Link className="dash-nav__link">
         {" "}
-        <BsFillFileEarmarkPdfFill size={30} />
+        <BsFillFileEarmarkPdfFill className="dash-nav__link--icon" />
         E-books
       </Link>
       <Link className="dash-nav__link">
         {" "}
-        <GiSpeaker size={30} />
+        <GiSpeaker className="dash-nav__link--icon" />
         Audio Books
       </Link>
       <br />
@@ -47,12 +72,12 @@ const DashboardNav = () => {
       <br />
       <Link className="dash-nav__link">
         {" "}
-        <RiMessage2Fill size={30} />
+        <RiMessage2Fill className="dash-nav__link--icon" />
         Emails and Messages
       </Link>
       <Link className="dash-nav__link">
         {" "}
-        <ImCog size={30} />
+        <ImCog className="dash-nav__link--icon" />
         Settings
       </Link>
     </div>
