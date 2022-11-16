@@ -5,6 +5,8 @@ import { Theme, useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 import {
   Button,
@@ -15,6 +17,8 @@ import {
   Select,
 } from "@mui/material";
 import { Stack } from "react-bootstrap";
+import { Name } from "selenium-webdriver/lib/command";
+import { toast } from "react-toastify";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -64,6 +68,75 @@ function getStyles(name, categoryName, theme) {
 const AddBook = () => {
   const theme = useTheme();
   const [categoryName, setcategoryName] = React.useState([]);
+  const [name, setName] = useState("");
+  const [rich_desc, setRich_desc] = useState("");
+  const [desc, setDesc] = useState("");
+  const [author, setAuthor] = useState("");
+  const [rent_cost_perday, setRent_cost_Perday] = useState("");
+  const [book_img, setBook_img] = useState("");
+
+  const addBook = (e) => {
+    // e.perventDefault();
+    // console.log(typeof(rent_cost_perday));
+    // console.log(name);
+    // console.log(rich_desc);
+    // console.log(desc);
+    // console.log(author);
+    // console.log(book_img);
+    // console.log(categoryName);
+    if(categoryName === [] || name === "" || rich_desc === "" || author === "" || book_img ==="" || desc ==="" || rent_cost_perday===""){
+      toast.warn("Fill all Required Field", {
+        position: "top-center",
+        autoClose: 4000,
+      });
+      return;
+    }
+
+    const data = new FormData();
+    data.append("category", categoryName);
+    data.append("name", name);
+    data.append("rich_desc", rich_desc);
+    data.append("desc", desc);
+    data.append("author", author);
+    data.append("rent_cost_perday", rent_cost_perday);
+    data.append("book_img", book_img);
+    console.log(data);
+
+
+    const config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    axios
+      .post("http://localhost:90/book/add", data, config)
+      .then((res) => {
+        if (res.status === 201) {
+          console.log("Book Added Successfully");
+          window.location.replace("/dashboard");
+          toast.success("Book Added Successfully", {
+            position: "top-center",
+            autoClose: 4000,
+          });
+          
+
+         
+        } else {
+          console.log("Please Try Again! Something Went Wrong!!!",res);
+          toast.error("Somthing went wrong!", {
+            toastId: "error",
+            position: "top-center",
+            autoClose: 4000,
+          });
+        }
+
+        // console.log(res);
+      })
+
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   const handleChange = (event) => {
     const {
@@ -92,11 +165,15 @@ const AddBook = () => {
       >
         <div className="row">
           <TextField
-            required
+            helperText="incorrect"
+           
             id="outlined-required fullWidth"
             fullWidth
             label="Book Name"
             width="100%"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
           />
           <TextField
             required
@@ -104,6 +181,9 @@ const AddBook = () => {
             fullWidth
             label="Book Author"
             width="100%"
+            onChange={(e) => {
+              setAuthor(e.target.value);
+            }}
           />
           <TextField
             required
@@ -112,6 +192,9 @@ const AddBook = () => {
             maxRows={4}
             id="outlined-required outlined-multiline-static"
             label="Book Description"
+            onChange={(e) => {
+              setDesc(e.target.value);
+            }}
           />
           <TextField
             required
@@ -120,6 +203,9 @@ const AddBook = () => {
             maxRows={6}
             id="outlined-required outlined-multiline-static"
             label="Book Rich Description"
+            onChange={(e) => {
+              setRich_desc(e.target.value);
+            }}
           />
           <FormControl sx={{ pb: 2 }} required>
             <InputLabel id="demo-multiple-name-label">Book Category</InputLabel>
@@ -153,20 +239,36 @@ const AddBook = () => {
             InputLabelProps={{
               shrink: true,
             }}
+            onChange={(e) => {
+              setBook_img(e.target.files[0]);
+            }}
           />
           <FormControl fullWidth required>
-            <InputLabel htmlFor="outlined-adornment-amount">
+            <InputLabel htmlFor="outlined-adornment-amount" >
               Rent Price
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-amount"
               startAdornment={
-                <InputAdornment position="start">Rs.</InputAdornment>
+                <InputAdornment position="start" >Rs.</InputAdornment>
               }
               label="Amount"
+              type="number"
+              
+        
+              onChange={(e) => {
+                setRent_cost_Perday(e.target.value);
+              }}
+              
+              
             />
           </FormControl>
-          <Button className="mt-2 fs-5 fw-bold" variant="contained" endIcon={<AddCircleIcon className="fs-3" />}>
+          <Button
+            className="mt-2 fs-5 fw-bold"
+            variant="contained"
+            endIcon={<AddCircleIcon className="fs-3" />}
+            onClick={addBook}
+          >
             Add a Book
           </Button>
         </div>

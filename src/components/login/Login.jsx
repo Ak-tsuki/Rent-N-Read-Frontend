@@ -43,7 +43,7 @@ const Login = () => {
             window.location.replace("/register");
           } else {
             console.log(res.data);
-            window.location.replace("/");
+            window.location.replace("/dashboard");
           }
         } else {
           toast.error("User Not Logged In", {

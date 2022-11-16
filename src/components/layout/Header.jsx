@@ -9,6 +9,10 @@ const Header = () => {
     e.preventDefault();
     setOpenMenu((p) => !p);
   };
+  const logout = () => {
+    localStorage.clear();
+    window.location.replace("/login");
+  };
   return (
     <div className="header">
       <Link to="/home">
@@ -30,9 +34,15 @@ const Header = () => {
         </Link>
         <Link className="nav__links">Books</Link>
         <Link className="nav__links">About</Link>
-        <Link className="nav__btn nav__links" to="login">
-          Sign In
-        </Link>
+        {localStorage.getItem("token") ? (
+          <Link className="nav__btn nav__links" to="login" onClick={logout}>
+            Log out
+          </Link>
+        ) : (
+          <Link className="nav__btn nav__links" to="login">
+            Login
+          </Link>
+        )}
       </nav>
     </div>
   );
