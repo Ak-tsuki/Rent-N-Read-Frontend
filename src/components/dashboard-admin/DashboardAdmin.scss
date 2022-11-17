@@ -1,0 +1,24 @@
+.admin-dashboard {
+  &__logo {
+    padding: 13px 0;
+    display: flex;
+    justify-content: center;
+  }
+  &__nav {
+    text-decoration: none;
+    color: #000;
+    &:hover,
+    &:focus,
+    &:active {
+      color: inherit;
+      background-color: inherit;
+    }
+    &--heading {
+      padding: 0 16px;
+      font-family: "Alata";
+      font-size: 12px;
+      margin: 20px 0 10px 0;
+      text-transform: uppercase;
+    }
+  }
+}

@@ -8,9 +8,9 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
+        {localStorage.getItem("userType") !== "admin" && <Header />}
         <Body />
-        <Footer />
+        {localStorage.getItem("userType") !== "admin" && <Footer />}
       </BrowserRouter>
       <ToastContainer></ToastContainer>
     </>

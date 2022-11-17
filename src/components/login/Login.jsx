@@ -40,7 +40,7 @@ const Login = () => {
           });
           if (localStorage.getItem("userType") === "admin") {
             // console.log(res)
-            window.location.replace("/register");
+            window.location.replace("/dashboard_admin");
           } else {
             console.log(res.data);
             window.location.replace("/dashboard");
