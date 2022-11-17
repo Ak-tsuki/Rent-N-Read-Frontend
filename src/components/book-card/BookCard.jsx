@@ -2,18 +2,20 @@ import React from "react";
 import "./bookCard.scss";
 import { FaTrash, FaPenAlt } from "react-icons/fa";
 const BookCard = ({ book }) => {
-  const { title, author, cost, image, desc } = book;
+  const { name, author, rent_cost_perday, book_pic, desc, category, status } = book;
   return (
     <div className="book-card">
       <FaTrash className="book-card__delete" />
-      <img src={image} alt="book_img" className="book-card__img" />
+      <img src={`http://localhost:90/${book_pic}`} alt="book_img" className="book-card__img" />
       <div className="book-details">
-        <h2 className="book-details__title">{title}</h2>
+        <h2 className="book-details__title">{name}</h2>
         <p className="book-details__author">{author}</p>
         <p className="book-details__desc">{desc}</p>
+        <p className="book-details__desc">{category.toString()}</p>
+        <p className="book-details__desc">Status: {status}</p>
         <p className="book-details__cost">
           Rent Cost:{" "}
-          <span className="book-details__cost--amount">Rs {cost}</span>
+          <span className="book-details__cost--amount">Rs {rent_cost_perday}</span>
           /day
         </p>
         <div className="book-details__update">

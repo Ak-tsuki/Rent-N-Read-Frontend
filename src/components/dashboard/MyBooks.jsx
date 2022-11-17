@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaBook } from "react-icons/fa";
 import AddBook from "../add_book/AddBook";
 import BookCard from "../book-card/BookCard";
@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import axios from "axios";
 
 const style = {
   position: 'absolute',
@@ -21,7 +22,9 @@ const style = {
 
 const MyBooks = () => {
   const [currentTab, setCurrentTab] = useState("listed");
-  const listedBooks = [
+  const [listedBooks, setListedBooks] = useState([]);
+  const [rentedBooks, setRentedBooks] = useState([]);
+  const listedBooks2 = [
     {
       title: "Harry Potter",
       author: "J.K. Rowling",
@@ -62,6 +65,20 @@ const MyBooks = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+  useEffect(() => {
+    axios.get("http://localhost:90/book/get", config).then((res) => {
+      console.log(res.data);
+      setListedBooks(res.data.data);
+      console.log(listedBooks);
+    });
+  }, []);
+
+
   return (
     <div className="mybooks-container">
       <div className="add-book">
@@ -99,11 +116,11 @@ const MyBooks = () => {
       </div>
       <div>
         {currentTab === "rented"
-          ? rentedBook.map((book) => <BookCard book={book} />)
+          ? rentedBooks.map((book) => <BookCard book={book} />)
           : listedBooks.map((book) => <BookCard book={book} />)}
       </div>
       <div>
-        <Button onClick={handleOpen}>Open modal</Button>
+        {/* <Button onClick={handleOpen}>Open modal</Button> */}
         <Modal
           open={open}
           onClose={handleClose}
