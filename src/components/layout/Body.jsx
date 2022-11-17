@@ -7,6 +7,7 @@ import Dashboard from "../dashboard/Dashboard";
 import MyBooks from "../dashboard/MyBooks";
 import DashboardAdmin from "../dashboard-admin/DashboardAdmin";
 import DashboardHome from "../dashboard-admin/DashboardHome";
+import AdminApprove from "../admin-approveBook/AdminApprove";
 const Body = () => {
   return (
     <>
@@ -19,6 +20,7 @@ const Body = () => {
         </Route>
         <Route path="/dashboard_admin" element={<DashboardAdmin />}>
           <Route path="" element={<DashboardHome />} />
+          <Route path="admin_approve" element={<AdminApprove />} />
         </Route>
       </Routes>
     </>

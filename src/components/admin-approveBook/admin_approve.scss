@@ -1,0 +1,58 @@
+#heading th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+
+  #title{
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 50px;
+    padding-bottom: 25px;
+    text-align: center;
+    font-size: xx-large;
+  }
+
+  .approve--btn {
+    display: flex;
+    align-items: center;
+
+    padding: 8px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    background: #64a36e;
+    border-radius: 6px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    svg {
+      margin-left: 5px;
+    }
+    &:hover {
+      background: #447c4d;
+    }
+  }
+
+  
+  .reject--btn {
+    display: flex;
+    align-items: center;
+
+    padding: 8px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    background: #d43131;
+    border-radius: 6px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    svg {
+      margin-left: 5px;
+    }
+    &:hover {
+      background: #9e0404;
+    }
+  }
