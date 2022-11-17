@@ -12,7 +12,8 @@ const BookCard = ({ book }) => {
         <p className="book-details__author">{author}</p>
         <p className="book-details__desc">{desc}</p>
         <p className="book-details__desc">{category.toString()}</p>
-        <p className="book-details__desc">Status: {status}</p>
+        
+        <p className="book-details__desc">Status:<span className={`book-details__desc  ${ status==="Requested" && "text-warning" || status==="Approved" && "text-success" || status==="Rejected" && "text-danger"}`}> {status}</span></p>
         <p className="book-details__cost">
           Rent Cost:{" "}
           <span className="book-details__cost--amount">Rs {rent_cost_perday}</span>
