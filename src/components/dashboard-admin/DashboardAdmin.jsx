@@ -66,7 +66,7 @@ function DashboardAdmin(props) {
   }, []);
 
   const drawer = (
-    <div className="alata">
+    <div className="alata" data-test="admin dashboard">
       <div className="admin-dashboard__logo">
         <img src={logo} alt="logo" />
       </div>
@@ -112,6 +112,7 @@ function DashboardAdmin(props) {
         <Link
           to="/dashboard_admin/admin_approve"
           className="admin-dashboard__nav"
+          data-test="admin_approve_btn"
         >
           <ListItem disablePadding>
             <ListItemButton>

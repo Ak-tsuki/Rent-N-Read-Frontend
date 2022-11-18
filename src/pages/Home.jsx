@@ -4,7 +4,7 @@ import { BiSearch } from "react-icons/bi";
 import { FaBook } from "react-icons/fa";
 const Home = () => {
   return (
-    <div className="home-container" data-test="login success">
+    <div className="home-container">
       <section className="hero">
         <form className="search">
           <input

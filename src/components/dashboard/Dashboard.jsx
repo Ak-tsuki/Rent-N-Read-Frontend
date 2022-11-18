@@ -10,7 +10,7 @@ const Dashboard = () => {
     setNavOpen((p) => !p);
   };
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container" data-test="login success">
       <RiDashboardFill className="dashboard-btn" onClick={menuClickHandler} />
       <div className="dashboard">
         <DashboardNav open={navOpen} />

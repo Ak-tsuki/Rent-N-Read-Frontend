@@ -27,6 +27,7 @@ const AdminApprove = () => {
         console.log(response.data.msg);
         toast.success(
           "Approved Successfully",
+          { toastId: "Approve success" },
           setTimeout(() => {
             window.location.reload();
           }, 1500)
@@ -47,6 +48,7 @@ const AdminApprove = () => {
         console.log(response.data.msg);
         toast.success(
           "Rejected Successfully",
+          { toastId: "Reject success" },
           setTimeout(() => {
             window.location.reload();
           }, 1500)
@@ -65,7 +67,7 @@ const AdminApprove = () => {
     });
   }, []);
   return (
-    <div>
+    <div data-test="approve_book">
       <h1 className="table-title">Verify Books</h1>
       <div className="table-responsive">
         <Table className="table" id="heading" striped>
@@ -108,30 +110,54 @@ const AdminApprove = () => {
                   {book.status}
                 </td>
                 <td>
-                  {book.status === "Pending" ? (
+                  {/* {book.status === "Pending" ? (
                     <>
-                      <button
-                        className="approve--btn"
-                        onClick={(e) => {
-                          approveBook(book._id, e);
-                        }}
-                      >
-                        Approve &nbsp; <BsFillCheckCircleFill />
-                      </button>
                       <button
                         className="reject--btn"
                         onClick={(e) => {
                           rejectBook(book._id, e);
                         }}
+                        data-test="approve--btn"
                       >
                         Reject &nbsp; <ImCross />
                       </button>
+                      <button
+                        type="submit"
+                        className="approve--btn"
+                        onClick={(e) => {
+                          approveBook(book._id, e);
+                        }}
+                        data-test="approve--btn"
+                      >
+                        Approve &nbsp; <BsFillCheckCircleFill />
+                      </button>
                     </>
                   ) : (
-                    <button className="reject--btn">
-                      Deletes &nbsp; <ImCross />
-                    </button>
-                  )}
+                    <>
+                      <button className="reject--btn">
+                        Deletes &nbsp; <ImCross />
+                      </button>
+                    </>
+                  )} */}
+                  <button
+                    type="submit"
+                    className="approve--btn"
+                    onClick={(e) => {
+                      approveBook(book._id, e);
+                    }}
+                    data-test="approve--btn"
+                  >
+                    Approve &nbsp; <BsFillCheckCircleFill />
+                  </button>
+                  <button
+                    className="reject--btn"
+                    onClick={(e) => {
+                      rejectBook(book._id, e);
+                    }}
+                    data-test="reject--btn"
+                  >
+                    Reject &nbsp; <ImCross />
+                  </button>
                 </td>
               </tr>
             ))}
