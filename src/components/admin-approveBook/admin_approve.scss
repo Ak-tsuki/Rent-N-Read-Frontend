@@ -1,72 +1,79 @@
 #heading th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #36906f;
-    color: white;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #36906f;
+  color: white;
+}
+.table-title{
+  font-family:"Raleway";
+  padding-top: 10px;
+  padding-bottom: 25px;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 30px;
+}
+.approve--btn {
+  margin-right: 8px;
+  width:100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #64a36e;
+  border-radius: 10px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  svg {
+    margin-left: 5px;
+    font-size: 10px;
   }
-
-  .table-title{
-    font-family: Arial, Helvetica, sans-serif;
-    padding-top: 10px;
-    padding-bottom: 25px;
-    text-align: center;
-    font-weight: bolder;
-    font-size: 58px;
-
+  &:hover {
+    background: #447c4d;
   }
-
-  .approve--btn {
-    display: flex;
-    width:100%;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 10px;
-    font-size: 16px;
-    font-weight: 500;
-    background: #64a36e;
-    border-radius: 6px;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-    svg {
-      margin-left: 5px;
-    }
-    &:hover {
-      background: #447c4d;
-    }
-  }
-
-  
+}
   .reject--btn {
     display: flex;
-    width:100%;
+    width:100px;
     justify-content: center;
     align-items: center;
-    margin-top: 3px;
-    padding: 8px 10px;
-    font-size: 16px;
+    padding: 8px;
+    font-size: 14px;
     font-weight: 500;
-    background: #d43131;
-    border-radius: 6px;
+    background: #e22424;
+    border-radius: 10px;
     color: #fff;
     border: none;
     cursor: pointer;
     transition: all 0.2s;
     svg {
       margin-left: 5px;
+      font-size: 10px;
     }
     &:hover {
-      background: #9e0404;
+      background: #a70c0c;
     }
   }
-
-  .table-img{
-    max-width:200px;
-  }
-
-  .pending-color{
-    color: #e0bd10;
-    font-weight: bold;
-  }
+.table-img{
+  max-width:200px;
+  height:250px;
+  object-fit: contain;
+}
+.pending-color{
+  color: #e0bd10;
+  font-weight: bold;
+}
+.tableheading{
+  font-size: large;
+  font-weight: 300;
+}
+.moreInfo{
+  margin-left: 35px;
+}
+.rent-tableheading{
+  width:180px;
+}

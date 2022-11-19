@@ -9,7 +9,9 @@ Feature: Approve and Reject Book
 
     Scenario: As an Admin I can Reject Book
         Given I am on the "approve_book" page
-        When I click the "reject--btn" button
+        And I click the "reject--btn" button
+        And I should see "reject-modal" modal
+        When I click the "yes-btn" button
         Then I should see "Reject success" message
 
 
