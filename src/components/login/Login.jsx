@@ -55,6 +55,11 @@ const Login = () => {
         }
       })
       .catch((e) => {
+        toast.error("User Not Registered", {
+          toastId: "error",
+          position: "top-center",
+          autoClose: 4000,
+        });
         console.log(e);
       });
   };

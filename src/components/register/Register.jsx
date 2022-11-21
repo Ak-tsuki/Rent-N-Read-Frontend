@@ -137,6 +137,11 @@ const Register = () => {
         console.log(response.data.msg);
       })
       .catch((e) => {
+        toast.error("Something Went Wrong, Please Try Again!!", {
+          toastId: "error",
+          position: "top-center",
+          autoClose: 4000,
+        });
         console.log(e);
       });
   };
