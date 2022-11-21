@@ -1,0 +1,40 @@
+.listed-card{
+    background: linear-gradient(to bottom, #c2c2c2 5%, #ffffff 80%);
+}
+.book-Name{
+    font-weight: 600;
+    font-size: 18px;
+    color: #783A0D;
+    overflow-wrap: break-word;
+    
+}
+
+.book-Author{
+    font-weight: 500;
+    font-size: 20px;
+    color: #838684;
+    overflow-wrap: break-word;
+}
+
+.bookcost,.bookday{
+    font-size: 20px;
+    font-weight: 500;
+}
+.bookcost{
+    color: #0DCD2C;
+}
+.bookday{
+    color: #838684;
+}
+
+.rent-btn{
+    background-color: #ff6363;
+}
+.rent-icon{
+    color: #ffffff;
+    font-size: 25px;
+}
+
+.rent-btn:hover{
+    background-color: #7e0000;
+}

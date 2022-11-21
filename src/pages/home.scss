@@ -119,3 +119,25 @@
     }
   }
 }
+
+.listedBook-container{
+  margin: 20px 10%;
+  
+}
+
+.heading2{
+  border-left: 6px solid #ff6363;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.heading2>h4{
+  font-weight: 500;
+}
+.listedBook{
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: grid;
+  gap: 8rem;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
