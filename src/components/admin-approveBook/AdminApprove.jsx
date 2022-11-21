@@ -23,13 +23,11 @@ import Modal from "@mui/material/Modal";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-
 const config = {
   headers: {
     Authorization: "Bearer " + localStorage.getItem("token"),
   },
 };
-
 function Row(props) {
   const { row, approveBook, rejectBook } = props;
   const [open, setOpen] = React.useState(false);
@@ -47,7 +45,6 @@ function Row(props) {
     boxShadow: 24,
     p: 4,
   };
-
   return (
     <React.Fragment>
       <StyledTableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -61,13 +58,13 @@ function Row(props) {
           </IconButton>
         </StyledTableCell>
         <TableCell align="center">{row.name}</TableCell>
-        <TableCell align="center">{row.bookOwner.username}</TableCell>
+        <TableCell align="center">{row.bookOwner?.username}</TableCell>
         <TableCell align="center">{row.rent_cost_perday}</TableCell>
         <TableCell align="center">{row.status}</TableCell>
         <TableCell align="center">
           <div className="d-flex  align-items-center justify-content-center">
             <button
-              class="approve--btn"
+              className="approve--btn"
               onClick={(e) => {
                 approveBook(row._id, e);
               }}
@@ -96,7 +93,7 @@ function Row(props) {
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   <div className="d-flex align-items-center ">
                     <button
-                      class="approve--btn"
+                      className="approve--btn"
                       onClick={(e) => {
                         rejectBook(row._id, e);
                       }}
@@ -104,7 +101,7 @@ function Row(props) {
                     >
                       Yes &nbsp; <BsCheckLg />
                     </button>
-                    <button onClick={handleClose} class="reject--btn ">
+                    <button onClick={handleClose} className="reject--btn ">
                       No &nbsp; <ImCross />
                     </button>
                   </div>
@@ -125,7 +122,7 @@ function Row(props) {
                 <img
                   src={`http://localhost:90/${row.book_pic}`}
                   alt="book_img"
-                  class="img-fluid  table-img"
+                  className="img-fluid  table-img"
                 />
                 <div className="moreInfo">
                   <p className="book-details__desc">Author: {row.author}</p>
@@ -156,7 +153,6 @@ Row.propTypes = {
     action: PropTypes.string.isRequired,
   }).isRequired,
 };
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#ff6363",
@@ -179,7 +175,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 export default function AdminApprove() {
   const [listedBooks, setListedBooks] = useState([]);
-
   const approveBook = (id, e) => {
     e.preventDefault();
     const data = {
@@ -222,7 +217,6 @@ export default function AdminApprove() {
         console.log(e);
       });
   };
-
   useEffect(() => {
     axios.get("http://localhost:90/book/getallbyadmin", config).then((res) => {
       console.log(res.data);
@@ -233,7 +227,7 @@ export default function AdminApprove() {
   return (
     <>
       <div>
-        <h1 class="table-title">Verify Books</h1>
+        <h1 className="table-title">Verify Books</h1>
       </div>
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table" sx={{ minWidth: 700 }}>

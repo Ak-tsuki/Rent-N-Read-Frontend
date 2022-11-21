@@ -16,18 +16,93 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [contact_no, setContactNo] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
 
-  const registerUser = (e) => {
-    e.preventDefault();
-    if (
-      username.length === 0 ||
-      email.length === 0 ||
-      contact_no.length === 0 ||
-      password.length === 0
-    ) {
-      setError(true);
+  const [usernameError, setUsernameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [contactError, setContactError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  const usernameRegex =
+    /^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$/;
+
+  const emailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+
+  const contactRegex =
+    /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+
+  const handleUsername = (e) => {
+    let username = e.target.value;
+    if (!username.match(usernameRegex)) {
+      setUsernameError(true);
+    } else {
+      setUsernameError(false);
     }
+    setUsername(username);
+  };
+
+  const handleEmail = (e) => {
+    let email = e.target.value;
+    if (!email.match(emailRegex)) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+    setEmail(email);
+  };
+
+  const handleContact = (e) => {
+    let contact_no = e.target.value;
+    if (!contact_no.match(contactRegex)) {
+      setContactError(true);
+    } else {
+      setContactError(false);
+    }
+    setContactNo(contact_no);
+  };
+
+  const handlePassword = (e) => {
+    let password = e.target.value;
+    if (!password.match(passwordRegex)) {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+    setPassword(password);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // let username = e.target[0].value;
+    // if (username.length < 3) {
+    //   setUsernameError(true);
+    // } else {
+    //   setUsernameError(false);
+    // }
+    // let email = e.target[1].value;
+    // if (!email.match(emailRegex)) {
+    //   setEmailError(true);
+    // } else {
+    //   setEmailError(false);
+    // }
+
+    // let contact_no = e.target[2].value;
+    // if (!contact_no.match(contactRegex)) {
+    //   setContactError(true);
+    // } else {
+    //   setContactError(false);
+    // }
+
+    // let password = e.target[3].value;
+    // if (!password.match(passwordRegex)) {
+    //   setPasswordError(true);
+    // } else {
+    //   setPasswordError(false);
+    // }
 
     const data = {
       username: username,
@@ -85,19 +160,25 @@ const Register = () => {
                 Sign In
               </Link>{" "}
             </h4>
-            <form onSubmit={registerUser}>
+            <form onSubmit={handleSubmit}>
               <div className="register__input">
                 <FaUserAlt size={20} className="register__input--icon" />
                 <input
+                  required="true"
                   type="text"
                   placeholder="Username"
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                  }}
+                  // value={username}
+                  onChange={handleUsername}
+                  // onChange={(e) => {
+                  //   setUsername(e.target.value);
+                  // }}
                   data-test="username"
                 />
-                {error && username.length <= 0 ? (
-                  <label>Username cannot be empty</label>
+                {usernameError ? (
+                  <span>
+                    Username should be 4-16 characters and shouldn't include any
+                    special characters and numbers
+                  </span>
                 ) : (
                   ""
                 )}
@@ -109,16 +190,14 @@ const Register = () => {
                   required
                   type="email"
                   placeholder="Email address"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
+                  // value={email}
+                  onChange={handleEmail}
+                  // onChange={(e) => {
+                  //   setEmail(e.target.value);
+                  // }}
                   data-test="email"
                 />
-                {error && email.length <= 0 ? (
-                  <label>Email cannot be empty</label>
-                ) : (
-                  ""
-                )}
+                {emailError ? <span>Enter valid email</span> : ""}
               </div>
 
               <div className="register__input">
@@ -127,16 +206,14 @@ const Register = () => {
                   required
                   type="number"
                   placeholder="Contact No."
-                  onChange={(e) => {
-                    setContactNo(e.target.value);
-                  }}
+                  // value={contact_no}
+                  onChange={handleContact}
+                  // onChange={(e) => {
+                  //   setContactNo(e.target.value);
+                  // }}
                   data-test="contactno"
                 />
-                {error && contact_no.length <= 0 ? (
-                  <label>Contact number cannot be empty</label>
-                ) : (
-                  ""
-                )}
+                {contactError ? <span>Enter valid Contact number</span> : ""}
               </div>
 
               <div className="register__input">
@@ -145,13 +222,18 @@ const Register = () => {
                   required
                   type="password"
                   placeholder="Enter password"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
+                  // value={password}
+                  onChange={handlePassword}
+                  // onChange={(e) => {
+                  //   setPassword(e.target.value);
+                  // }}
                   data-test="password"
                 />
-                {error && password.length <= 0 ? (
-                  <label>Password cannot be empty</label>
+                {passwordError ? (
+                  <span>
+                    Password must be at least 8 characters long, must contain at
+                    least 1 uppercase letters, 1 special characters
+                  </span>
                 ) : (
                   ""
                 )}
@@ -160,7 +242,7 @@ const Register = () => {
               <button
                 type="submit"
                 className="register__btn"
-                onClick={registerUser}
+                onClick={handleSubmit}
                 data-test="register-btn"
               >
                 Create an account

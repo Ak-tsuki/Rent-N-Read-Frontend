@@ -55,7 +55,7 @@ function DashboardAdmin(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:90/user/get", config)
+      .get("http://localhost:90/user/getadmin", config)
       .then((res) => {
         setUserDetails(res.data.data);
         console.log(userDetails.username);
