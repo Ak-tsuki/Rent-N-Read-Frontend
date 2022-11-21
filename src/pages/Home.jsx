@@ -3,8 +3,19 @@ import "./home.scss";
 import { BiSearch } from "react-icons/bi";
 import { FaBook } from "react-icons/fa";
 import ListedBookCard from "../components/listedbook-card/listedbook-card";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Home = () => {
+  const [listedBooks, setListedBooks] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:90/book/get").then((res) => {
+      console.log(res.data);
+      setListedBooks(res.data.data);
+    });
+  }, []);
+
   return (
     <div className="home-container">
       <section className="hero">
@@ -33,14 +44,9 @@ const Home = () => {
           <h4 className="ms-2">Newly Listed</h4>
         </div>
         <div className="listedBook">
-          <ListedBookCard></ListedBookCard>
-          <ListedBookCard></ListedBookCard>
-          <ListedBookCard></ListedBookCard>
-          <ListedBookCard></ListedBookCard>
-          <ListedBookCard></ListedBookCard>
-          <ListedBookCard></ListedBookCard>
-          <ListedBookCard></ListedBookCard>
-          <ListedBookCard></ListedBookCard>
+          {listedBooks.slice(0, 10).map((book) => (
+            <ListedBookCard book={book} />
+          ))}
         </div>
       </section>
     </div>
