@@ -1,0 +1,12 @@
+.Book-container{
+    margin: 120px 10%;
+    min-height: 650px;
+}
+.Book-list{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: grid;
+    gap: 8rem;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}

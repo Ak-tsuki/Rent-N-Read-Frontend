@@ -32,7 +32,9 @@ const Header = () => {
         <Link to="/" className="nav__links ">
           Home
         </Link>
-        <Link className="nav__links">Books</Link>
+        <Link className="nav__links" to="/books">
+          Books
+        </Link>
         <Link className="nav__links">About</Link>
         {localStorage.getItem("token") ? (
           <Link className="nav__btn nav__links" to="login" onClick={logout}>

@@ -8,11 +8,15 @@ import MyBooks from "../dashboard/MyBooks";
 import DashboardAdmin from "../dashboard-admin/DashboardAdmin";
 import DashboardHome from "../dashboard-admin/DashboardHome";
 import AdminApprove from "../admin-approveBook/AdminApprove";
+import Books from "../../pages/Books";
+import SingleBook from "../../pages/SingleBook";
 const Body = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/books" element={<Books />} />
+        <Route path="/singlebook" element={<SingleBook />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />}>

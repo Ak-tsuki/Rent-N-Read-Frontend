@@ -1,0 +1,95 @@
+.Book-container {
+  margin: 80px 7%;
+  min-height: 650px;
+}
+
+.wishlist-btn {
+  border: 3px solid #b2ab00;
+  border-radius: 10px;
+  background-color: white;
+  color: #b2ab00;
+  padding: 14px 28px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.wishlist-btn:hover {
+  color: white;
+  background-color: #b2ab00;
+}
+
+.book-cover {
+  max-width: 370px;
+}
+
+.book-details {
+  background-color: #f1f1f1;
+  padding: 30px 20px;
+  overflow-wrap: break-word;
+  border-radius: 10px;
+  position: relative;
+}
+.book-name {
+  color: #783a0d;
+  font-weight: 600;
+}
+
+.book-author {
+  color: #8a908c;
+  font-size: 16px;
+}
+.book-desc-head {
+  font-weight: 500;
+  font-size: 18px;
+}
+.book-desc {
+  margin-right: 25%;
+}
+
+.request-btn {
+  border: none;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.btn-rent {
+  border: 3px solid #ff6363;
+  background-color: #ff6363;
+  color: #ffff;
+}
+
+.btn-exchange {
+  border: 3px solid #638d6a;
+  background-color: #638d6a;
+  color: #ffff;
+}
+
+.btn-rent:hover {
+  border: 3px solid #ff6363;
+  background-color: #ffff;
+  color: #ff6363;
+}
+.btn-exchange:hover {
+  border: 3px solid #638d6a;
+  background-color: #ffff;
+  color: #638d6a;
+}
+.cost-rent {
+  color: #0dcd2c;
+}
+.avatar {
+  vertical-align: middle;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  top: -20px;
+  right: 50px;
+}

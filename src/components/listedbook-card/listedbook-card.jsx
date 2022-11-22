@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import "./listedbook-card.scss";
 import { FaChevronCircleRight } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 const ListedBookCard = ({ book }) => {
   const { name, author, rent_cost_perday, book_pic } = book;
   return (
@@ -23,9 +23,9 @@ const ListedBookCard = ({ book }) => {
             <p className="bookcost">Rs. {rent_cost_perday}</p>
             <p className="bookday">/day</p>
           </div>
-          <button type="button" className="btn rent-btn mb-3 ms-3">
+          <Link to="/singlebook" className="btn rent-btn mb-3 ms-3">
             <FaChevronCircleRight className="rent-icon" />
-          </button>
+          </Link>
         </div>
       </div>
     </Card>
