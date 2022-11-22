@@ -84,7 +84,15 @@ const AddBook = () => {
     // console.log(author);
     // console.log(book_img);
     // console.log(categoryName);
-    if(categoryName === [] || name === "" || rich_desc === "" || author === "" || book_img ==="" || desc ==="" || rent_cost_perday===""){
+    if (
+      categoryName === [] ||
+      name === "" ||
+      rich_desc === "" ||
+      author === "" ||
+      book_img === "" ||
+      desc === "" ||
+      rent_cost_perday === ""
+    ) {
       toast.warn("Fill all Required Field", {
         position: "top-center",
         autoClose: 4000,
@@ -102,7 +110,6 @@ const AddBook = () => {
     data.append("book_img", book_img);
     console.log(data);
 
-
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -118,11 +125,8 @@ const AddBook = () => {
             position: "top-center",
             autoClose: 4000,
           });
-          
-
-         
         } else {
-          console.log("Please Try Again! Something Went Wrong!!!",res);
+          console.log("Please Try Again! Something Went Wrong!!!", res);
           toast.error("Somthing went wrong!", {
             toastId: "error",
             position: "top-center",
@@ -165,8 +169,6 @@ const AddBook = () => {
       >
         <div className="row">
           <TextField
-            
-           
             id="outlined-required fullWidth"
             fullWidth
             label="Book Name"
@@ -244,23 +246,19 @@ const AddBook = () => {
             }}
           />
           <FormControl fullWidth required>
-            <InputLabel htmlFor="outlined-adornment-amount" >
+            <InputLabel htmlFor="outlined-adornment-amount">
               Rent Price
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-amount"
               startAdornment={
-                <InputAdornment position="start" >Rs.</InputAdornment>
+                <InputAdornment position="start">Rs.</InputAdornment>
               }
               label="Amount"
               type="number"
-              
-        
               onChange={(e) => {
                 setRent_cost_Perday(e.target.value);
               }}
-              
-              
             />
           </FormControl>
           <Button

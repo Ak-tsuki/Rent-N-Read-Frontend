@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const ListedBookCard = ({ book }) => {
   const { _id, name, author, rent_cost_perday, book_pic } = book;
   return (
-    <Card className="listed-card" sx={{ maxWidth: 260 }}>
+    <Card className="listed-card" sx={{ maxWidth: 290 }}>
       <div className="p-4">
         <CardMedia
           component="img"

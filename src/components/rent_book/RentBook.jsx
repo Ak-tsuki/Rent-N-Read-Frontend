@@ -40,12 +40,9 @@ const RentBook = ({ id, name, rent_cost }) => {
   const [endDate, setEndDate] = React.useState(dayjs());
   const theme = useTheme();
 
-  const [noofDays, setNoOfDays] = useState("0");
-  const [total_cost, setTotalCost] = useState("1100");
-
   return (
     <div>
-      <div className="form-title row justify-content-center mb-2 rent-heading-container">
+      <div className="form-title row justify-content-center mb-5 rent-heading-container">
         <h2 className="text-center m-0 py-3 rent-heading">Rent a Book</h2>
       </div>
       <Box
@@ -66,9 +63,11 @@ const RentBook = ({ id, name, rent_cost }) => {
             width="100%"
             disabled
             value={name}
+            className="mb-3"
           />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
+              className="mb-3"
               disablePast
               label="Start Date"
               openTo="day"
@@ -82,6 +81,7 @@ const RentBook = ({ id, name, rent_cost }) => {
           </LocalizationProvider>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
+              className="mb-3"
               disablePast
               label="End Date"
               openTo="day"
@@ -100,11 +100,12 @@ const RentBook = ({ id, name, rent_cost }) => {
             label="No. of Days"
             width="100%"
             disabled
+            className="mb-3"
             value={Math.round(
               timeunit.milliseconds.toDays(endDate - startDate)
             )}
           />
-          <FormControl fullWidth required>
+          <FormControl fullWidth required className="mb-3">
             <InputLabel htmlFor="outlined-adornment-amount">
               Total Cost
             </InputLabel>
@@ -115,7 +116,10 @@ const RentBook = ({ id, name, rent_cost }) => {
               }
               label="Amount"
               type="number"
-              value={total_cost}
+              value={
+                Math.round(timeunit.milliseconds.toDays(endDate - startDate)) *
+                rent_cost
+              }
               disabled
             />
           </FormControl>
