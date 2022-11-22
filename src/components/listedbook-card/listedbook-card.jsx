@@ -5,7 +5,7 @@ import "./listedbook-card.scss";
 import { FaChevronCircleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 const ListedBookCard = ({ book }) => {
-  const { name, author, rent_cost_perday, book_pic } = book;
+  const { _id, name, author, rent_cost_perday, book_pic } = book;
   return (
     <Card className="listed-card" sx={{ maxWidth: 260 }}>
       <div className="p-4">
@@ -23,7 +23,7 @@ const ListedBookCard = ({ book }) => {
             <p className="bookcost">Rs. {rent_cost_perday}</p>
             <p className="bookday">/day</p>
           </div>
-          <Link to="/singlebook" className="btn rent-btn mb-3 ms-3">
+          <Link to={"/singlebook/" + _id} className="btn rent-btn mb-3 ms-3">
             <FaChevronCircleRight className="rent-icon" />
           </Link>
         </div>

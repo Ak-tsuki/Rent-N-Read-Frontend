@@ -4,10 +4,14 @@ import Box from "@mui/material/Box";
 import { Theme, useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { FaChevronCircleRight } from "react-icons/fa";
 import axios from "axios";
 import { useState, useEffect } from "react";
-
+import dayjs from "dayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import timeunit from "timeunit";
 import {
   Button,
   InputAdornment,
@@ -31,64 +35,18 @@ const MenuProps = {
   },
 };
 
-const categories = [
-  "Fantasy",
-  "Adventure",
-  "Romance",
-  "Contemporary",
-  "Dystopian",
-  "Mystery",
-  "Horror",
-  "Thriller",
-  "Paranormal",
-  "Historical Fiction",
-  "Science Fiction",
-  "Children's",
-  "Memoir",
-  "Cookbook",
-  "Art",
-  "Self-help",
-  "Development",
-  "Motivational",
-  "Health",
-  "History",
-  "Travel",
-  "Humor",
-];
-
-function getStyles(name, categoryName, theme) {
-  return {
-    fontWeight:
-      categoryName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-const RentBook = () => {
+const RentBook = ({ id, name, rent_cost }) => {
+  const [startDate, setStartDate] = React.useState(dayjs());
+  const [endDate, setEndDate] = React.useState(dayjs());
   const theme = useTheme();
-  const [categoryName, setcategoryName] = React.useState([]);
-  const [name, setName] = useState("");
-  const [rich_desc, setRich_desc] = useState("");
-  const [desc, setDesc] = useState("");
-  const [author, setAuthor] = useState("");
-  const [rent_cost_perday, setRent_cost_Perday] = useState("");
-  const [book_img, setBook_img] = useState("");
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setcategoryName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
+  const [noofDays, setNoOfDays] = useState("0");
+  const [total_cost, setTotalCost] = useState("1100");
 
   return (
     <div>
-      <div className="form-title row justify-content-center mb-2 p-2">
-        <h2 className="text-center m-0">Rent a Book</h2>
+      <div className="form-title row justify-content-center mb-2 rent-heading-container">
+        <h2 className="text-center m-0 py-3 rent-heading">Rent a Book</h2>
       </div>
       <Box
         component="form"
@@ -106,81 +64,49 @@ const RentBook = () => {
             fullWidth
             label="Book Name"
             width="100%"
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
+            disabled
+            value={name}
           />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              disablePast
+              label="Start Date"
+              openTo="day"
+              views={["year", "month", "day"]}
+              value={startDate}
+              onChange={(newValue) => {
+                setStartDate(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              disablePast
+              label="End Date"
+              openTo="day"
+              views={["year", "month", "day"]}
+              value={endDate}
+              onChange={(newValue) => {
+                setEndDate(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+
           <TextField
-            required
             id="outlined-required fullWidth"
             fullWidth
-            label="Book Author"
+            label="No. of Days"
             width="100%"
-            onChange={(e) => {
-              setAuthor(e.target.value);
-            }}
-          />
-          <TextField
-            required
-            multiline
-            rows={2}
-            maxRows={4}
-            id="outlined-required outlined-multiline-static"
-            label="Book Description"
-            onChange={(e) => {
-              setDesc(e.target.value);
-            }}
-          />
-          <TextField
-            required
-            multiline
-            rows={4}
-            maxRows={6}
-            id="outlined-required outlined-multiline-static"
-            label="Book Rich Description"
-            onChange={(e) => {
-              setRich_desc(e.target.value);
-            }}
-          />
-          <FormControl sx={{ pb: 2 }} required>
-            <InputLabel id="demo-multiple-name-label">Book Category</InputLabel>
-            <Select
-              labelId="demo-multiple-name-label"
-              id="demo-multiple-name"
-              multiple
-              value={categoryName}
-              onChange={handleChange}
-              input={<OutlinedInput label="Book Category" />}
-              MenuProps={MenuProps}
-            >
-              {categories.map((name) => (
-                <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, categoryName, theme)}
-                >
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <TextField
-            required
-            id="outlined-required fullWidth"
-            type="file"
-            label="Book Image"
-            fullWidth
-            width="100%"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={(e) => {
-              setBook_img(e.target.files[0]);
-            }}
+            disabled
+            value={Math.round(
+              timeunit.milliseconds.toDays(endDate - startDate)
+            )}
           />
           <FormControl fullWidth required>
             <InputLabel htmlFor="outlined-adornment-amount">
-              Rent Price
+              Total Cost
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-amount"
@@ -189,17 +115,16 @@ const RentBook = () => {
               }
               label="Amount"
               type="number"
-              onChange={(e) => {
-                setRent_cost_Perday(e.target.value);
-              }}
+              value={total_cost}
+              disabled
             />
           </FormControl>
           <Button
             className="mt-2 fs-5 fw-bold"
             variant="contained"
-            endIcon={<AddCircleIcon className="fs-3" />}
+            endIcon={<FaChevronCircleRight className="fs-3" />}
           >
-            Add a Book
+            Send Rent Request
           </Button>
         </div>
       </Box>

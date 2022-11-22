@@ -1,11 +1,8 @@
 import React from "react";
 import "./singleBook.scss";
-import { BiSearch } from "react-icons/bi";
-import { FaBook } from "react-icons/fa";
-import ListedBookCard from "../components/listedbook-card/listedbook-card";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import CardMedia from "@mui/material/CardMedia";
+import { useParams } from "react-router-dom";
 import { BsBookmarkPlusFill } from "react-icons/bs";
 import { FaChevronCircleRight } from "react-icons/fa";
 import { RiExchangeFill } from "react-icons/ri";
@@ -29,13 +26,33 @@ const SingleBook = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const { book_id } = useParams();
+
+  const [book_img, setBookImg] = useState("");
+  const [name, setName] = useState("");
+  const [author, setAuthor] = useState("");
+  const [owner_img, setOwnerImg] = useState("");
+  const [desc, setDesc] = useState("");
+  const [cost, setCost] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:90/book/getone/" + book_id).then((res) => {
+      console.log(res.data);
+      setBookImg(res.data.data.book_pic);
+      setName(res.data.data.name);
+      setAuthor(res.data.data.author);
+      setDesc(res.data.data.rich_desc);
+      setCost(res.data.data.rent_cost_perday);
+    });
+  }, []);
+
   return (
     <div className="Book-container">
       <div className="row">
         <div className="col-12 col-md-4 d-flex justify-content-center">
           <div className="book-cover">
             <img
-              src="https://media.harrypotterfanzone.com/deathly-hallows-us-childrens-edition.jpg"
+              src={`http://localhost:90/${book_img}`}
               className="img-fluid"
               alt="..."
             />
@@ -51,29 +68,17 @@ const SingleBook = () => {
             class="avatar"
           />
           <div className="my-4">
-            <h3 className="book-name">Breif answers to big questions</h3>
-            <p className="book-author">-author</p>
+            <h3 className="book-name">{name}</h3>
+            <p className="book-author">-{author}</p>
           </div>
           <div className="my-4">
             <h5 className="book-desc-head">Description</h5>
-            <p className="book-desc">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-              hic nobis corporis corrupti labore reiciendis harum quam
-              architecto deleniti magni ipsum, voluptas illum delectus ea
-              perspiciatis? Quasi quibusdam dignissimos beatae. Lorem ipsum
-              dolor sit amet consectetur adipisicing elit. Soluta doloribus, nam
-              adipisci similique debitis repellat distinctio fugit tenetur sint!
-              Fugit animi aut natus quos quo doloribus enim voluptates
-              praesentium distinctio! Vel vero suscipit laboriosam mollitia
-              quam, unde, itaque sequi reiciendis fuga, quae ipsa nulla sunt
-              minima. Officiis blanditiis ipsam error consequuntur voluptates
-              voluptas asperiores? Praesentium cupiditate sunt error quibusdam
-            </p>
+            <p className="book-desc">{desc}</p>
           </div>
           <div className="d-flex flex-nowrap my-4">
             <h5>Rent Cost: </h5>
             <div className="d-flex flex-nowrap">
-              <h5 className="ms-1 cost-rent">Rs. 120</h5>
+              <h5 className="ms-1 cost-rent">Rs. {cost}</h5>
               <h5 className="">/day</h5>
             </div>
           </div>
@@ -91,7 +96,6 @@ const SingleBook = () => {
         </div>
       </div>
       <div>
-        {/* <Button onClick={handleOpen}>Open modal</Button> */}
         <Modal
           open={open}
           onClose={handleClose}
@@ -99,13 +103,7 @@ const SingleBook = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography> */}
-            <RentBook />
+            <RentBook id={book_id} name={name} rent_cost={cost} />
           </Box>
         </Modal>
       </div>

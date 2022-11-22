@@ -19,7 +19,7 @@ const Books = () => {
   return (
     <div className="Book-container">
       <div className="Book-list">
-        {listedBooks.slice(0, 10).map((book) => (
+        {listedBooks.map((book) => (
           <ListedBookCard book={book} />
         ))}
       </div>
