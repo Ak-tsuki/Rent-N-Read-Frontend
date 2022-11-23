@@ -38,7 +38,61 @@ const MenuProps = {
 const RentBook = ({ id, name, rent_cost }) => {
   const [startDate, setStartDate] = React.useState(dayjs());
   const [endDate, setEndDate] = React.useState(dayjs());
+  const [total_price, setTotalPrice] = React.useState();
+  const [no_of_days, setNoOfDays] = React.useState();
   const theme = useTheme();
+
+  const [disable, setDisable] = useState(true);
+
+  const rentBook = (e) => {
+    if (Math.round(timeunit.milliseconds.toDays(endDate - startDate)) <= 3) {
+      toast.warn("Rent days should be more than 3 days", {
+        position: "top-center",
+        autoClose: 4000,
+      });
+      return;
+    }
+    const data = {
+      bookId: id,
+      start_date: startDate,
+      end_date: endDate,
+      contact_no: "88888888",
+      total_price:
+        Math.round(timeunit.milliseconds.toDays(endDate - startDate)) *
+        rent_cost,
+      no_of_days: Math.round(timeunit.milliseconds.toDays(endDate - startDate)),
+    };
+
+    const config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    axios
+      .post("http://localhost:90/rent/insert", data, config)
+      .then((res) => {
+        if (res.status === 201) {
+          console.log("Book rent request sent successfully");
+          // window.location.replace("/dashboard");
+          toast.success("Book rent request sent successfully", {
+            position: "top-center",
+            autoClose: 4000,
+          });
+        } else {
+          toast.error("Somthing went wrong!..", {
+            toastId: "error",
+            position: "top-center",
+            autoClose: 4000,
+          });
+        }
+
+        // console.log(res);
+      })
+
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   return (
     <div>
@@ -127,6 +181,7 @@ const RentBook = ({ id, name, rent_cost }) => {
             className="mt-2 fs-5 fw-bold"
             variant="contained"
             endIcon={<FaChevronCircleRight className="fs-3" />}
+            onClick={rentBook}
           >
             Send Rent Request
           </Button>
