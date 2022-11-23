@@ -10,6 +10,7 @@ import DashboardHome from "../dashboard-admin/DashboardHome";
 import AdminApprove from "../admin-approveBook/AdminApprove";
 import Books from "../../pages/Books";
 import SingleBook from "../../pages/SingleBook";
+import MyRentRequest from "../dashboard/MyRentRequest";
 const Body = () => {
   return (
     <>
@@ -21,6 +22,7 @@ const Body = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<MyBooks />} />
+          <Route path="/dashboard/request" element={<MyRentRequest />} />
         </Route>
         <Route path="/dashboard_admin" element={<DashboardAdmin />}>
           <Route path="" element={<DashboardHome />} />

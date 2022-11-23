@@ -64,7 +64,7 @@ const SingleBook = () => {
             </button>
           </div>
         </div>
-        <div className="col-12 col-md-8 book-details ">
+        <div className="col-12 col-md-8 book-detail ">
           <img
             src="https://media.harrypotterfanzone.com/deathly-hallows-us-childrens-edition.jpg"
             alt="Avatar"

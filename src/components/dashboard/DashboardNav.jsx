@@ -47,7 +47,7 @@ const DashboardNav = ({ open }) => {
         <ImBooks className="dash-nav__link--icon" />
         My Books
       </Link>
-      <Link className="dash-nav__link">
+      <Link className="dash-nav__link" to="/dashboard/request">
         {" "}
         <GiOpenBook className="dash-nav__link--icon" />
         Rent Requests
