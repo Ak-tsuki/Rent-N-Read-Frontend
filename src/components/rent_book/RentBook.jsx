@@ -49,6 +49,7 @@ const RentBook = ({ id, bookOwner, name, rent_cost }) => {
       toast.warn("Rent days should be more than 3 days", {
         position: "top-center",
         autoClose: 4000,
+        toastId: "warning",
       });
       return;
     }
@@ -182,6 +183,7 @@ const RentBook = ({ id, bookOwner, name, rent_cost }) => {
             variant="contained"
             endIcon={<FaChevronCircleRight className="fs-3" />}
             onClick={rentBook}
+            data-test="send-rent-request-btn"
           >
             Send Rent Request
           </Button>

@@ -88,7 +88,11 @@ const SingleBook = () => {
           <div className="d-flex flex-wrap align-items-center my-4">
             <h5 className="me-2">Available For</h5>
             <div>
-              <button className="request-btn btn-rent m-2" onClick={handleOpen}>
+              <button
+                className="request-btn btn-rent m-2"
+                onClick={handleOpen}
+                data-test="rent-btn"
+              >
                 Rent <FaChevronCircleRight className="ms-1 fs-5" />
               </button>
               <button className="request-btn btn-exchange m-2">
