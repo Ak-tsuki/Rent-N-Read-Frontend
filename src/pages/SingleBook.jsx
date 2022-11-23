@@ -32,6 +32,8 @@ const SingleBook = () => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [owner_img, setOwnerImg] = useState("");
+  const [bookowner, setBookOwner] = useState("");
+
   const [desc, setDesc] = useState("");
   const [cost, setCost] = useState("");
 
@@ -39,6 +41,7 @@ const SingleBook = () => {
     axios.get("http://localhost:90/book/getone/" + book_id).then((res) => {
       console.log(res.data);
       setBookImg(res.data.data.book_pic);
+      setBookOwner(res.data.data.bookOwner);
       setName(res.data.data.name);
       setAuthor(res.data.data.author);
       setDesc(res.data.data.rich_desc);
@@ -103,7 +106,12 @@ const SingleBook = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <RentBook id={book_id} name={name} rent_cost={cost} />
+            <RentBook
+              id={book_id}
+              bookOwner={bookowner}
+              name={name}
+              rent_cost={cost}
+            />
           </Box>
         </Modal>
       </div>

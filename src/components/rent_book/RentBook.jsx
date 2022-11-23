@@ -35,7 +35,7 @@ const MenuProps = {
   },
 };
 
-const RentBook = ({ id, name, rent_cost }) => {
+const RentBook = ({ id, bookOwner, name, rent_cost }) => {
   const [startDate, setStartDate] = React.useState(dayjs());
   const [endDate, setEndDate] = React.useState(dayjs());
   const [total_price, setTotalPrice] = React.useState();
@@ -54,9 +54,9 @@ const RentBook = ({ id, name, rent_cost }) => {
     }
     const data = {
       bookId: id,
+      bookOwner: bookOwner,
       start_date: startDate,
       end_date: endDate,
-      contact_no: "88888888",
       total_price:
         Math.round(timeunit.milliseconds.toDays(endDate - startDate)) *
         rent_cost,
