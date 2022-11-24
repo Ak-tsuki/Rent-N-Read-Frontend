@@ -91,9 +91,13 @@ const Rentedbook = ({ book }) => {
           <span className="book-details__cost--amount">Rs {total_price}</span>
         </p>
         <div>
-          <button className="request-btn btn-accept m-2" onClick={handleOpen}>
-            Proceed To Checkout <FiSend className="ms-1 fs-5" />
-          </button>
+          {rent_status !== "Approved" ? (
+            <div> </div>
+          ) : (
+            <button className="request-btn btn-accept m-2" onClick={handleOpen}>
+              Proceed To Checkout <FiSend className="ms-1 fs-5" />
+            </button>
+          )}
         </div>
       </div>
       <div>
@@ -104,7 +108,7 @@ const Rentedbook = ({ book }) => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style} >
+          <Box sx={style}>
             <Checkout bookObject={bookObject}></Checkout>
           </Box>
         </Modal>
