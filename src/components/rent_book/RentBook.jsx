@@ -42,10 +42,23 @@ const RentBook = ({ id, bookOwner, name, rent_cost }) => {
   const [no_of_days, setNoOfDays] = React.useState();
   const theme = useTheme();
 
+  const [daysError, setDaysError] = useState(false);
+
   const [disable, setDisable] = useState(true);
 
   const rentBook = (e) => {
-    if (Math.round(timeunit.milliseconds.toDays(endDate - startDate)) <= 3) {
+    if (startDate >= endDate) {
+      toast.warn(
+        "Please select valid date...! Start Date must be before end date.",
+        {
+          position: "top-center",
+          autoClose: 4000,
+        }
+      );
+      return;
+    } else if (
+      Math.round(timeunit.milliseconds.toDays(endDate - startDate)) <= 3
+    ) {
       toast.warn("Rent days should be more than 3 days", {
         position: "top-center",
         autoClose: 4000,
@@ -53,6 +66,7 @@ const RentBook = ({ id, bookOwner, name, rent_cost }) => {
       });
       return;
     }
+
     const data = {
       bookId: id,
       bookOwner: bookOwner,
@@ -160,6 +174,7 @@ const RentBook = ({ id, bookOwner, name, rent_cost }) => {
               timeunit.milliseconds.toDays(endDate - startDate)
             )}
           />
+
           <FormControl fullWidth required className="mb-3">
             <InputLabel htmlFor="outlined-adornment-amount">
               Total Cost
