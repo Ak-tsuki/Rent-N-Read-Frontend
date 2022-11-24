@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
+import Rentedbook from "../rentedBook-card/RentedBook";
 
 const style = {
   position: "absolute",
@@ -24,42 +25,6 @@ const MyBooks = () => {
   const [currentTab, setCurrentTab] = useState("listed");
   const [listedBooks, setListedBooks] = useState([]);
   const [rentedBooks, setRentedBooks] = useState([]);
-  const listedBooks2 = [
-    {
-      title: "Harry Potter",
-      author: "J.K. Rowling",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis craspulvinar ultrices id nisl ornare nisi. Nisi, morbi consectetur nibhdapibus maecenas elementum id nec. Velit vitae tellus ac feugiat nonridiculus.",
-      cost: "20",
-      image:
-        "https://m.media-amazon.com/images/M/MV5BMzkyZGFlOWQtZjFlMi00N2YwLWE2OWQtYTgxY2NkNmM1NjMwXkEyXkFqcGdeQXVyNjY1NTM1MzA@._V1_FMjpg_UX1000_.jpg",
-    },
-    {
-      title: "Harry Potter",
-      author: "J.K. Rowling",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis craspulvinar ultrices id nisl ornare nisi. Nisi, morbi consectetur nibhdapibus maecenas elementum id nec. Velit vitae tellus ac feugiat nonridiculus.",
-      cost: "20",
-      image:
-        "https://m.media-amazon.com/images/M/MV5BMzkyZGFlOWQtZjFlMi00N2YwLWE2OWQtYTgxY2NkNmM1NjMwXkEyXkFqcGdeQXVyNjY1NTM1MzA@._V1_FMjpg_UX1000_.jpg",
-    },
-  ];
-  const rentedBook = [
-    {
-      title: "Anya and the Nightingale",
-      author: "Sofiya Pasternack",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis craspulvinar ultrices id nisl ornare nisi. Nisi, morbi consectetur nibhdapibus maecenas elementum id nec. Velit vitae tellus ac feugiat nonridiculus.",
-      cost: "20",
-      image:
-        "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1593147230l/48946798.jpg",
-    },
-    {
-      title: "Anya and the Nightingale",
-      author: "Sofiya Pasternack",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis craspulvinar ultrices id nisl ornare nisi. Nisi, morbi consectetur nibhdapibus maecenas elementum id nec. Velit vitae tellus ac feugiat nonridiculus.",
-      cost: "20",
-      image:
-        "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1593147230l/48946798.jpg",
-    },
-  ];
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -75,6 +40,12 @@ const MyBooks = () => {
       console.log(res.data);
       setListedBooks(res.data.data);
       console.log(listedBooks);
+    });
+    axios.get("http://localhost:90/rented_books/get", config).then((res) => {
+      console.log("rentedBooks");
+      console.log(res.data);
+      setRentedBooks(res.data.data);
+      console.log(rentedBooks);
     });
   }, []);
 
@@ -115,7 +86,7 @@ const MyBooks = () => {
       </div>
       <div>
         {currentTab === "rented"
-          ? rentedBooks.map((book) => <BookCard book={book} />)
+          ? rentedBooks.map((book) => <Rentedbook book={book} />)
           : listedBooks.map((book) => <BookCard book={book} />)}
       </div>
       <div>
