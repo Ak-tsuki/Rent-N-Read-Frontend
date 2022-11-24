@@ -81,11 +81,14 @@ const Checkout = ({bookObject}) => {
         <div className="row">
           <Button
             className="mt-2 fs-5 fw-bold"
+            style={{
+                backgroundColor: "#5B2C92",
+            }}
             variant="contained"
-            endIcon={<img src={logo} alt="logo" className="header__logo--img bg-white rounded-2" />}
+            endIcon={<img src={logo} alt="logo" className="header__logo--img" />}
             // onClick={addBook}
           >
-            Pay With Khalti 
+            Pay With
           </Button>
         </div>
       </Box>
