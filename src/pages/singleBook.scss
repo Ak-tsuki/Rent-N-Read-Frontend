@@ -2,11 +2,17 @@
   margin: 80px 7%;
   min-height: 650px;
 }
-
+.img-book {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
 .wishlist-btn {
   border: 3px solid #b2ab00;
   border-radius: 10px;
   background-color: white;
+  font-size: 15px;
+  font-weight: 600;
   color: #b2ab00;
   padding: 14px 28px;
   cursor: pointer;
@@ -20,7 +26,7 @@
 }
 
 .book-cover {
-  max-width: 370px;
+  max-width: 250px;
 }
 
 .book-detail {
@@ -33,6 +39,8 @@
 .book-name {
   color: #783a0d;
   font-weight: 600;
+  font-size: 20px;
+  text-transform: capitalize;
 }
 
 .book-author {
@@ -40,12 +48,17 @@
   font-size: 16px;
 }
 .book-desc-head {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 18px;
 }
 .book-desc {
-  margin-right: 25%;
+  max-width: 600px;
   text-align: justify;
+}
+
+.rent-cost {
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .request-btn {
@@ -53,8 +66,8 @@
   background-color: white;
   color: black;
   border-radius: 10px;
-  padding: 14px 28px;
-  font-size: 18px;
+  padding: 8px 20px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.5s;
@@ -84,6 +97,7 @@
 }
 .cost-rent {
   color: #0dcd2c;
+  font-weight: 600;
 }
 .avatar {
   vertical-align: middle;
@@ -93,4 +107,9 @@
   position: absolute;
   top: -20px;
   right: 50px;
+}
+
+.availabefor {
+  font-size: 18px;
+  font-weight: 600;
 }

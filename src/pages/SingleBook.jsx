@@ -56,48 +56,50 @@ const SingleBook = () => {
           <div className="book-cover">
             <img
               src={`http://localhost:90/${book_img}`}
-              className="img-fluid"
+              className="img-book"
               alt="..."
             />
-            <button className="wishlist-btn my-4 fs-4 fw-semibold">
-              Add to wishlist <BsBookmarkPlusFill className="fs-3" />
+            <button className="wishlist-btn my-4">
+              Add to wishlist <BsBookmarkPlusFill className="ms-1 fs-4" />
             </button>
           </div>
         </div>
-        <div className="col-12 col-md-8 book-detail ">
-          <img
-            src="https://media.harrypotterfanzone.com/deathly-hallows-us-childrens-edition.jpg"
-            alt="Avatar"
-            class="avatar"
-          />
-          <div className="my-4">
-            <h3 className="book-name">{name}</h3>
-            <p className="book-author">-{author}</p>
-          </div>
-          <div className="my-4">
-            <h5 className="book-desc-head">Description</h5>
-            <p className="book-desc">{desc}</p>
-          </div>
-          <div className="d-flex flex-nowrap my-4">
-            <h5>Rent Cost: </h5>
-            <div className="d-flex flex-nowrap">
-              <h5 className="ms-1 cost-rent">Rs. {cost}</h5>
-              <h5 className="">/day</h5>
+        <div className="col-12 col-md-8  ">
+          <div className="book-detail">
+            <img
+              src="https://media.harrypotterfanzone.com/deathly-hallows-us-childrens-edition.jpg"
+              alt="Avatar"
+              class="avatar"
+            />
+            <div className="my-4">
+              <h3 className="book-name">{name}</h3>
+              <p className="book-author">-{author}</p>
             </div>
-          </div>
-          <div className="d-flex flex-wrap align-items-center my-4">
-            <h5 className="me-2">Available For</h5>
-            <div>
-              <button
-                className="request-btn btn-rent m-2"
-                onClick={handleOpen}
-                data-test="rent-btn"
-              >
-                Rent <FaChevronCircleRight className="ms-1 fs-5" />
-              </button>
-              <button className="request-btn btn-exchange m-2">
-                Exchange <RiExchangeFill className="ms-1 fs-4" />
-              </button>
+            <div className="my-4">
+              <h5 className="book-desc-head">Description</h5>
+              <p className="book-desc">{desc}</p>
+            </div>
+            <div className="d-flex flex-nowrap my-4">
+              <h5>Rent Cost: </h5>
+              <div className="d-flex flex-nowrap">
+                <h5 className="ms-1 cost-rent">Rs. {cost}</h5>
+                <h5 className="">/day</h5>
+              </div>
+            </div>
+            <div className="d-flex flex-wrap align-items-center my-4">
+              <h5 className="me-2">Available For</h5>
+              <div>
+                <button
+                  className="request-btn btn-rent m-2"
+                  onClick={handleOpen}
+                  data-test="rent-btn"
+                >
+                  Rent <FaChevronCircleRight className="ms-1 fs-5" />
+                </button>
+                <button className="request-btn btn-exchange m-2">
+                  Exchange <RiExchangeFill className="ms-1 fs-4" />
+                </button>
+              </div>
             </div>
           </div>
         </div>

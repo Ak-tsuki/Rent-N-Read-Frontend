@@ -120,24 +120,24 @@
   }
 }
 
-.listedBook-container{
+.listedBook-container {
   margin: 100px 10%;
-  
 }
 
-.heading2{
+.heading2 {
   border-left: 6px solid #ff6363;
   margin-top: 20px;
   margin-bottom: 30px;
 }
-.heading2>h4{
+.heading2 > h4 {
   font-weight: 500;
 }
-.listedBook{
+.listedBook {
   margin-top: 50px;
   margin-bottom: 50px;
   display: grid;
-  gap: 8rem;
+  gap: 40px;
+  grid-row-gap: 50px;
   justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }

@@ -1,40 +1,53 @@
-.listed-card{
-    background: linear-gradient(to bottom, #c2c2c2 5%, #ffffff 80%);
+.listed-card {
+  background: linear-gradient(to bottom, #c2c2c2 5%, #ffffff 80%);
+  position: relative;
 }
-.book-Name{
-    font-weight: 600;
-    font-size: 18px;
-    color: #783A0D;
-    overflow-wrap: break-word;
-    
+.book-Name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #783a0d;
+  overflow-wrap: break-word;
+  text-transform: capitalize;
 }
-
-.book-Author{
-    font-weight: 500;
-    font-size: 20px;
-    color: #838684;
-    overflow-wrap: break-word;
-}
-
-.bookcost,.bookday{
-    font-size: 20px;
-    font-weight: 500;
-}
-.bookcost{
-    color: #0DCD2C;
-}
-.bookday{
-    color: #838684;
+.book-img {
+  max-width: 130px;
+  height: 190px;
+  object-fit: cover;
 }
 
-.rent-btn{
-    background-color: #ff6363;
-}
-.rent-icon{
-    color: #ffffff;
-    font-size: 25px;
+.book-Author {
+  font-weight: 500;
+  font-size: 14px;
+  color: #838684;
+  overflow-wrap: break-word;
 }
 
-.rent-btn:hover{
-    background-color: #7e0000;
+.bookcost,
+.bookday {
+  font-size: 14px;
+  font-weight: 500;
+}
+.bookcost {
+  color: #0dcd2c;
+}
+.bookday {
+  color: #838684;
+}
+
+.rent-btn {
+  background-color: #ff6363;
+}
+.rent-icon {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.rent-btn:hover {
+  background-color: #7e0000;
+}
+
+.rent-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
