@@ -1,0 +1,39 @@
+.form-title {
+    background-color: #ff6363;
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffff;
+  }
+  
+  .rent-card {
+    background: #f8f8f8;
+    padding: 18px;
+    display: flex;
+    position: relative;
+    margin-bottom: 20px;
+    @media (max-width: 550px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    &__img {
+      max-width: 180px;
+      object-fit: contain;
+      margin-right: 20px;
+      @media (max-width: 550px) {
+        margin-right: 0px;
+        margin-bottom: 20px;
+      }
+    }
+    &__delete {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      color: rgb(246, 95, 95);
+      &:hover {
+        color: rgb(203, 26, 26);
+      }
+    }
+  }
