@@ -11,7 +11,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 const PendingCard = ({ book }) => {
   console.log(book)
+  
   const { start_date, no_of_days, bookId, rent_status, userId } = book;
+  
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -23,6 +25,7 @@ const PendingCard = ({ book }) => {
     e.preventDefault();
     const data = {
       id: id,
+      
     };
     axios
       .put("http://localhost:90/rent/approve", data, config)
@@ -61,6 +64,7 @@ const PendingCard = ({ book }) => {
         console.log(e);
       });
   };
+ 
 
   return (
     <div className="book-cards">

@@ -22,7 +22,7 @@ const style = {
 };
 
 const MyRentRequest = () => {
-  const [currentTab, setCurrentTab] = useState("listed");
+  const [currentTab, setCurrentTab] = useState("pending");
   const [pending, setPending] = useState([]);
   const [requestList, setRequestList] = useState([]);
   
