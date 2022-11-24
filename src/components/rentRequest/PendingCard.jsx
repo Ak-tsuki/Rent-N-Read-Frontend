@@ -100,20 +100,24 @@ const PendingCard = ({ book }) => {
           </span>
         </p>
         <p className="book-details__desc">Requested by: {userId.username}</p>
-        <div>
+        {rent_status === "Pending" ?<div>
           <button className="request-btn btn-accept m-2" 
           onClick={(e) => {
                 approveRequest(book._id, e);
               }}
+              data-test="btn-accept"
               >
             Accept It <FiSend className="ms-1 fs-5" />
           </button>
           <button className="request-btn btn-reject m-2" onClick={(e) => {
                 rejectrequest(book._id, e);
-              }}>
+              }}
+              data-test="btn-reject"
+              >
             Reject It <TiCancel className="ms-1 fs-4" />
           </button>
-        </div>
+        </div> : <div></div>
+        }
       </div>
     </div>
   );

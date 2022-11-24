@@ -34,6 +34,19 @@ Given("I am on the {string} page", async function (string) {
       return await this.page.goto(
         "http://localhost:3000/singlebook/637b6f152b66706df6de0d47"
       );
+
+      // this is to locate page and get token of rent request
+    case "approve_rent":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZTI0YzE2N2RiNTY1MzA4MDU0YmUiLCJpYXQiOjE2NjkyOTc2Njl9.QOPSjR_m8CM6qYynDwMK6JYJXa9d0-JGgIuIK4O98TA"
+        );
+      });
+      return await this.page.goto(
+        "http://localhost:3000/dashboard/request"
+      );
     default:
       throw new Error(`${string} is not a supported page name`);
   }

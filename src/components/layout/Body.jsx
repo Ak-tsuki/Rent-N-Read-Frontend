@@ -23,7 +23,7 @@ const Body = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<MyBooks />} />
-          <Route path="/dashboard/request" element={<MyRentRequest />} />
+          <Route path="request" element={<MyRentRequest />} />
         </Route>
         <Route path="/dashboard_admin" element={<DashboardAdmin />}>
           <Route path="" element={<DashboardHome />} />
