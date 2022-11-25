@@ -148,6 +148,7 @@ const Checkout = ({ bookObject }) => {
               backgroundColor: "#5B2C92",
             }}
             variant="contained"
+            data-test="pay-with-khalti-btn"
             endIcon={
               <img src={logo} alt="logo" className="header__logo--img" />
             }
