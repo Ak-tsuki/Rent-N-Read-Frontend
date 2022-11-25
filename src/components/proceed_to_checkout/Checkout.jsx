@@ -1,27 +1,73 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./checkout.scss";
 import Box from "@mui/material/Box";
-import { FaTrash } from "react-icons/fa";
-import { FiSend } from "react-icons/fi";
 import "react-toastify/dist/ReactToastify.css";
-import { Theme, useTheme } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import logo from "../../assets/khalti.svg";
 import { Button } from "@mui/material";
+import axios from "axios";
+import KhaltiCheckout from "khalti-checkout-web";
 
-const Checkout = ({bookObject}) => {
-    const {
-        start_date,
-        no_of_days,
-        bookId,
-        rent_status,
-        end_date,
-        payment_status,
-        total_price,
-        _id,
-      } = bookObject;
+const Checkout = ({ bookObject }) => {
+  const {
+    start_date,
+    no_of_days,
+    bookId,
+    rent_status,
+    end_date,
+    payment_status,
+    total_price,
+    _id,
+  } = bookObject;
+
+  const myKey = {
+    publicTestKey: "test_public_key_b4f2f58210d24adeb3a09f18004822b6",
+    secretKey: "test_secret_key_5eb022defe114eee80231588f185e8c4",
+  };
+
+  const config = {
+    // replace the publicKey with yours
+    publicKey: myKey.publicTestKey,
+    productIdentity: _id,
+    productName: bookId.name,
+    productUrl: "http://localhost:3000/",
+    paymentPreference: ["KHALTI"],
+    eventHandler: {
+      onSuccess(payload) {
+        // hit merchant api for initiating verfication
+        console.log(payload);
+        const data = {
+          token: payload.token,
+          amount: payload.amount,
+        };
+
+        const config = {
+          headers: {
+            Authorization: myKey.secretKey,
+          },
+        };
+
+        axios
+          .get(
+            `http://localhost:90/payment/khalti/verification/${data.token}/${data.amount}/${myKey.secretKey}`
+          )
+          .then((response) => {
+            console.log(response.data);
+            alert("Thank You For Generosity");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+      onError(error) {
+        console.log(error);
+      },
+      onClose() {
+        console.log("widget is closing");
+      },
+    },
+  };
+
+  const checkout = new KhaltiCheckout(config);
 
   return (
     <div>
@@ -82,11 +128,13 @@ const Checkout = ({bookObject}) => {
           <Button
             className="mt-2 fs-5 fw-bold"
             style={{
-                backgroundColor: "#5B2C92",
+              backgroundColor: "#5B2C92",
             }}
             variant="contained"
-            endIcon={<img src={logo} alt="logo" className="header__logo--img" />}
-            // onClick={addBook}
+            endIcon={
+              <img src={logo} alt="logo" className="header__logo--img" />
+            }
+            onClick={() => checkout.show({ amount: total_price * 100 })}
           >
             Pay With
           </Button>
