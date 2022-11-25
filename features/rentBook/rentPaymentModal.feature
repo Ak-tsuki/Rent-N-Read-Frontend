@@ -1,6 +1,6 @@
 Feature: Payment modal for online payment
 
-    As a User, I want to view the payment modal so that I can see the books that I can pay
+    As a User, I want to view the payment modal so that I can pay
     the total rent cost for book rent approved by the book owner.
 
     Scenario: As a User I want to see proceed to checkout button if the book is approved
