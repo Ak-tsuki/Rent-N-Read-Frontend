@@ -1,4 +1,5 @@
 import React from "react";
+import "./RentedBooks.scss";
 import { FaTrash } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 import "react-toastify/dist/ReactToastify.css";
@@ -46,7 +47,7 @@ const Rentedbook = ({ book }) => {
       <img
         src={`http://localhost:90/${bookId.book_pic}`}
         alt="book_img"
-        className="book-card__img"
+        className="rented-book__img"
       />
       <div className="book-details">
         <h2 className="book-details__title">{bookId.name}</h2>
@@ -94,7 +95,11 @@ const Rentedbook = ({ book }) => {
           {rent_status !== "Approved" ? (
             <div> </div>
           ) : (
-            <button className="request-btn btn-accept m-2" onClick={handleOpen}>
+            <button
+              className=" btn-accept request-btn m-2"
+              onClick={handleOpen}
+              data-test="checkout-btn"
+            >
               Proceed To Checkout <FiSend className="ms-1 fs-5" />
             </button>
           )}

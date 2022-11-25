@@ -80,6 +80,7 @@ const MyBooks = () => {
             currentTab === "rented" && "tabs__tab--open"
           }`}
           onClick={() => setCurrentTab("rented")}
+          data-test="rented-books-btn"
         >
           Rented Books
         </div>
