@@ -6,6 +6,7 @@ import logo from "../../assets/khalti.svg";
 import { Button } from "@mui/material";
 import axios from "axios";
 import KhaltiCheckout from "khalti-checkout-web";
+import { toast } from "react-toastify";
 
 const Checkout = ({ bookObject }) => {
   const {
@@ -42,7 +43,7 @@ const Checkout = ({ bookObject }) => {
 
         const config = {
           headers: {
-            Authorization: myKey.secretKey,
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
         };
 
@@ -52,7 +53,23 @@ const Checkout = ({ bookObject }) => {
           )
           .then((response) => {
             console.log(response.data);
-            alert("Thank You For Generosity");
+            const data2 = {
+              id: _id,
+            };
+            axios
+              .put("http://localhost:90/rent/paymentPaid", data2, config)
+              .then((response) => {
+                console.log(response.data.msg);
+                toast.success(
+                  "Payment Successfully",
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 1500)
+                );
+              })
+              .catch((e) => {
+                console.log(e);
+              });
           })
           .catch((error) => {
             console.log(error);

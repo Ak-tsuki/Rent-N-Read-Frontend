@@ -80,7 +80,7 @@ const Rentedbook = ({ book }) => {
           <span
             className={`book-details__desc  ${
               (payment_status === "Pending" && "text-warning") ||
-              (payment_status === "Approved" && "text-success") ||
+              (payment_status === "Paid" && "text-success") ||
               (payment_status === "Rejected" && "text-danger")
             }`}
           >
@@ -92,7 +92,7 @@ const Rentedbook = ({ book }) => {
           <span className="book-details__cost--amount">Rs {total_price}</span>
         </p>
         <div>
-          {rent_status !== "Approved" ? (
+          {rent_status !== "Approved" || payment_status === "Paid" ? (
             <div> </div>
           ) : (
             <button
