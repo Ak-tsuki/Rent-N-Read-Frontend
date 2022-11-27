@@ -74,26 +74,20 @@
 }
 
 .btn-rent {
-  border: 3px solid #ff6363;
   background-color: #ff6363;
   color: #ffff;
 }
 
 .btn-exchange {
-  border: 3px solid #638d6a;
   background-color: #638d6a;
   color: #ffff;
 }
 
 .btn-rent:hover {
-  border: 3px solid #ff6363;
-  background-color: #ffff;
-  color: #ff6363;
+  background-color: #690a0a;
 }
 .btn-exchange:hover {
-  border: 3px solid #638d6a;
-  background-color: #ffff;
-  color: #638d6a;
+  background-color: #0c4c17;
 }
 .cost-rent {
   color: #0dcd2c;
