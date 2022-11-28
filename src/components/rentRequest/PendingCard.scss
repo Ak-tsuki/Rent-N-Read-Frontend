@@ -9,10 +9,10 @@
     align-items: center;
   }
 
-  &__img {
-    max-width: 150px;
-    object-fit: cover;
-    margin-right: 100px;
+  .book-card__img1 {
+    max-width: 180px;
+    object-fit: contain;
+    margin-right: 20px;
     @media (max-width: 550px) {
       margin-right: 0px;
       margin-bottom: 20px;
@@ -119,13 +119,13 @@
   }
   
   .btn-accept:hover {
-    border: 3px solid #ff6363;
-    background-color: #ffff;
-    color: #ff6363;
+    border: 3px solid #000000;
+    background-color: #940a0a;
+    color: #fffbfb;
   }
   .btn-reject:hover {
-    border: 3px solid #7D7D76;
-    background-color: #ffff;
-    color: #7D7D76;
+    border: 3px solid #000000;
+    background-color: #454542;
+    color: #f6f6f4;
   }
 }

@@ -72,7 +72,7 @@ const PendingCard = ({ book }) => {
       <img
         src={`http://localhost:90/${bookId.book_pic}`}
         alt="book_img"
-        className="book-card__img"
+        className="book-card__img1"
       />
       <div className="book-details">
         <h2 className="book-details__title">{bookId.name}</h2>

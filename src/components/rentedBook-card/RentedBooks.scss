@@ -16,4 +16,19 @@
       margin-bottom: 20px;
     }
   }
+.book-cards{
+  .btn-return {
+    border: 3px solid #ffffff;
+    background-color: #20ac30;
+    color: rgb(255, 255, 255);
+    @media (max-width: 380px) {
+      font-size: 18px;
+    }
+  .btn-return:hover {
+    border: 3px solid #8a8a05;
+    background-color: #676702;
+    color: #ffffff;
+    }
+  }
   
+}

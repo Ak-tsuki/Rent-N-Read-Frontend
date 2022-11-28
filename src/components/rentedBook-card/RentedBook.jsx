@@ -2,11 +2,16 @@ import React from "react";
 import "./RentedBooks.scss";
 import { FaTrash } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
+import { GiReturnArrow } from "react-icons/gi";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Checkout from "../proceed_to_checkout/Checkout";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import time from "cucumber/lib/time";
 
 const style = {
   position: "absolute",
@@ -32,6 +37,7 @@ const Rentedbook = ({ book }) => {
     setBookObject();
   };
 
+
   const {
     start_date,
     no_of_days,
@@ -41,6 +47,37 @@ const Rentedbook = ({ book }) => {
     payment_status,
     total_price,
   } = book;
+
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+
+  const returnBook = (id, e) => {
+    e.preventDefault();
+    const data = {
+      id: id,
+      
+      
+    };
+    axios
+      .put("http://localhost:90/rent/returnBook", data, config)
+      .then((response) => {
+        console.log(response.data.msg);
+        toast.success(
+          "Returned Successfully",
+          { toastId: "Returned success" },
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500)
+        );
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <div className="book-cards">
       <FaTrash className="book-card__delete" />
@@ -50,6 +87,7 @@ const Rentedbook = ({ book }) => {
         className="rented-book__img"
       />
       <div className="book-details">
+        
         <h2 className="book-details__title">{bookId.name}</h2>
         <p className="book-details__author">{bookId.author}</p>
         <p className="book-details__cost">
@@ -68,7 +106,8 @@ const Rentedbook = ({ book }) => {
             className={`book-details__desc  ${
               (rent_status === "Pending" && "text-warning") ||
               (rent_status === "Approved" && "text-success") ||
-              (rent_status === "Rejected" && "text-danger")
+              (rent_status === "Rejected" && "text-danger") ||
+              (rent_status === "Returned" && "text-danger")
             }`}
           >
             {" "}
@@ -91,6 +130,7 @@ const Rentedbook = ({ book }) => {
           Total Cost:{" "}
           <span className="book-details__cost--amount">Rs {total_price}</span>
         </p>
+       
         <div>
           {rent_status !== "Approved" || payment_status === "Paid" ? (
             <div> </div>
@@ -104,6 +144,23 @@ const Rentedbook = ({ book }) => {
             </button>
           )}
         </div>
+        <div>
+         
+          { rent_status !== "Approved" || payment_status !== "Paid"  ? (
+            <div> </div>
+          ) : (
+            <button
+              className="btn-return request-btn m-2"
+              onClick={(e) => {
+                returnBook(book._id, e);
+              }}
+              data-test="return-btn"
+            >
+              Return Book <GiReturnArrow className="ms-1 fs-5" />
+            </button>
+          )}
+        </div>
+     
       </div>
       <div>
         {/* <Button onClick={handleOpen}>Open modal</Button> */}
