@@ -12,6 +12,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import timeunit from "timeunit";
+
 import {
   Button,
   InputAdornment,
@@ -77,7 +78,7 @@ const RentBook = ({ id, bookOwner, name, rent_cost }) => {
         rent_cost,
       no_of_days: Math.round(timeunit.milliseconds.toDays(endDate - startDate)),
     };
-
+    
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -157,7 +158,7 @@ const RentBook = ({ id, bookOwner, name, rent_cost }) => {
               views={["year", "month", "day"]}
               value={endDate}
               onChange={(newValue) => {
-                setEndDate(newValue);
+                setEndDate(newValue.splite);
               }}
               renderInput={(params) => <TextField {...params} />}
             />

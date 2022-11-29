@@ -12,6 +12,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import time from "cucumber/lib/time";
+import moment from "moment";
+import dayjs from "dayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
 
 const style = {
   position: "absolute",
@@ -28,6 +32,8 @@ const style = {
 const Rentedbook = ({ book }) => {
   const [open, setOpen] = React.useState(false);
   const [bookObject, setBookObject] = useState([]);
+
+  
   const handleOpen = () => {
     setOpen(true);
     setBookObject(book);
@@ -36,6 +42,7 @@ const Rentedbook = ({ book }) => {
     setOpen(false);
     setBookObject();
   };
+  
 
 
   const {
@@ -48,36 +55,43 @@ const Rentedbook = ({ book }) => {
     total_price,
   } = book;
 
-  const config = {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("token"),
-    },
-  };
+  // const currentDate = new Date();
 
 
-  const returnBook = (id, e) => {
-    e.preventDefault();
-    const data = {
-      id: id,
+
+  
+
+
+  // const config = {
+  //   headers: {
+  //     Authorization: "Bearer " + localStorage.getItem("token"),
+  //   },
+  // };
+
+
+  // const returnBook = (id, e) => {
+  //   e.preventDefault();
+  //   const data = {
+  //     id: id,
       
       
-    };
-    axios
-      .put("http://localhost:90/rent/returnBook", data, config)
-      .then((response) => {
-        console.log(response.data.msg);
-        toast.success(
-          "Returned Successfully",
-          { toastId: "Returned success" },
-          setTimeout(() => {
-            window.location.reload();
-          }, 1500)
-        );
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
+  //   };
+  //   axios
+  //     .put("http://localhost:90/rent/returnBook", data, config)
+  //     .then((response) => {
+  //       console.log(response.data.msg);
+  //       toast.success(
+  //         "Returned Successfully",
+  //         { toastId: "Returned success" },
+  //         setTimeout(() => {
+  //           window.location.reload();
+  //         }, 1500)
+  //       );
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // };
   return (
     <div className="book-cards">
       <FaTrash className="book-card__delete" />
@@ -86,8 +100,7 @@ const Rentedbook = ({ book }) => {
         alt="book_img"
         className="rented-book__img"
       />
-      <div className="book-details">
-        
+      <div className="book-details">  
         <h2 className="book-details__title">{bookId.name}</h2>
         <p className="book-details__author">{bookId.author}</p>
         <p className="book-details__cost">
@@ -98,8 +111,8 @@ const Rentedbook = ({ book }) => {
           /day
         </p>
         <p className="book-details__desc">Duration: {no_of_days} Days</p>
-        <p className="book-details__desc">Start Date: {start_date}</p>
-        <p className="book-details__desc">End Date: {end_date}</p>
+        <p className="book-details__desc">Start Date: {moment(start_date).format("MMMM Do YYYY")}</p>
+        <p className="book-details__desc">End Date: {moment(end_date).format("MMMM Do YYYY")}</p>
         <p className="book-details__desc">
           Status:
           <span
@@ -144,9 +157,9 @@ const Rentedbook = ({ book }) => {
             </button>
           )}
         </div>
-        <div>
+        {/* <div>
          
-          { rent_status !== "Approved" || payment_status !== "Paid"  ? (
+          { rent_status !== "Approved" || payment_status !== "Paid" || end_date < currentDate ? (
             <div> </div>
           ) : (
             <button
@@ -159,7 +172,7 @@ const Rentedbook = ({ book }) => {
               Return Book <GiReturnArrow className="ms-1 fs-5" />
             </button>
           )}
-        </div>
+        </div> */}
      
       </div>
       <div>
