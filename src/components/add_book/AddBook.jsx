@@ -169,6 +169,7 @@ const AddBook = () => {
       >
         <div className="row">
           <TextField
+            required
             id="outlined-required fullWidth"
             fullWidth
             label="Book Name"

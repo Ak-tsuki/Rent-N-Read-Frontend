@@ -1,17 +1,33 @@
-import React from "react";
+import * as React from "react";
 import "./bookCard.scss";
 import { FaTrash, FaPenAlt } from "react-icons/fa";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import UpdateBook from "../update_book/UpdateBook";
 import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { Typography } from "@mui/material";
+import { ImCross } from "react-icons/im";
+import { BsCheckLg } from "react-icons/bs";
 
 const BookCard = ({ book }) => {
   const [updateOpen, setUpdateOpen] = useState(false);
+  const [view, setView] = React.useState(false);
+  const handleOpen = () => setView(true);
+  const handleClose = () => setView(false);
   const handleUpdateOpen = () => setUpdateOpen(true);
   const handleUpdateClose = () => setUpdateOpen(false);
-  const { name, author, rent_cost_perday, book_pic, desc, category, status } =
-    book;
+  const {
+    name,
+    author,
+    rent_cost_perday,
+    book_pic,
+    desc,
+    category,
+    status,
+    _id,
+  } = book;
   const style = {
     position: "absolute",
     top: "50%",
@@ -23,6 +39,41 @@ const BookCard = ({ book }) => {
     boxShadow: 24,
     p: 4,
   };
+
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  const deleteBook = () => {
+    // e.preventDefault();
+    // const data ={
+    //   _id:id
+    // }
+    console.log(_id);
+    axios
+      .delete("http://localhost:90/book/delete/" + book._id, config)
+      .then((result) => {
+        console.log(result);
+        if (result.data.success) {
+          console.log("Book Deleted Successfull");
+          toast.success(
+            "Book Deleted Successfully",
+            { toastId: "Delete Success" },
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500)
+          );
+        } else {
+          console.log("Please Try Again!!!");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <>
       <Modal
@@ -37,7 +88,39 @@ const BookCard = ({ book }) => {
       </Modal>
 
       <div className="book-card">
-        <FaTrash className="book-card__delete" />
+        <FaTrash
+          className="book-card__delete"
+          onClick={handleOpen}
+        />
+        <Modal
+          open={view}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          data-test="reject-modal"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Are you sure you want to delete this book?
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <div className="d-flex align-items-center ">
+                <button
+                  className="approve--btn"
+                  onClick={(e) => {
+                    deleteBook(book._id, e);
+                  }}
+                  data-test="yes-btn"
+                >
+                  Yes &nbsp; <BsCheckLg />
+                </button>
+                <button onClick={handleClose} className="reject--btn ">
+                  No &nbsp; <ImCross />
+                </button>
+              </div>
+            </Typography>
+          </Box>
+        </Modal>
         <img
           src={`http://localhost:90/${book_pic}`}
           alt="book_img"
