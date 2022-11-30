@@ -91,13 +91,14 @@ const BookCard = ({ book }) => {
         <FaTrash
           className="book-card__delete"
           onClick={handleOpen}
+          data-test="delete-book-btn"
         />
         <Modal
           open={view}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          data-test="reject-modal"
+          data-test="delete-modal"
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
