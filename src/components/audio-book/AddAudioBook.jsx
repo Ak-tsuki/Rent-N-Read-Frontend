@@ -80,7 +80,7 @@ const AddAudioBook = () => {
   const [bookPic, setBookPic] = useState("");
   const [audioFile, setAudioFile] = useState("");
 
-  const addBook = (e) => {
+  const addAudioBook = (e) => {
     // e.perventDefault();
     // console.log(typeof(rent_cost_perday));
     // console.log(name);
@@ -113,8 +113,8 @@ const AddAudioBook = () => {
     data.append("desc", desc);
     data.append("author", author);
     data.append("price", price);
-    data.append("book_pic", bookPic);
-    data.append("audio_file", audioFile);
+    data.append("book_img", bookPic);
+    data.append("audio_book", audioFile);
     console.log(data);
 
     const config = {
@@ -123,12 +123,12 @@ const AddAudioBook = () => {
       },
     };
     axios
-      .post("http://localhost:90/book/add", data, config)
+      .post("http://localhost:90/audiobook/add", data, config)
       .then((res) => {
         if (res.status === 201) {
-          console.log("Book Added Successfully");
-          window.location.replace("/dashboard");
-          toast.success("Book Added Successfully", {
+          console.log("Audio Book Added Successfully");
+          window.location.replace("/dashboard_admin/audio_book");
+          toast.success("Audio book added successfully", {
             position: "top-center",
             autoClose: 4000,
           });
@@ -282,7 +282,7 @@ const AddAudioBook = () => {
             className="mt-2 fs-5 fw-bold"
             variant="contained"
             endIcon={<PlayLessonIcon className="fs-3" />}
-            onClick={addBook}
+            onClick={addAudioBook}
           >
             Add audio book
           </Button>
