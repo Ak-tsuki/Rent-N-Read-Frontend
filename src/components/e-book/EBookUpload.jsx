@@ -23,6 +23,11 @@ import AddEBook from "./AddEBook";
 import { BsPencilSquare, BsTrashFill } from "react-icons/bs";
 import { FaFilePdf } from "react-icons/fa";
 
+const config = {
+  headers: {
+    Authorization: "Bearer " + localStorage.getItem("token"),
+  },
+};
 function Row(props) {
   const { row, approveBook, rejectBook } = props;
   const [open, setOpen] = React.useState(false);
@@ -115,10 +120,14 @@ function Row(props) {
                 More Information
               </Typography>
               <div className="book-card">
-                <img src={r} alt="book_img" className="img-fluid  table-img" />
+                <img
+                  src={`http://localhost:90/${row.book_pic}`}
+                  alt="book_img"
+                  className="img-fluid  table-img"
+                />
                 <div className="moreInfo">
-                  <p className="book-details__desc">Author: </p>
-                  <p className="book-details__desc">Category: </p>
+                  <p className="book-details__desc">Author: {row.author}</p>
+                  <p className="book-details__desc">Category: {row.category}</p>
                   {/* <p className="book-details__desc">Description: </p> */}
                   <p>{row.rich_desc}</p>
                   <p className="book-details__desc">
@@ -171,6 +180,18 @@ const style = {
   p: 4,
 };
 export default function EBookUpload() {
+  const [eBooks, setEBooks] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    axios.get("http://localhost:90/eBook/getbyadmin", config).then((res) => {
+      console.log(res.data);
+      setEBooks(res.data.data);
+      console.log(eBooks);
+    });
+  }, []);
   return (
     <>
       <div>
