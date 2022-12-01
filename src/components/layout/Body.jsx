@@ -12,6 +12,7 @@ import Books from "../../pages/Books";
 import SingleBook from "../../pages/SingleBook";
 import MyRentRequest from "../dashboard/MyRentRequest";
 import AudioBookUpload from "../audio-book/AudioBookUpload";
+import EBookUpload from "../e-book/EBookUpload";
 
 const Body = () => {
   return (
@@ -30,6 +31,7 @@ const Body = () => {
           <Route path="" element={<DashboardHome />} />
           <Route path="admin_approve" element={<AdminApprove />} />
           <Route path="audio_book" element={<AudioBookUpload />} />
+          <Route path="ebook" element={<EBookUpload />} />
         </Route>
       </Routes>
     </>
