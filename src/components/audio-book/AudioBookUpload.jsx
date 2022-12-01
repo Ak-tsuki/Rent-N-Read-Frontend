@@ -2,13 +2,11 @@ import * as React from "react";
 import "../admin-approveBook/admin_approve.scss";
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import { FaTrash, FaPenAlt } from "react-icons/fa";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -19,15 +17,12 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PlayLessonIcon from "@mui/icons-material/PlayLesson";
 import { BsCheckLg } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
 import AddAudioBook from "./AddAudioBook";
 import { BsPencilSquare, BsTrashFill } from "react-icons/bs";
-import ReactPlayer from "react-player";
-
+import ReactAudioPlayer from "react-audio-player";
 const config = {
   headers: {
     Authorization: "Bearer " + localStorage.getItem("token"),
@@ -39,6 +34,7 @@ function Row(props) {
   const [view, setView] = React.useState(false);
   const handleOpen = () => setView(true);
   const handleClose = () => setView(false);
+
   const style = {
     position: "absolute",
     top: "50%",
@@ -63,9 +59,8 @@ function Row(props) {
           </IconButton>
         </StyledTableCell>
         <TableCell align="center">{row.name}</TableCell>
-        <TableCell align="center">{row.bookOwner?.username}</TableCell>
-        <TableCell align="center">{row.rent_cost_perday}</TableCell>
-        <TableCell align="center">{row.status}</TableCell>
+        <TableCell align="center">{row.author}</TableCell>
+        <TableCell align="center">{row.price}</TableCell>
         <TableCell align="center">
           <div className="d-flex  align-items-center justify-content-center">
             <button
@@ -135,14 +130,10 @@ function Row(props) {
                   <p className="book-details__desc">Description: </p>
                   <p>{row.rich_desc}</p>
                   <p className="book-details__desc">
-                    Audio Book:{" "}
                     {
-                      <ReactPlayer
-                        url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-                        width="400px"
-                        height="50px"
-                        playing={false}
-                        controls={true}
+                      <ReactAudioPlayer
+                        src={`http://localhost:90/${row.audio_book}`}
+                        controls
                       />
                     }
                   </p>
@@ -155,21 +146,7 @@ function Row(props) {
     </React.Fragment>
   );
 }
-Row.propTypes = {
-  row: PropTypes.shape({
-    rent: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
-    more: PropTypes.arrayOf(
-      PropTypes.shape({
-        desc: PropTypes.string.isRequired,
-        bookOwner: PropTypes.string.isRequired,
-        author: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    action: PropTypes.string.isRequired,
-  }).isRequired,
-};
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#ff6363",
@@ -202,58 +179,19 @@ const style = {
   p: 4,
 };
 export default function AudioBookUpload() {
-  const [listedBooks, setListedBooks] = useState([]);
+  const [audioBooks, setAudioBooks] = useState([]);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const approveBook = (id, e) => {
-    e.preventDefault();
-    const data = {
-      id: id,
-    };
-    axios
-      .put("http://localhost:90/book/approve", data, config)
-      .then((response) => {
-        console.log(response.data.msg);
-        toast.success(
-          "Approved Successfully",
-          { toastId: "Approve success" },
-          setTimeout(() => {
-            window.location.reload();
-          }, 1500)
-        );
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-  const rejectBook = (id, e) => {
-    e.preventDefault();
-    const data = {
-      id: id,
-    };
-    axios
-      .put("http://localhost:90/book/reject", data, config)
-      .then((response) => {
-        console.log(response.data.msg);
-        toast.success(
-          "Rejected Successfully",
-          { toastId: "Reject success" },
-          setTimeout(() => {
-            window.location.reload();
-          }, 1500)
-        );
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
+
   useEffect(() => {
-    axios.get("http://localhost:90/book/getallbyadmin", config).then((res) => {
-      console.log(res.data);
-      setListedBooks(res.data.data);
-      console.log(listedBooks);
-    });
+    axios
+      .get("http://localhost:90/audiobook/getbyadmin", config)
+      .then((res) => {
+        console.log(res.data);
+        setAudioBooks(res.data.data);
+        console.log(audioBooks);
+      });
   }, []);
   return (
     <>
@@ -300,12 +238,7 @@ export default function AudioBookUpload() {
               <StyledTableCell align="center" className="tableheading">
                 Author
               </StyledTableCell>
-              <StyledTableCell
-                className="tableheading rent-tableheading"
-                align="justify"
-              >
-                Description
-              </StyledTableCell>
+
               <StyledTableCell className="tableheading" align="center">
                 Price
               </StyledTableCell>
@@ -315,13 +248,8 @@ export default function AudioBookUpload() {
             </StyledTableRow>
           </TableHead>
           <TableBody>
-            {listedBooks.map((row) => (
-              <Row
-                key={row._id}
-                row={row}
-                updateBook={approveBook}
-                deleteBook={rejectBook}
-              />
+            {audioBooks.map((row) => (
+              <Row key={row._id} row={row} />
             ))}
           </TableBody>
         </Table>
