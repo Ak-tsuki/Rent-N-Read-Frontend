@@ -26,6 +26,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import AddAudioBook from "./AddAudioBook";
 import { BsPencilSquare, BsTrashFill } from "react-icons/bs";
+import ReactPlayer from "react-player";
 
 const config = {
   headers: {
@@ -133,6 +134,18 @@ function Row(props) {
                   <p className="book-details__desc">Category: {row.category}</p>
                   <p className="book-details__desc">Description: </p>
                   <p>{row.rich_desc}</p>
+                  <p className="book-details__desc">
+                    Audio Book:{" "}
+                    {
+                      <ReactPlayer
+                        url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                        width="400px"
+                        height="50px"
+                        playing={false}
+                        controls={true}
+                      />
+                    }
+                  </p>
                 </div>
               </div>
             </Box>
