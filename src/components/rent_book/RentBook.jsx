@@ -90,16 +90,23 @@ const RentBook = ({ id, bookOwner, name, rent_cost }) => {
         if (res.status === 201) {
           console.log("Book rent request sent successfully");
           // window.location.replace("/dashboard");
-          toast.success("Book rent request sent successfully", {
+          toast.success("Book rent request sent successfully",
+          setTimeout(() => {
+            window.location.replace("/dashboard");
+          }, 1500), {
             position: "top-center",
             autoClose: 4000,
           });
         } else {
-          toast.error("Somthing went wrong!..", {
+          toast.error("Somthing went wrong!..", 
+          {
             toastId: "error",
             position: "top-center",
             autoClose: 4000,
-          });
+            
+          }
+          
+          );
         }
 
         // console.log(res);
@@ -158,7 +165,7 @@ const RentBook = ({ id, bookOwner, name, rent_cost }) => {
               views={["year", "month", "day"]}
               value={endDate}
               onChange={(newValue) => {
-                setEndDate(newValue.splite);
+                setEndDate(newValue);
               }}
               renderInput={(params) => <TextField {...params} />}
             />

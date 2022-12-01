@@ -14,8 +14,11 @@ import { GiReturnArrow } from "react-icons/gi";
 const PendingCard = ({ book }) => {
   console.log(book)
   
-  const { start_date, no_of_days, bookId, rent_status, userId, payment_status, end_date,  } = book;
-  const currentDate = new Date();
+  const { start_date, no_of_days, bookId, rent_status, userId, payment_status, end_date} = book;
+  const endDate =moment(end_date).format("MMMM Do YYYY");
+  const currentDate = moment(Date.createdAt).format("MMMM Do YYYY");
+  console.log(currentDate);
+  console.log(endDate);
 
   
   const config = {
@@ -159,10 +162,20 @@ const PendingCard = ({ book }) => {
         }
         <div>
          
-         { rent_status !== "Approved" || payment_status !== "Paid" || end_date < currentDate ? (
-           <div> </div>
+        { rent_status === "Pending" || payment_status === "Pending" || currentDate !== endDate  ? (
+           <div> 
+             <button
+           className="btn-returns request-btn m-2 disabled"
+           
+           data-test="return-btn"
+         >
+           Books Returned <GiReturnArrow className="ms-1 fs-5" />
+         </button> 
+                       
+            </div>
          ) : (
-           <button
+          <div> 
+            <button
              className="btn-return request-btn m-2"
              onClick={(e) => {
                returnBook(book._id, e);
@@ -171,6 +184,9 @@ const PendingCard = ({ book }) => {
            >
              Book Returned <GiReturnArrow className="ms-1 fs-5" />
            </button>
+           
+           
+           </div>
          )}
        </div>
       </div>

@@ -108,24 +108,40 @@
       font-size: 18px;
     }
   }
-  
-  .btn-reject {
-    border: 3px solid #7D7D76;
-    background-color: #7D7D76;
+  .btn-returns {
+    border: 3px solid #ffffff;
+    background-color: #565050;
     color: #ffff;
     @media (max-width: 380px) {
       font-size: 18px;
     }
   }
+  .btn-returns:hover {
+    border: 3px solid #fffffe;
+    background-color: #050505;
+    color: #ffff;
+    @media (max-width: 380px) {
+      font-size: 18px;
+    }
+  }
+  .btn-return {
+    border: 3px solid #ffffff;
+    background-color: #20ac30;
+    color: rgb(255, 255, 255);
+    @media (max-width: 380px) {
+      font-size: 18px;
+    }
+
+  .btn-return:hover {
+    border: 3px solid #ffffff;
+    background-color: #676702;
+    color: #ffffff;
+    @media (max-width: 380px) {
+      font-size: 18px;
+    }
+    }
+  }
   
-  .btn-accept:hover {
-    border: 3px solid #000000;
-    background-color: #940a0a;
-    color: #fffbfb;
-  }
-  .btn-reject:hover {
-    border: 3px solid #000000;
-    background-color: #454542;
-    color: #f6f6f4;
-  }
+  
+  
 }
