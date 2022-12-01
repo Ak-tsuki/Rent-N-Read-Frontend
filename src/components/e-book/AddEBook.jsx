@@ -101,6 +101,49 @@ const AddEBook = () => {
       });
       return;
     }
+
+    const data = new FormData();
+    data.append("category", category);
+    data.append("name", name);
+    data.append("rich_desc", richDesc);
+    // data.append("desc", desc);
+    data.append("author", author);
+    data.append("rent_cost_perday", rent_cost_perday);
+    data.append("price", price);
+    data.append("book_img", bookPic);
+    data.append("e_book", pdfFile);
+    console.log(data);
+
+    const config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    axios
+      .post("http://localhost:90/eBook/add", data, config)
+      .then((res) => {
+        if (res.status === 201) {
+          console.log("E-Book Added Successfully");
+          window.location.replace("/dashboard_admin/ebook");
+          toast.success("E-Book added successfully", {
+            position: "top-center",
+            autoClose: 4000,
+          });
+        } else {
+          console.log("Please Try Again! Something Went Wrong!!!", res);
+          toast.error("Somthing went wrong!", {
+            toastId: "error",
+            position: "top-center",
+            autoClose: 4000,
+          });
+        }
+
+        // console.log(res);
+      })
+
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const handleChange = (event) => {
