@@ -130,7 +130,7 @@ function DashboardAdmin(props) {
           </ListItem>
         </Link>
         <p className="admin-dashboard__nav--heading">Book uploads</p>
-        <Link className="admin-dashboard__nav">
+        <Link to="/dashboard_admin/ebook" className="admin-dashboard__nav">
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>

@@ -110,7 +110,7 @@ const AddAudioBook = () => {
     data.append("category", category);
     data.append("name", name);
     data.append("rich_desc", richDesc);
-    data.append("desc", desc);
+    // data.append("desc", desc);
     data.append("author", author);
     data.append("price", price);
     data.append("book_img", bookPic);
@@ -192,7 +192,7 @@ const AddAudioBook = () => {
               setAuthor(e.target.value);
             }}
           />
-          <TextField
+          {/* <TextField
             required
             multiline
             rows={2}
@@ -202,7 +202,7 @@ const AddAudioBook = () => {
             onChange={(e) => {
               setDesc(e.target.value);
             }}
-          />
+          /> */}
           <TextField
             required
             multiline

@@ -127,7 +127,7 @@ function Row(props) {
                 <div className="moreInfo">
                   <p className="book-details__desc">Author: {row.author}</p>
                   <p className="book-details__desc">Category: {row.category}</p>
-                  <p className="book-details__desc">Description: </p>
+                  {/* <p className="book-details__desc">Description: </p> */}
                   <p>{row.rich_desc}</p>
                   <p className="book-details__desc">
                     {
