@@ -23,6 +23,12 @@ import AddEBook from "./AddEBook";
 import { BsPencilSquare, BsTrashFill } from "react-icons/bs";
 import { FaFilePdf } from "react-icons/fa";
 
+import { Viewer } from "@react-pdf-viewer/core";
+import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+import { Worker } from "@react-pdf-viewer/core";
+
 const config = {
   headers: {
     Authorization: "Bearer " + localStorage.getItem("token"),
@@ -32,8 +38,16 @@ function Row(props) {
   const { row, approveBook, rejectBook } = props;
   const [open, setOpen] = React.useState(false);
   const [view, setView] = React.useState(false);
+  const [see, setSee] = React.useState(false);
   const handleOpen = () => setView(true);
   const handleClose = () => setView(false);
+
+  const handleOpen1 = () => setSee(true);
+  const handleClose1 = () => setSee(false);
+
+  const [pdfFile, setPDFFile] = useState("null");
+  const [viewPdf, setViewPdf] = useState("null");
+  const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
   const style = {
     position: "absolute",
@@ -46,6 +60,28 @@ function Row(props) {
     boxShadow: 24,
     p: 4,
   };
+  const style1 = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "90%",
+    height: "90vh",
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const handlePdfFileSubmit = (e) => {
+    e.preventDefault();
+    if (pdfFile !== null) {
+      setViewPdf(pdfFile);
+    } else {
+      setViewPdf(null);
+    }
+  };
+
   return (
     <React.Fragment>
       <StyledTableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -132,12 +168,35 @@ function Row(props) {
                   <p>{row.rich_desc}</p>
                   <p className="book-details__desc">
                     {
-                      <button class="reject--btn">
+                      <button class="reject--btn" onClick={handleOpen1}>
                         View PDF
                         <FaFilePdf size={20} />
                       </button>
                     }
                   </p>
+                  <Modal
+                    open={see}
+                    onClose={handleClose1}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    onSubmit={handlePdfFileSubmit}
+                  >
+                    <div className="pdf-container">
+                      <Box sx={style1}>
+                        {viewPdf && (
+                          <>
+                            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.0.279/build/pdf.worker.min.js">
+                              <Viewer
+                                fileUrl={`http://localhost:90/${row.e_book}`}
+                                plugins={[defaultLayoutPluginInstance]}
+                              />
+                            </Worker>
+                          </>
+                        )}
+                        {!viewPdf && <>No pdf file selected</>}
+                      </Box>
+                    </div>
+                  </Modal>
                 </div>
               </div>
             </Box>

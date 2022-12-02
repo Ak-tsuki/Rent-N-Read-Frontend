@@ -80,7 +80,11 @@ const AddEBook = () => {
   const [rent_cost_perday, setRent_cost_Perday] = useState("");
   const [price, setPrice] = useState("");
   const [bookPic, setBookPic] = useState("");
-  const [pdfFile, setPDFFile] = useState("");
+
+  const [pdfFile, setPDFFile] = useState("null");
+  const [pdfFileError, setPDFFileError] = useState("");
+
+  const [viewPdf, setViewPdf] = useState(null);
 
   const addEBook = (e) => {
     // e.perventDefault();
@@ -155,7 +159,14 @@ const AddEBook = () => {
       typeof value === "string" ? value.split(",") : value
     );
   };
-
+  const handlePdfFileSubmit = (e) => {
+    e.preventDefault();
+    if (pdfFile !== null) {
+      setViewPdf(pdfFile);
+    } else {
+      setViewPdf(null);
+    }
+  };
   return (
     <div>
       <Box
@@ -167,6 +178,7 @@ const AddEBook = () => {
         }}
         noValidate
         autoComplete="off"
+        onSumit={handlePdfFileSubmit}
       >
         <div className="row">
           <TextField

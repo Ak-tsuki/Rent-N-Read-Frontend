@@ -95,7 +95,7 @@ const AddAudioBook = () => {
       richDesc === "" ||
       author === "" ||
       bookPic === "" ||
-      desc === "" ||
+      // desc === "" ||
       price === "" ||
       audioFile === ""
     ) {
