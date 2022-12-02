@@ -68,6 +68,18 @@ Given("I am on the {string} page", async function (string) {
         "http://localhost:3000/dashboard_admin/ebook"
       );
 
+      case "audiobook":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZjBkZjgxOGEyMTAzYTQ5ZmRhNDMiLCJpYXQiOjE2Njk4ODY3MjN9.gVOC1CeG_1qRKEdeOBS61B-m1b7sKOORik_EiPL1tiw"
+        );
+      });
+      return await this.page.goto(
+        "http://localhost:3000/dashboard_admin/audio_book"
+      );
+
     default:
       throw new Error(`${string} is not a supported page name`);
   }

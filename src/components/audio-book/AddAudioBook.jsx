@@ -102,6 +102,7 @@ const AddAudioBook = () => {
       toast.warn("Fill all Required Field", {
         position: "top-center",
         autoClose: 4000,
+        toastId: "warning",
       });
       return;
     }
@@ -283,6 +284,7 @@ const AddAudioBook = () => {
             variant="contained"
             endIcon={<PlayLessonIcon className="fs-3" />}
             onClick={addAudioBook}
+            data-test="add-btn"
           >
             Add audio book
           </Button>

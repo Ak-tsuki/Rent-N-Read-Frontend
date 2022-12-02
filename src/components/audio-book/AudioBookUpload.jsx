@@ -201,6 +201,7 @@ export default function AudioBookUpload() {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
+          data-test="add-audiobook-modal"
         >
           <Box sx={style}>
             {/* <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -222,7 +223,7 @@ export default function AudioBookUpload() {
         >
           Add a book <FaBook />
         </button> */}
-          <button className="add-book__btn" onClick={handleOpen}>
+          <button className="add-book__btn" onClick={handleOpen} data-test="add-audiobook-btn">
             Add audio book <PlayLessonIcon />
           </button>
         </div>
