@@ -259,6 +259,7 @@ export default function EBookUpload() {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
+          data-test="add-ebook-modal"
         >
           <Box sx={style}>
             {/* <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -280,7 +281,11 @@ export default function EBookUpload() {
         >
           Add a book <FaBook />
         </button> */}
-          <button className="add-book__btn" onClick={handleOpen}>
+          <button
+            className="add-book__btn"
+            onClick={handleOpen}
+            data-test="add-ebook-btn"
+          >
             Add E-book <FaFilePdf />
           </button>
         </div>

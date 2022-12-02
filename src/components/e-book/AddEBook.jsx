@@ -102,6 +102,7 @@ const AddEBook = () => {
       toast.warn("Fill all Required Field", {
         position: "top-center",
         autoClose: 4000,
+        toastId: "warning",
       });
       return;
     }
@@ -309,6 +310,7 @@ const AddEBook = () => {
             variant="contained"
             endIcon={<FaFilePdf className="fs-3" />}
             onClick={addEBook}
+            data-test="add-btn"
           >
             Add E-Book
           </Button>
