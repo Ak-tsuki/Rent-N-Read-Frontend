@@ -1,16 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import { Theme, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
 import PlayLessonIcon from "@mui/icons-material/PlayLesson";
-import { FaBook } from "react-icons/fa";
-import AddBook from "../add_book/AddBook";
-import BookCard from "../book-card/BookCard";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import {
   Button,
@@ -20,8 +15,6 @@ import {
   OutlinedInput,
   Select,
 } from "@mui/material";
-import { Stack } from "react-bootstrap";
-import { Name } from "selenium-webdriver/lib/command";
 import { toast } from "react-toastify";
 
 const ITEM_HEIGHT = 48;
@@ -74,21 +67,12 @@ const AddAudioBook = () => {
   const [category, setCategory] = useState([]);
   const [name, setName] = useState("");
   const [richDesc, setRichDesc] = useState("");
-  const [desc, setDesc] = useState("");
   const [author, setAuthor] = useState("");
   const [price, setPrice] = useState("");
   const [bookPic, setBookPic] = useState("");
   const [audioFile, setAudioFile] = useState("");
 
   const addAudioBook = (e) => {
-    // e.perventDefault();
-    // console.log(typeof(rent_cost_perday));
-    // console.log(name);
-    // console.log(rich_desc);
-    // console.log(desc);
-    // console.log(author);
-    // console.log(book_img);
-    // console.log(categoryName);
     if (
       category === [] ||
       name === "" ||
@@ -111,7 +95,6 @@ const AddAudioBook = () => {
     data.append("category", category);
     data.append("name", name);
     data.append("rich_desc", richDesc);
-    // data.append("desc", desc);
     data.append("author", author);
     data.append("price", price);
     data.append("book_img", bookPic);
@@ -141,11 +124,16 @@ const AddAudioBook = () => {
             autoClose: 4000,
           });
         }
-
-        // console.log(res);
       })
 
       .catch((e) => {
+        if (e.response.status === 401) {
+          toast.error(e.response.data.msg, {
+            toastId: "error",
+            position: "top-center",
+            autoClose: 4000,
+          });
+        }
         console.log(e);
       });
   };
@@ -166,7 +154,6 @@ const AddAudioBook = () => {
         component="form"
         sx={{
           "& .MuiTextField-root": { m: 0, pb: 2 },
-          // width: 762,
           maxWidth: "100%",
         }}
         noValidate
