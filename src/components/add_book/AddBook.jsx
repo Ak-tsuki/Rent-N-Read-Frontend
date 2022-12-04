@@ -267,6 +267,7 @@ const AddBook = () => {
             variant="contained"
             endIcon={<AddCircleIcon className="fs-3" />}
             onClick={addBook}
+            data-test="add-btn"
           >
             Add a Book
           </Button>

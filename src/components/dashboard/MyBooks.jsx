@@ -61,7 +61,11 @@ const MyBooks = () => {
         >
           Add a book <FaBook />
         </button> */}
-        <button className="add-book__btn" onClick={handleOpen}>
+        <button
+          className="add-book__btn"
+          onClick={handleOpen}
+          data-test="add-book-btn"
+        >
           Add a book <FaBook />
         </button>
       </div>

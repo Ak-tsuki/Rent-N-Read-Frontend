@@ -51,7 +51,7 @@ Given("I am on the {string} page", async function (string) {
         localStorage.clear();
         localStorage.setItem(
           "token",
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzg3NThiNDBmMjMwYmQ4MWJhZmFkMDciLCJpYXQiOjE2Njk4MTUxNTB9.VZND1qIcHca7ms42BA1JJdJGfopUiyBf9xn16Ak3PdU"
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZTI0YzE2N2RiNTY1MzA4MDU0YmUiLCJpYXQiOjE2NzAxMzA0Mzd9.77HvxQYMk9MtO5TDF2NnLLfPjc8baQh9EkoarxNZDVM"
         );
       });
       return await this.page.goto("http://localhost:3000/dashboard");
@@ -68,7 +68,7 @@ Given("I am on the {string} page", async function (string) {
         "http://localhost:3000/dashboard_admin/ebook"
       );
 
-      case "audiobook":
+    case "audiobook":
       await this.page.evaluateOnNewDocument(() => {
         localStorage.clear();
         localStorage.setItem(

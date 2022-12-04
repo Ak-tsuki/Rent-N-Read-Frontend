@@ -142,12 +142,18 @@ const AddEBook = () => {
             autoClose: 4000,
           });
         }
-
         // console.log(res);
       })
-
       .catch((e) => {
         console.log(e);
+        if (e.response.status === 401) {
+          toast.warn(e.response.data.msg, {
+            position: "top-center",
+            autoClose: 4000,
+            toastId: "warning",
+          });
+          return;
+        }
       });
   };
 
