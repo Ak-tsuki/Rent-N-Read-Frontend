@@ -52,7 +52,7 @@ const DashboardNav = ({ open }) => {
         <GiOpenBook className="dash-nav__link--icon" />
         Rent Requests
       </Link>
-      <Link className="dash-nav__link">
+      <Link className="dash-nav__link" to="/dashboard/exchangerequest">
         {" "}
         <RiExchangeBoxFill className="dash-nav__link--icon" />
         Exchange Requests

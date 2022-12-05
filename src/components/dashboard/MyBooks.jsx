@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import Rentedbook from "../rentedBook-card/RentedBook";
+import ExchangeBookCard from "../exchangebook-card/ExchangeBookCard";
 
 const style = {
   position: "absolute",
@@ -25,6 +26,7 @@ const MyBooks = () => {
   const [currentTab, setCurrentTab] = useState("listed");
   const [listedBooks, setListedBooks] = useState([]);
   const [rentedBooks, setRentedBooks] = useState([]);
+  const [exchangedBooks, setExchangedBooks] = useState([]);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -47,6 +49,13 @@ const MyBooks = () => {
       setRentedBooks(res.data.data);
       console.log(rentedBooks);
     });
+    axios
+      .get("http://localhost:90/user/exchange_requests", config)
+      .then((res) => {
+        console.log("exchaged");
+        console.log(res.data);
+        setExchangedBooks(res.data.data);
+      });
   }, []);
 
   return (
@@ -88,11 +97,23 @@ const MyBooks = () => {
         >
           Rented Books
         </div>
+        <div
+          className={`tabs__tab ${
+            currentTab === "exchanged" && "tabs__tab--open"
+          }`}
+          onClick={() => setCurrentTab("exchanged")}
+          data-test="rented-books-btn"
+        >
+          Exchanged Books
+        </div>
       </div>
       <div>
-        {currentTab === "rented"
-          ? rentedBooks.map((book) => <Rentedbook book={book} />)
-          : listedBooks.map((book) => <BookCard book={book} />)}
+        {currentTab === "listed" &&
+          listedBooks.map((book) => <BookCard book={book} />)}
+        {currentTab === "rented" &&
+          rentedBooks.map((book) => <Rentedbook book={book} />)}
+        {currentTab === "exchanged" &&
+          exchangedBooks.map((book) => <ExchangeBookCard book={book} />)}
       </div>
       <div>
         {/* <Button onClick={handleOpen}>Open modal</Button> */}

@@ -13,6 +13,7 @@ import SingleBook from "../../pages/SingleBook";
 import MyRentRequest from "../dashboard/MyRentRequest";
 import AudioBookUpload from "../audio-book/AudioBookUpload";
 import EBookUpload from "../e-book/EBookUpload";
+import MyExchangeRequest from "../dashboard/MyExchangeRequest";
 
 const Body = () => {
   return (
@@ -26,6 +27,7 @@ const Body = () => {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<MyBooks />} />
           <Route path="request" element={<MyRentRequest />} />
+          <Route path="exchangerequest" element={<MyExchangeRequest />} />
         </Route>
         <Route path="/dashboard_admin" element={<DashboardAdmin />}>
           <Route path="" element={<DashboardHome />} />

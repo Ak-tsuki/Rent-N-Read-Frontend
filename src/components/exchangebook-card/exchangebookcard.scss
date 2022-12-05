@@ -1,0 +1,144 @@
+.book-cards {
+  background: #f8f8f8;
+  padding: 18px;
+  display: flex;
+  position: relative;
+  margin-bottom: 20px;
+  @media (max-width: 550px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .book-card__img1 {
+    max-width: 180px;
+    object-fit: contain;
+    margin-right: 20px;
+    @media (max-width: 550px) {
+      margin-right: 0px;
+      margin-bottom: 20px;
+    }
+  }
+  &__delete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(246, 95, 95);
+    &:hover {
+      color: rgb(203, 26, 26);
+    }
+  }
+}
+
+.book-details {
+  flex: 1;
+  &__title {
+    font-weight: 700;
+    font-size: 21px;
+
+    color: #783a0d;
+    @media (max-width: 380px) {
+      font-size: 18px;
+    }
+  }
+  &__author {
+    font-weight: 600;
+    font-size: 16px;
+
+    color: #8a918c;
+    margin-bottom: 10px;
+    @media (max-width: 380px) {
+      font-size: 14px;
+    }
+  }
+  &__desc {
+    font-family: "Alata";
+    font-size: 16px;
+    max-width: 625px;
+    margin-bottom: 10px;
+    @media (max-width: 380px) {
+      font-size: 14px;
+    }
+  }
+  &__cost {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 8px;
+    @media (max-width: 380px) {
+      font-size: 14px;
+    }
+    &--amount {
+      color: #0dcd2c;
+      font-size: 18px;
+      @media (max-width: 380px) {
+        font-size: 16px;
+      }
+    }
+  }
+  &__update {
+    display: flex;
+    justify-content: end;
+    &--btn {
+      display: flex;
+      align-items: center;
+
+      padding: 8px 10px;
+      font-size: 14px;
+      font-weight: 500;
+      background: #64a36e;
+      border-radius: 6px;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      svg {
+        margin-left: 5px;
+      }
+      &:hover {
+        background: #447c4d;
+      }
+    }
+  }
+  .btn-accept {
+    border: 3px solid #ff6363;
+    background-color: #ff6363;
+    color: #ffff;
+    @media (max-width: 380px) {
+      font-size: 18px;
+    }
+  }
+  .btn-returns {
+    border: 3px solid #ffffff;
+    background-color: #565050;
+    color: #ffff;
+    @media (max-width: 380px) {
+      font-size: 18px;
+    }
+  }
+  .btn-returns:hover {
+    border: 3px solid #fffffe;
+    background-color: #050505;
+    color: #ffff;
+    @media (max-width: 380px) {
+      font-size: 18px;
+    }
+  }
+  .btn-return {
+    border: 3px solid #ffffff;
+    background-color: #20ac30;
+    color: rgb(255, 255, 255);
+    @media (max-width: 380px) {
+      font-size: 18px;
+    }
+
+    .btn-return:hover {
+      border: 3px solid #ffffff;
+      background-color: #676702;
+      color: #ffffff;
+      @media (max-width: 380px) {
+        font-size: 18px;
+      }
+    }
+  }
+}
