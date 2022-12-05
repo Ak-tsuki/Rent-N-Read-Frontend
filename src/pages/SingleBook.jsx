@@ -8,6 +8,8 @@ import { FaChevronCircleRight } from "react-icons/fa";
 import { RiExchangeFill } from "react-icons/ri";
 import Modal from "@mui/material/Modal";
 import RentBook from "../components/rent_book/RentBook";
+import ExchangeBook from "../components/exchange_book/ExchangeBook";
+
 import Box from "@mui/material/Box";
 
 const style = {
@@ -23,9 +25,14 @@ const style = {
 };
 
 const SingleBook = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openRent, setOpenRent] = React.useState(false);
+  const handleOpenRent = () => setOpenRent(true);
+  const handleCloseRent = () => setOpenRent(false);
+
+  const [openExchange, setOpenExchange] = React.useState(false);
+  const handleOpenExchange = () => setOpenExchange(true);
+  const handleCloseExchange = () => setOpenExchange(false);
+
   const { book_id } = useParams();
 
   const [book_img, setBookImg] = useState("");
@@ -91,12 +98,15 @@ const SingleBook = () => {
               <div>
                 <button
                   className="request-btn btn-rent m-2"
-                  onClick={handleOpen}
+                  onClick={handleOpenRent}
                   data-test="rent-btn"
                 >
                   Rent <FaChevronCircleRight className="ms-1 fs-5" />
                 </button>
-                <button className="request-btn btn-exchange m-2">
+                <button
+                  className="request-btn btn-exchange m-2"
+                  onClick={handleOpenExchange}
+                >
                   Exchange <RiExchangeFill className="ms-1 fs-4" />
                 </button>
               </div>
@@ -106,8 +116,8 @@ const SingleBook = () => {
       </div>
       <div>
         <Modal
-          open={open}
-          onClose={handleClose}
+          open={openRent}
+          onClose={handleCloseRent}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
@@ -118,6 +128,16 @@ const SingleBook = () => {
               name={name}
               rent_cost={cost}
             />
+          </Box>
+        </Modal>
+        <Modal
+          open={openExchange}
+          onClose={handleCloseExchange}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <ExchangeBook id={book_id} bookOwner={bookowner} name={name} />
           </Box>
         </Modal>
       </div>
