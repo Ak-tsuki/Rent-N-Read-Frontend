@@ -72,7 +72,7 @@ const RequestedExchangeCard = ({ book }) => {
           .then(
             toast.success(
               "Book Exchanged Successfully",
-              { toastId: "Approve success" },
+              { toastId: "Accept success" },
               setTimeout(() => {
                 window.location.reload();
               }, 1500)
@@ -168,7 +168,7 @@ const RequestedExchangeCard = ({ book }) => {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          data-test="delete-modal"
+          data-test="reject-modal"
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">

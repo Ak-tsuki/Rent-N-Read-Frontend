@@ -106,6 +106,7 @@ const SingleBook = () => {
                 <button
                   className="request-btn btn-exchange m-2"
                   onClick={handleOpenExchange}
+                  data-test="exchangeBook-btn"
                 >
                   Exchange <RiExchangeFill className="ms-1 fs-4" />
                 </button>

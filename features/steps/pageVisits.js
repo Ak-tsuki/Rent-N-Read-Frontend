@@ -51,10 +51,32 @@ Given("I am on the {string} page", async function (string) {
         localStorage.clear();
         localStorage.setItem(
           "token",
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZTI0YzE2N2RiNTY1MzA4MDU0YmUiLCJpYXQiOjE2NzAxMzA0Mzd9.77HvxQYMk9MtO5TDF2NnLLfPjc8baQh9EkoarxNZDVM"
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZTI0YzE2N2RiNTY1MzA4MDU0YmUiLCJpYXQiOjE2NzAzMTUwODR9.Es56s1-At5_I7MKPrfqunjIJY40f-9NmYtWhI7GcuZY"
         );
       });
       return await this.page.goto("http://localhost:3000/dashboard");
+
+    case "books":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZTI0YzE2N2RiNTY1MzA4MDU0YmUiLCJpYXQiOjE2NzAzMTUwODR9.Es56s1-At5_I7MKPrfqunjIJY40f-9NmYtWhI7GcuZY"
+        );
+      });
+      return await this.page.goto("http://localhost:3000/books");
+
+    case "exchangerequest":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZjA5YTgxOGEyMTAzYTQ5ZmRhM2YiLCJpYXQiOjE2NzAzMTk2NzB9.imWi0LdAuSQFWc8B4I5NVvOAunc3GzvT4_9A8GCZi4o"
+        );
+      });
+      return await this.page.goto(
+        "http://localhost:3000/dashboard/exchangerequest"
+      );
 
     case "ebook":
       await this.page.evaluateOnNewDocument(() => {

@@ -146,8 +146,9 @@ const ExchangeBook = ({ id, bookOwner, name }) => {
             className="mt-2 fs-5 fw-bold"
             variant="contained"
             endIcon={<FaChevronCircleRight className="fs-3" />}
-            data-test="send-rent-request-btn"
+            // data-test="send-rent-request-btn"
             onClick={exchangeBook}
+            data-test="exchange-req-btn"
           >
             Send Exchange Request
           </Button>
