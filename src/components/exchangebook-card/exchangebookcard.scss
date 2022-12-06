@@ -1,3 +1,6 @@
+.main-div-book-cards {
+  background: #f8f8f8;
+}
 .book-cards {
   background: #f8f8f8;
   padding: 18px;
@@ -141,4 +144,14 @@
       }
     }
   }
+}
+.css-1m0pdy6-MuiPaper-root-MuiAccordion-root:before {
+  position: absolute;
+  left: 0;
+  top: -1px;
+  right: 0;
+  height: 1px;
+  content: "";
+  opacity: 1;
+  background-color: #f8f8f8;
 }
