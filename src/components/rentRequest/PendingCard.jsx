@@ -116,6 +116,7 @@ const PendingCard = ({ book }) => {
         </p>
         <p className="book-details__desc">Duration: {no_of_days}</p>
         <p className="book-details__desc">Start Date: {moment(start_date).format("MMMM Do YYYY")}</p>
+        <p className="book-details__desc">End Date: {moment(end_date).format("MMMM Do YYYY")}</p>
         <p className="book-details__desc">
           Status:
           <span
