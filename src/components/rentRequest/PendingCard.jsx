@@ -152,7 +152,7 @@ const PendingCard = ({ book }) => {
               >
             Accept It <FiSend className="ms-1 fs-5" />
           </button>
-          <button className="request-btn btn-reject m-2" onClick={(e) => {
+          <button className="reject_btn btn-reject m-2" onClick={(e) => {
                 rejectrequest(book._id, e);
               }}
               data-test="btn-reject"
