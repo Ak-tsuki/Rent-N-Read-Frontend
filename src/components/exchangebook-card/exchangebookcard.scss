@@ -155,3 +155,10 @@
   opacity: 1;
   background-color: #f8f8f8;
 }
+.accordion::before {
+  background-color: white !important;
+}
+// .accordion {
+//   box-shadow: none !important;
+//   background-color: #f8f8f8 !important;
+// }

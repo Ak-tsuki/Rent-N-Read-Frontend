@@ -67,7 +67,7 @@ const ExchangeBookCard = ({ book }) => {
           </p>
         </div>
       </div>
-      <Accordion>
+      <Accordion className="accordion">
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
