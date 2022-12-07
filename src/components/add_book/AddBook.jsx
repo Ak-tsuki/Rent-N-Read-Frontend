@@ -41,11 +41,11 @@ const categories = [
   "Horror",
   "Thriller",
   "Paranormal",
-  "Historical Fiction",
-  "Science Fiction",
+  "Fiction",
+  "Adult",
   "Children's",
-  "Memoir",
-  "Cookbook",
+  "Love",
+  "Comic",
   "Art",
   "Self-help",
   "Development",
@@ -54,6 +54,10 @@ const categories = [
   "History",
   "Travel",
   "Humor",
+  "War",
+  "Biography",
+  "Essays",
+  "Novel"
 ];
 
 function getStyles(name, categoryName, theme) {
