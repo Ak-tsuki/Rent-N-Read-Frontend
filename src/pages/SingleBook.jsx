@@ -11,6 +11,7 @@ import RentBook from "../components/rent_book/RentBook";
 import ExchangeBook from "../components/exchange_book/ExchangeBook";
 
 import Box from "@mui/material/Box";
+import ListedBookCard from "../components/listedbook-card/listedbook-card";
 
 const style = {
   position: "absolute",
@@ -34,6 +35,7 @@ const SingleBook = () => {
   const handleCloseExchange = () => setOpenExchange(false);
 
   const { book_id } = useParams();
+  const { authormain } = useParams();
 
   const [book_img, setBookImg] = useState("");
   const [name, setName] = useState("");
@@ -44,6 +46,8 @@ const SingleBook = () => {
   const [desc, setDesc] = useState("");
   const [cost, setCost] = useState("");
 
+  const [listedBooks, setListedBooks] = useState([]);
+
   useEffect(() => {
     axios.get("http://localhost:90/book/getone/" + book_id).then((res) => {
       console.log(res.data);
@@ -53,6 +57,11 @@ const SingleBook = () => {
       setAuthor(res.data.data.author);
       setDesc(res.data.data.rich_desc);
       setCost(res.data.data.rent_cost_perday);
+    });
+
+    axios.get("http://localhost:90/book/getauthor/" + authormain).then((res) => {
+      console.log(res.data);
+      setListedBooks(res.data.data);
     });
   }, []);
 
@@ -142,6 +151,18 @@ const SingleBook = () => {
           </Box>
         </Modal>
       </div>
+      <section className="listedBook-container">
+        <div className="heading2">
+          <h4 className="ms-2">More Books From This Author</h4>
+        </div>
+        <div className="listedBook">
+          {listedBooks.slice(0, 5).map((book) => (
+            (book.name !== name) ?
+            <ListedBookCard book={book} />
+            :<div className="bookspace"></div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

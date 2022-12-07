@@ -26,7 +26,11 @@ const ListedBookCard = ({ book }) => {
           </div>
         </div>
       </div>
-      <Link to={"/singlebook/" + _id} className="btn rent-btn ms-3">
+      <Link
+        to={"/singlebook/" + _id + "/" + author}
+        className="btn rent-btn ms-3"
+        onClick={window.location.replace}
+      >
         <FaChevronCircleRight className="rent-icon" data-test="Vmore-btn" />
       </Link>
     </Card>
