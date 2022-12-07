@@ -8,20 +8,54 @@ import axios from "axios";
 
 const Books = () => {
   const [listedBooks, setListedBooks] = useState([]);
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const [allBooks, setAllBooks] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:90/book/get").then((res) => {
       console.log(res.data);
+      setAllBooks(res.data.data);
       setListedBooks(res.data.data);
     });
   }, []);
 
+  const searchBooks = (e) => {
+    e.preventDefault();
+    console.log(searchQuery);
+
+    const searchResult = allBooks.filter(
+      (book) =>
+        book.author.toLowerCase().includes(searchQuery) ||
+        book.name.toLowerCase().includes(searchQuery)
+    );
+
+    setListedBooks(searchResult);
+
+    if (searchQuery === "") {
+      setListedBooks(allBooks);
+    }
+  };
+
   return (
-    <div className="Book-container">
-      <div className="Book-list">
-        {listedBooks.map((book) => (
-          <ListedBookCard book={book} />
-        ))}
+    <div>
+      {" "}
+      <form className="search" onSubmit={searchBooks}>
+        <input
+          type="text"
+          className="search__input"
+          placeholder="Enter book name, author....."
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button className="search__btn" type="submit">
+          <BiSearch />
+          Search
+        </button>
+      </form>
+      <div className="Book-container">
+        <div className="Book-list">
+          {listedBooks.map((book) => (
+            <ListedBookCard book={book} />
+          ))}
+        </div>
       </div>
     </div>
   );
