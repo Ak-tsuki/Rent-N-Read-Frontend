@@ -8,31 +8,36 @@ import { TiCancel } from "react-icons/ti";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import moment from 'moment';
+import moment from "moment";
 import { GiReturnArrow } from "react-icons/gi";
 
 const PendingCard = ({ book }) => {
-  console.log(book)
-  
-  const { start_date, no_of_days, bookId, rent_status, userId, payment_status, end_date} = book;
-  const endDate =moment(end_date).format("MMMM Do YYYY");
+  console.log(book);
+
+  const {
+    start_date,
+    no_of_days,
+    bookId,
+    rent_status,
+    userId,
+    payment_status,
+    end_date,
+  } = book;
+  const endDate = moment(end_date).format("MMMM Do YYYY");
   const currentDate = moment(Date.createdAt).format("MMMM Do YYYY");
   console.log(currentDate);
   console.log(endDate);
 
-  
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
   };
 
-
   const approveRequest = (id, e) => {
     e.preventDefault();
     const data = {
       id: id,
-      
     };
     axios
       .put("http://localhost:90/rent/approve", data, config)
@@ -75,8 +80,6 @@ const PendingCard = ({ book }) => {
     e.preventDefault();
     const data = {
       id: id,
-      
-      
     };
     axios
       .put("http://localhost:90/rent/returnBook", data, config)
@@ -94,7 +97,6 @@ const PendingCard = ({ book }) => {
         console.log(e);
       });
   };
- 
 
   return (
     <div className="book-cards">
@@ -115,8 +117,12 @@ const PendingCard = ({ book }) => {
           /day
         </p>
         <p className="book-details__desc">Duration: {no_of_days}</p>
-        <p className="book-details__desc">Start Date: {moment(start_date).format("MMMM Do YYYY")}</p>
-        <p className="book-details__desc">End Date: {moment(end_date).format("MMMM Do YYYY")}</p>
+        <p className="book-details__desc">
+          Start Date: {moment(start_date).format("MMMM Do YYYY")}
+        </p>
+        <p className="book-details__desc">
+          End Date: {moment(end_date).format("MMMM Do YYYY")}
+        </p>
         <p className="book-details__desc">
           Status:
           <span
@@ -143,53 +149,56 @@ const PendingCard = ({ book }) => {
             {payment_status}
           </span>{" "}
         </p>
-        {rent_status === "Pending" ?<div>
-          <button className="request-btn btn-accept m-2" 
-          onClick={(e) => {
+        {rent_status === "Pending" ? (
+          <div>
+            <button
+              className="request-btn btn-accept m-2"
+              onClick={(e) => {
                 approveRequest(book._id, e);
               }}
               data-test="btn-accept"
-              >
-            Accept It <FiSend className="ms-1 fs-5" />
-          </button>
-          <button className="reject_btn btn-reject m-2" onClick={(e) => {
+            >
+              Accept It <FiSend className="ms-1 fs-5" />
+            </button>
+            <button
+              className="reject_btn btn-reject m-2"
+              onClick={(e) => {
                 rejectrequest(book._id, e);
               }}
               data-test="btn-reject"
-              >
-            Reject It <TiCancel className="ms-1 fs-4" />
-          </button>
-        </div> : <div></div>
-        }
+            >
+              Reject It <TiCancel className="ms-1 fs-4" />
+            </button>
+          </div>
+        ) : (
+          <div></div>
+        )}
         <div>
-         
-        { rent_status === "Pending" || payment_status === "Pending" || currentDate !== endDate  ? (
-           <div> 
-             <button
-           className="btn-returns request-btn m-2 disabled"
-           
-           data-test="return-btn"
-         >
-           Books Returned <GiReturnArrow className="ms-1 fs-5" />
-         </button> 
-                       
+          {rent_status === "Pending" ||
+          payment_status === "Pending" ||
+          currentDate !== endDate ? (
+            <div>
+              <button
+                className="btn-returns request-btn m-2 disabled"
+                data-test="return-btn"
+              >
+                Books Returned <GiReturnArrow className="ms-1 fs-5" />
+              </button>
             </div>
-         ) : (
-          <div> 
-            <button
-             className="btn-return request-btn m-2"
-             onClick={(e) => {
-               returnBook(book._id, e);
-             }}
-             data-test="return-btn"
-           >
-             Book Returned <GiReturnArrow className="ms-1 fs-5" />
-           </button>
-           
-           
-           </div>
-         )}
-       </div>
+          ) : (
+            <div>
+              <button
+                className="btn-return request-btn m-2"
+                onClick={(e) => {
+                  returnBook(book._id, e);
+                }}
+                data-test="return-btn"
+              >
+                Book Returned <GiReturnArrow className="ms-1 fs-5" />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
