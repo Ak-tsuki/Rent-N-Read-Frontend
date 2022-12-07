@@ -24,8 +24,8 @@ const Books = () => {
 
     const searchResult = allBooks.filter(
       (book) =>
-        book.author.toLowerCase().includes(searchQuery) ||
-        book.name.toLowerCase().includes(searchQuery)
+        book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        book.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     setListedBooks(searchResult);
