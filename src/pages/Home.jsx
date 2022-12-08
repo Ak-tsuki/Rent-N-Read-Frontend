@@ -9,6 +9,7 @@ import axios from "axios";
 const Home = () => {
   const [listedBooks, setListedBooks] = useState([]);
   const [recommendedBooks, setRecommendedBooks] = useState([]);
+  const [audioBooks, setAudioBooks] = useState([]);
 
   const config = {
     headers: {
@@ -26,6 +27,14 @@ const Home = () => {
       console.log(res.data);
       setRecommendedBooks(res.data.data);
     });
+
+    axios
+      .get("http://localhost:90/audiobook/getbyadmin", config)
+      .then((res) => {
+        console.log(res.data);
+        setAudioBooks(res.data.data);
+        console.log(audioBooks);
+      });
   }, []);
 
   return (
@@ -73,18 +82,40 @@ const Home = () => {
               ))}
             </div>
           </section>
+          <section className="listedBook-container">
+            <div className="heading2">
+              <h4 className="ms-2">Audio Books</h4>
+            </div>
+            <div className="listedBook">
+              {audioBooks.slice(0, 10).map((book) => (
+                <ListedBookCard book={book} />
+              ))}
+            </div>
+          </section>
         </>
       ) : (
-        <section className="listedBook-container">
-          <div className="heading2">
-            <h4 className="ms-2">Newly Listed</h4>
-          </div>
-          <div className="listedBook">
-            {listedBooks.slice(0, 10).map((book) => (
-              <ListedBookCard book={book} />
-            ))}
-          </div>
-        </section>
+        <>
+          <section className="listedBook-container">
+            <div className="heading2">
+              <h4 className="ms-2">Newly Listed</h4>
+            </div>
+            <div className="listedBook">
+              {listedBooks.slice(0, 10).map((book) => (
+                <ListedBookCard book={book} />
+              ))}
+            </div>
+          </section>
+          <section className="listedBook-container">
+            <div className="heading2">
+              <h4 className="ms-2">Audio Books</h4>
+            </div>
+            <div className="listedBook">
+              {audioBooks.slice(0, 10).map((book) => (
+                <ListedBookCard book={book} />
+              ))}
+            </div>
+          </section>
+        </>
       )}
     </div>
   );
