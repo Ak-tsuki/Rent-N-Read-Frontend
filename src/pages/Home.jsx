@@ -29,7 +29,7 @@ const Home = () => {
     });
 
     axios
-      .get("http://localhost:90/audiobook/getbyadmin", config)
+      .get("http://localhost:90/audiobook/get")
       .then((res) => {
         console.log(res.data);
         setAudioBooks(res.data.data);
@@ -87,7 +87,7 @@ const Home = () => {
               <h4 className="ms-2">Audio Books</h4>
             </div>
             <div className="listedBook">
-              {audioBooks.slice(0, 10).map((book) => (
+              {audioBooks.slice(0, 5).map((book) => (
                 <ListedBookCard book={book} />
               ))}
             </div>
@@ -110,7 +110,7 @@ const Home = () => {
               <h4 className="ms-2">Audio Books</h4>
             </div>
             <div className="listedBook">
-              {audioBooks.slice(0, 10).map((book) => (
+              {audioBooks.slice(0, 5).map((book) => (
                 <ListedBookCard book={book} />
               ))}
             </div>
