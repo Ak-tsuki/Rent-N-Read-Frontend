@@ -5,7 +5,7 @@ import { FaBook } from "react-icons/fa";
 import ListedBookCard from "../components/listedbook-card/listedbook-card";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import notfound from "../assets/notfound.svg";
 const Books = () => {
   const [listedBooks, setListedBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -44,17 +44,22 @@ const Books = () => {
           className="search__input"
           placeholder="Enter book name, author....."
           onChange={(e) => setSearchQuery(e.target.value)}
+          data-test="search-query"
         />
-        <button className="search__btn" type="submit">
+        <button className="search__btn" type="submit" data-test="search-btn">
           <BiSearch />
           Search
         </button>
       </form>
       <div className="Book-container">
         <div className="Book-list">
-          {listedBooks.map((book) => (
-            <ListedBookCard book={book} />
-          ))}
+          {listedBooks.length ? (
+            listedBooks.map((book) => (
+              <ListedBookCard book={book} data-test="search-result" />
+            ))
+          ) : (
+            <img src={notfound} alt="not_found" className="not-found-img" />
+          )}
         </div>
       </div>
     </div>
