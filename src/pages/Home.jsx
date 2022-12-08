@@ -8,11 +8,23 @@ import axios from "axios";
 
 const Home = () => {
   const [listedBooks, setListedBooks] = useState([]);
+  const [recommendedBooks, setRecommendedBooks] = useState([]);
+
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
 
   useEffect(() => {
     axios.get("http://localhost:90/book/get").then((res) => {
       console.log(res.data);
       setListedBooks(res.data.data);
+    });
+
+    axios.get("http://localhost:90/book/recommendation", config).then((res) => {
+      console.log(res.data);
+      setRecommendedBooks(res.data.data);
     });
   }, []);
 
@@ -46,7 +58,7 @@ const Home = () => {
               <h4 className="ms-2">Recommended Books</h4>
             </div>
             <div className="listedBook">
-              {listedBooks.slice(0, 5).map((book) => (
+              {recommendedBooks.slice(0, 5).map((book) => (
                 <ListedBookCard book={book} />
               ))}
             </div>

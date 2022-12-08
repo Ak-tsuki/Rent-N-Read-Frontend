@@ -40,6 +40,7 @@ const SingleBook = () => {
   const [book_img, setBookImg] = useState("");
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
+  const [category, setCategory] = useState([]);
   const [owner_img, setOwnerImg] = useState("");
   const [bookowner, setBookOwner] = useState("");
 
@@ -55,6 +56,7 @@ const SingleBook = () => {
       setBookOwner(res.data.data.bookOwner);
       setName(res.data.data.name);
       setAuthor(res.data.data.author);
+      setCategory(res.data.data.category);
       setDesc(res.data.data.rich_desc);
       setCost(res.data.data.rent_cost_perday);
     });
@@ -94,6 +96,10 @@ const SingleBook = () => {
             <div className="my-4">
               <h5 className="book-desc-head">Description</h5>
               <p className="book-desc">{desc}</p>
+            </div>
+            <div className="my-4">
+              <h5 className="book-desc-head">Category</h5>
+              <p className="book-desc">{category.toString()}</p>
             </div>
             <div className="d-flex flex-nowrap my-4">
               <h5>Rent Cost: </h5>
