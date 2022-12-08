@@ -58,7 +58,12 @@ const Books = () => {
               <ListedBookCard book={book} data-test="search-result" />
             ))
           ) : (
-            <img src={notfound} alt="not_found" className="not-found-img" />
+            <img
+              src={notfound}
+              alt="not_found"
+              className="not-found-img"
+              data-test="not-found"
+            />
           )}
         </div>
       </div>
