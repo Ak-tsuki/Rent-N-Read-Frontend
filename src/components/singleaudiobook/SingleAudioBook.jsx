@@ -63,7 +63,7 @@ const SingleAudioBook = () => {
       });
 
     axios
-      .get("http://localhost:90/book/getauthor/" + authormain)
+      .get("http://localhost:90/audiobook/getauthor/" + authormain)
       .then((res) => {
         console.log(res.data);
         setListedBooks(res.data.data);

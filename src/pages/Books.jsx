@@ -7,6 +7,7 @@ import ListedEbookCard from "../components/listedbook-card/listed-Ebookcard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import notfound from "../assets/notfound.svg";
+import ListedAudioBookCard from "../components/listedbook-card/listedaudiobook-card";
 const Books = () => {
   const [listedBooks, setListedBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -99,7 +100,7 @@ const Books = () => {
         </div>
         <div className="Book-list">
           {audioBooks.slice(0, 12).map((book) => (
-            <ListedBookCard book={book} />
+            <ListedAudioBookCard book={book} />
           ))}
         </div>
       </section>
