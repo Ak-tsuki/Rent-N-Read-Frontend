@@ -10,6 +10,7 @@ const Books = () => {
   const [listedBooks, setListedBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [allBooks, setAllBooks] = useState([]);
+  const [eBooks, setEBooks] = useState([]);
   const [audioBooks, setAudioBooks] = useState([]);
 
   useEffect(() => {
@@ -19,13 +20,17 @@ const Books = () => {
       setListedBooks(res.data.data);
     });
 
-    axios
-      .get("http://localhost:90/audiobook/get")
-      .then((res) => {
-        console.log(res.data);
-        setAudioBooks(res.data.data);
-        console.log(audioBooks);
-      });
+    axios.get("http://localhost:90/ebook/get").then((res) => {
+      console.log(res.data);
+      setEBooks(res.data.data);
+      console.log(eBooks);
+    });
+
+    axios.get("http://localhost:90/audiobook/get").then((res) => {
+      console.log(res.data);
+      setAudioBooks(res.data.data);
+      console.log(audioBooks);
+    });
   }, []);
 
   const searchBooks = (e) => {
@@ -77,6 +82,16 @@ const Books = () => {
           )}
         </div>
       </div>
+      <section className="Book-container">
+        <div className="heading2">
+          <h4 className="ms-2">E-Books</h4>
+        </div>
+        <div className="Book-list">
+          {eBooks.slice(0, 12).map((book) => (
+            <ListedBookCard book={book} />
+          ))}
+        </div>
+      </section>
       <section className="Book-container">
         <div className="heading2">
           <h4 className="ms-2">Audio Books</h4>
