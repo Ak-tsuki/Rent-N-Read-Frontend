@@ -3,6 +3,7 @@ import "./books.scss";
 import { BiSearch } from "react-icons/bi";
 import { FaBook } from "react-icons/fa";
 import ListedBookCard from "../components/listedbook-card/listedbook-card";
+import ListedEbookCard from "../components/listedbook-card/listed-Ebookcard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import notfound from "../assets/notfound.svg";
@@ -88,7 +89,7 @@ const Books = () => {
         </div>
         <div className="Book-list">
           {eBooks.slice(0, 12).map((book) => (
-            <ListedBookCard book={book} />
+            <ListedEbookCard book={book} />
           ))}
         </div>
       </section>

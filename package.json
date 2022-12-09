@@ -12,6 +12,7 @@
     "@mui/x-date-pickers": "^5.0.8",
     "@react-pdf-viewer/core": "^3.8.0",
     "@react-pdf-viewer/default-layout": "^3.9.0",
+    "@react-pdf-viewer/toolbar": "^3.9.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

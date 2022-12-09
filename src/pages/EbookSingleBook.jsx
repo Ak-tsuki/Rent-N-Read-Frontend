@@ -5,13 +5,35 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BsBookmarkPlusFill } from "react-icons/bs";
 import { FaChevronCircleRight } from "react-icons/fa";
+import { MdPreview } from "react-icons/md";
+import { BsCashCoin } from "react-icons/bs";
 import { RiExchangeFill } from "react-icons/ri";
 import Modal from "@mui/material/Modal";
 import RentBook from "../components/rent_book/RentBook";
 import ExchangeBook from "../components/exchange_book/ExchangeBook";
 
 import Box from "@mui/material/Box";
-import ListedBookCard from "../components/listedbook-card/listedbook-card";
+import ListedEbookCard from "../components/listedbook-card/listed-Ebookcard";
+
+import { Viewer } from "@react-pdf-viewer/core";
+import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+import { Worker } from "@react-pdf-viewer/core";
+import Checkout from "../components/proceed_to_checkout/Checkout";
+
+const style1 = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "90%",
+  height: "90vh",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const style = {
   position: "absolute",
@@ -25,7 +47,7 @@ const style = {
   p: 4,
 };
 
-const SingleBook = () => {
+const EbookSingleBook = ({ book }) => {
   const [openRent, setOpenRent] = React.useState(false);
   const handleOpenRent = () => setOpenRent(true);
   const handleCloseRent = () => setOpenRent(false);
@@ -44,28 +66,71 @@ const SingleBook = () => {
   const [owner_img, setOwnerImg] = useState("");
   const [bookowner, setBookOwner] = useState("");
 
+  const [e_book, setEbook] = useState("");
+  const [price, setPrice] = useState("");
+
   const [desc, setDesc] = useState("");
   const [cost, setCost] = useState("");
 
-  const [listedBooks, setListedBooks] = useState([]);
+  const [eBooks, setEBooks] = useState([]);
+
+  const [viewPdf, setViewPdf] = useState("null");
+  const defaultLayoutPluginInstance = defaultLayoutPlugin();
+
+  const [see, setSee] = React.useState(false);
+  const handleOpen1 = () => setSee(true);
+  const handleClose1 = () => setSee(false);
+
+  const [pdfFile, setPDFFile] = useState("null");
+
+  const [open, setOpen] = React.useState(false);
+  const [bookObject, setBookObject] = useState([]);
+
+  const handleOpen = () => {
+    setOpen(true);
+    setBookObject(book);
+  };
+  const handleClose = () => {
+    setOpen(false);
+    setBookObject();
+  };
 
   useEffect(() => {
-    axios.get("http://localhost:90/book/getone/" + book_id).then((res) => {
+    // axios.get("http://localhost:90/book/getone/" + book_id).then((res) => {
+    //   console.log(res.data);
+    //   setBookImg(res.data.data.book_pic);
+    //   setBookOwner(res.data.data.bookOwner);
+    //   setName(res.data.data.name);
+    //   setAuthor(res.data.data.author);
+    //   setCategory(res.data.data.category);
+    //   setDesc(res.data.data.rich_desc);
+    //   setCost(res.data.data.rent_cost_perday);
+    // });
+
+    // axios
+    //   .get("http://localhost:90/book/getauthor/" + authormain)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setEBooks(res.data.data);
+    //   });
+
+    axios.get("http://localhost:90/ebook/getone/" + book_id).then((res) => {
       console.log(res.data);
       setBookImg(res.data.data.book_pic);
-      setBookOwner(res.data.data.bookOwner);
+      setEbook(res.data.data.e_book);
       setName(res.data.data.name);
       setAuthor(res.data.data.author);
       setCategory(res.data.data.category);
       setDesc(res.data.data.rich_desc);
       setCost(res.data.data.rent_cost_perday);
+      setPrice(res.data.data.price);
     });
 
     axios
-      .get("http://localhost:90/book/getauthor/" + authormain)
+      .get("http://localhost:90/ebook/getauthor/" + authormain)
       .then((res) => {
         console.log(res.data);
-        setListedBooks(res.data.data);
+        setEBooks(res.data.data);
       });
   }, []);
 
@@ -110,6 +175,46 @@ const SingleBook = () => {
                 <h5 className="">/day</h5>
               </div>
             </div>
+            <div className="d-flex flex-nowrap my-4">
+              <h5>Price: </h5>
+              <div className="d-flex flex-nowrap">
+                <h5 className="ms-1 cost-rent">Rs. {price}</h5>
+              </div>
+            </div>
+
+            <div className="d-flex flex-nowrap my-4">
+              <button
+                className="request-btn btn-preview m-2"
+                onClick={handleOpen1}
+                data-test="rent-btn"
+              >
+                Preview <MdPreview className="ms-1 fs-5" />
+              </button>
+            </div>
+            <Modal
+              open={see}
+              onClose={handleClose1}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+
+              // onSubmit={handlePdfFileSubmit}
+            >
+              <div className="pdf-container">
+                <Box sx={style1}>
+                  {viewPdf && (
+                    <>
+                      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.0.279/build/pdf.worker.min.js">
+                        <Viewer
+                          fileUrl={`http://localhost:90/${e_book}`}
+                          plugins={[defaultLayoutPluginInstance]}
+                        />
+                      </Worker>
+                    </>
+                  )}
+                </Box>
+              </div>
+            </Modal>
+
             <div className="d-flex flex-wrap align-items-center my-4">
               <h5 className="me-2">Available For</h5>
               <div>
@@ -120,6 +225,7 @@ const SingleBook = () => {
                 >
                   Rent <FaChevronCircleRight className="ms-1 fs-5" />
                 </button>
+
                 <button
                   className="request-btn btn-exchange m-2"
                   onClick={handleOpenExchange}
@@ -127,6 +233,26 @@ const SingleBook = () => {
                 >
                   Exchange <RiExchangeFill className="ms-1 fs-4" />
                 </button>
+                <button
+                  className="request-btn btn-rent m-2"
+                  onClick={handleOpen}
+                  data-test="rent-btn"
+                >
+                  Buy <BsCashCoin className="ms-1 fs-5" />
+                </button>
+                <div>
+                  {/* <Button onClick={handleOpen}>Open modal</Button> */}
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={style}>
+                      <Checkout bookObject={bookObject}></Checkout>
+                    </Box>
+                  </Modal>
+                </div>
               </div>
             </div>
           </div>
@@ -164,11 +290,11 @@ const SingleBook = () => {
           <h4 className="ms-2">More Books From This Author</h4>
         </div>
         <div className="listedBook">
-          {listedBooks
+          {eBooks
             .slice(0, 5)
             .map((book) =>
               book.name !== name ? (
-                <ListedBookCard book={book} />
+                <ListedEbookCard book={book} />
               ) : (
                 <div className="bookspace"></div>
               )
@@ -179,4 +305,4 @@ const SingleBook = () => {
   );
 };
 
-export default SingleBook;
+export default EbookSingleBook;
