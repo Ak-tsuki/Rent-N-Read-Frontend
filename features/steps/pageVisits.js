@@ -101,7 +101,7 @@ Given("I am on the {string} page", async function (string) {
       return await this.page.goto(
         "http://localhost:3000/dashboard_admin/audio_book"
       );
-    
+
     case "homepage":
       await this.page.evaluateOnNewDocument(() => {
         localStorage.clear();
@@ -110,11 +110,9 @@ Given("I am on the {string} page", async function (string) {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzg3NThiNDBmMjMwYmQ4MWJhZmFkMDciLCJpYXQiOjE2NzA1Nzc2OTh9.XSN3QE7NAIFgz41BKaQ5EkiGT4YerXuKz0uH1E6xcoQ"
         );
       });
-      return await this.page.goto(
-        "http://localhost:3000"
-      );
+      return await this.page.goto("http://localhost:3000");
 
-      case "singleaudiobookpage":
+    case "singleaudiobookpage":
       await this.page.evaluateOnNewDocument(() => {
         localStorage.clear();
         localStorage.setItem(
@@ -124,6 +122,18 @@ Given("I am on the {string} page", async function (string) {
       });
       return await this.page.goto(
         "http://localhost:3000/singleaudiobook/639061e6e895bc8961b0a1a6/Justin%20Bieber"
+      );
+
+    case "singleebookpage":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZjA5YTgxOGEyMTAzYTQ5ZmRhM2YiLCJpYXQiOjE2NzA1OTUyNjR9.P-Kgz8shspIGm405aD-ybSyIV7lWjkP5hrK7M3XEvRk"
+        );
+      });
+      return await this.page.goto(
+        "http://localhost:3000/ebooksinglebook/63929809c4905c6eadb63343/JK%20Rolling"
       );
 
     default:

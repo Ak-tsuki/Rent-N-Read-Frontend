@@ -21,7 +21,7 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { Worker } from "@react-pdf-viewer/core";
 import Checkout from "../components/proceed_to_checkout/Checkout";
-
+import EbookCheckout from "../components/proceed_to_checkout/EbookCheckout";
 const style1 = {
   position: "absolute",
   top: "50%",
@@ -52,9 +52,9 @@ const EbookSingleBook = ({ book }) => {
   const handleOpenRent = () => setOpenRent(true);
   const handleCloseRent = () => setOpenRent(false);
 
-  const [openExchange, setOpenExchange] = React.useState(false);
-  const handleOpenExchange = () => setOpenExchange(true);
-  const handleCloseExchange = () => setOpenExchange(false);
+  // const [openExchange, setOpenExchange] = React.useState(false);
+  // const handleOpenExchange = () => setOpenExchange(true);
+  // const handleCloseExchange = () => setOpenExchange(false);
 
   const { book_id } = useParams();
   const { authormain } = useParams();
@@ -96,24 +96,6 @@ const EbookSingleBook = ({ book }) => {
   };
 
   useEffect(() => {
-    // axios.get("http://localhost:90/book/getone/" + book_id).then((res) => {
-    //   console.log(res.data);
-    //   setBookImg(res.data.data.book_pic);
-    //   setBookOwner(res.data.data.bookOwner);
-    //   setName(res.data.data.name);
-    //   setAuthor(res.data.data.author);
-    //   setCategory(res.data.data.category);
-    //   setDesc(res.data.data.rich_desc);
-    //   setCost(res.data.data.rent_cost_perday);
-    // });
-
-    // axios
-    //   .get("http://localhost:90/book/getauthor/" + authormain)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     setEBooks(res.data.data);
-    //   });
-
     axios.get("http://localhost:90/ebook/getone/" + book_id).then((res) => {
       console.log(res.data);
       setBookImg(res.data.data.book_pic);
@@ -135,7 +117,7 @@ const EbookSingleBook = ({ book }) => {
   }, []);
 
   return (
-    <div className="Book-container">
+    <div className="Book-container" data-test="singleebookpage">
       <div className="row">
         <div className="col-12 col-md-4 d-flex justify-content-center">
           <div className="book-cover">
@@ -225,34 +207,13 @@ const EbookSingleBook = ({ book }) => {
                 >
                   Rent <FaChevronCircleRight className="ms-1 fs-5" />
                 </button>
-
-                <button
-                  className="request-btn btn-exchange m-2"
-                  onClick={handleOpenExchange}
-                  data-test="exchangeBook-btn"
-                >
-                  Exchange <RiExchangeFill className="ms-1 fs-4" />
-                </button>
                 <button
                   className="request-btn btn-rent m-2"
                   onClick={handleOpen}
-                  data-test="rent-btn"
+                  data-test="buy-btn"
                 >
                   Buy <BsCashCoin className="ms-1 fs-5" />
                 </button>
-                <div>
-                  {/* <Button onClick={handleOpen}>Open modal</Button> */}
-                  <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                  >
-                    <Box sx={style}>
-                      <Checkout bookObject={bookObject}></Checkout>
-                    </Box>
-                  </Modal>
-                </div>
               </div>
             </div>
           </div>
@@ -274,16 +235,24 @@ const EbookSingleBook = ({ book }) => {
             />
           </Box>
         </Modal>
-        <Modal
-          open={openExchange}
-          onClose={handleCloseExchange}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <ExchangeBook id={book_id} bookOwner={bookowner} name={name} />
-          </Box>
-        </Modal>
+        <div>
+          {/* <Button onClick={handleOpen}>Open modal</Button> */}
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <EbookCheckout
+                _id={book_id}
+                bookOwner={bookowner}
+                name={name}
+                price={price}
+              />
+            </Box>
+          </Modal>
+        </div>
       </div>
       <section className="listedBook-container">
         <div className="heading2">
