@@ -5,11 +5,12 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BsBookmarkPlusFill } from "react-icons/bs";
 import { FaChevronCircleRight } from "react-icons/fa";
-import { RiExchangeFill } from "react-icons/ri";
 import Modal from "@mui/material/Modal";
 
 import Box from "@mui/material/Box";
 import ListedAudioBookCard from "../listedbook-card/listedaudiobook-card";
+import BuyAudioBook from "../buy_audio_book/BuyAudioBook";
+import { MdShoppingBag } from "react-icons/md";
 
 const style = {
   position: "absolute",
@@ -48,21 +49,25 @@ const SingleAudioBook = () => {
   const [listedBooks, setListedBooks] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:90/audiobook/getone/" + audiobook_id).then((res) => {
-      console.log(res.data);
-      setBookImg(res.data.data.book_pic);
-      setBookOwner(res.data.data.bookOwner);
-      setName(res.data.data.name);
-      setAuthor(res.data.data.author);
-      setCategory(res.data.data.category);
-      setDesc(res.data.data.rich_desc);
-      setCost(res.data.data.price);
-    });
+    axios
+      .get("http://localhost:90/audiobook/getone/" + audiobook_id)
+      .then((res) => {
+        console.log(res.data);
+        setBookImg(res.data.data.book_pic);
+        setBookOwner(res.data.data.bookOwner);
+        setName(res.data.data.name);
+        setAuthor(res.data.data.author);
+        setCategory(res.data.data.category);
+        setDesc(res.data.data.rich_desc);
+        setCost(res.data.data.price);
+      });
 
-    axios.get("http://localhost:90/book/getauthor/" + authormain).then((res) => {
-      console.log(res.data);
-      setListedBooks(res.data.data);
-    });
+    axios
+      .get("http://localhost:90/book/getauthor/" + authormain)
+      .then((res) => {
+        console.log(res.data);
+        setListedBooks(res.data.data);
+      });
   }, []);
 
   return (
@@ -100,10 +105,9 @@ const SingleAudioBook = () => {
               <p className="book-desc">{category.toString()}</p>
             </div>
             <div className="d-flex flex-nowrap my-4">
-              <h5>Rent Cost: </h5>
+              <h5>Book Price: </h5>
               <div className="d-flex flex-nowrap">
                 <h5 className="ms-1 cost-rent">Rs. {cost}</h5>
-                <h5 className="">/day</h5>
               </div>
             </div>
             <div className="d-flex flex-wrap align-items-center my-4">
@@ -112,9 +116,9 @@ const SingleAudioBook = () => {
                 <button
                   className="request-btn btn-rent m-2"
                   onClick={handleOpenRent}
-                //   data-test="rent-btn"
+                  //   data-test="rent-btn"
                 >
-                  Rent <FaChevronCircleRight className="ms-1 fs-5" />
+                  Buy <MdShoppingBag className="ms-1 fs-5" />
                 </button>
               </div>
             </div>
@@ -129,11 +133,11 @@ const SingleAudioBook = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <RentBook
-              id={audiobook_id}
+            <BuyAudioBook
+              _id={audiobook_id}
               bookOwner={bookowner}
               name={name}
-              rent_cost={cost}
+              price={cost}
             />
           </Box>
         </Modal>
@@ -143,11 +147,15 @@ const SingleAudioBook = () => {
           <h4 className="ms-2">More Books From This Author</h4>
         </div>
         <div className="listedBook">
-          {listedBooks.slice(0, 5).map((book) => (
-            (book.name !== name) ?
-            <ListedAudioBookCard book={book} />
-            :<div className="bookspace"></div>
-          ))}
+          {listedBooks
+            .slice(0, 5)
+            .map((book) =>
+              book.name !== name ? (
+                <ListedAudioBookCard book={book} />
+              ) : (
+                <div className="bookspace"></div>
+              )
+            )}
         </div>
       </section>
     </div>
