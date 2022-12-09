@@ -14,6 +14,7 @@ import MyRentRequest from "../dashboard/MyRentRequest";
 import AudioBookUpload from "../audio-book/AudioBookUpload";
 import EBookUpload from "../e-book/EBookUpload";
 import MyExchangeRequest from "../dashboard/MyExchangeRequest";
+import SingleAudioBook from "../singleaudiobook/SingleAudioBook";
 
 const Body = () => {
   return (
@@ -22,6 +23,7 @@ const Body = () => {
         <Route path="/" element={<Home />} />
         <Route path="/books" element={<Books />} />
         <Route path="/singlebook/:book_id/:authormain" element={<SingleBook />} />
+        <Route path="/singleaudiobook/:audiobook_id/:authormain" element={<SingleAudioBook />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />}>

@@ -5,6 +5,7 @@ import { FaBook } from "react-icons/fa";
 import ListedBookCard from "../components/listedbook-card/listedbook-card";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ListedAudioBookCard from "../components/listedbook-card/listedaudiobook-card";
 
 const Home = () => {
   const [listedBooks, setListedBooks] = useState([]);
@@ -103,7 +104,7 @@ const Home = () => {
             </div>
             <div className="listedBook">
               {audioBooks.slice(0, 5).map((book) => (
-                <ListedBookCard book={book} />
+                <ListedAudioBookCard book={book} />
               ))}
             </div>
           </section>
@@ -136,7 +137,7 @@ const Home = () => {
             </div>
             <div className="listedBook">
               {audioBooks.slice(0, 5).map((book) => (
-                <ListedBookCard book={book} />
+                <ListedAudioBookCard book={book} />
               ))}
             </div>
           </section>
