@@ -9,6 +9,7 @@ import axios from "axios";
 const Home = () => {
   const [listedBooks, setListedBooks] = useState([]);
   const [recommendedBooks, setRecommendedBooks] = useState([]);
+  const [eBooks, setEBooks] = useState([]);
   const [audioBooks, setAudioBooks] = useState([]);
 
   const config = {
@@ -28,13 +29,17 @@ const Home = () => {
       setRecommendedBooks(res.data.data);
     });
 
-    axios
-      .get("http://localhost:90/audiobook/get")
-      .then((res) => {
-        console.log(res.data);
-        setAudioBooks(res.data.data);
-        console.log(audioBooks);
-      });
+    axios.get("http://localhost:90/ebook/get").then((res) => {
+      console.log(res.data);
+      setEBooks(res.data.data);
+      console.log(eBooks);
+    });
+
+    axios.get("http://localhost:90/audiobook/get").then((res) => {
+      console.log(res.data);
+      setAudioBooks(res.data.data);
+      console.log(audioBooks);
+    });
   }, []);
 
   return (
@@ -84,6 +89,16 @@ const Home = () => {
           </section>
           <section className="listedBook-container">
             <div className="heading2">
+              <h4 className="ms-2">E-Books</h4>
+            </div>
+            <div className="listedBook">
+              {eBooks.slice(0, 5).map((book) => (
+                <ListedBookCard book={book} />
+              ))}
+            </div>
+          </section>
+          <section className="listedBook-container">
+            <div className="heading2">
               <h4 className="ms-2">Audio Books</h4>
             </div>
             <div className="listedBook">
@@ -101,6 +116,16 @@ const Home = () => {
             </div>
             <div className="listedBook">
               {listedBooks.slice(0, 10).map((book) => (
+                <ListedBookCard book={book} />
+              ))}
+            </div>
+          </section>
+          <section className="listedBook-container">
+            <div className="heading2">
+              <h4 className="ms-2">E-Books</h4>
+            </div>
+            <div className="listedBook">
+              {eBooks.slice(0, 5).map((book) => (
                 <ListedBookCard book={book} />
               ))}
             </div>
