@@ -71,7 +71,7 @@ const SingleAudioBook = () => {
   }, []);
 
   return (
-    <div className="Book-container">
+    <div className="Book-container" data-test="singleaudiobookpage">
       <div className="row">
         <div className="col-12 col-md-4 d-flex justify-content-center">
           <div className="book-cover">
@@ -111,12 +111,11 @@ const SingleAudioBook = () => {
               </div>
             </div>
             <div className="d-flex flex-wrap align-items-center my-4">
-              <h5 className="me-2">Available For</h5>
               <div>
                 <button
-                  className="request-btn btn-rent m-2"
+                  className="request-btn btn-rent"
                   onClick={handleOpenRent}
-                  //   data-test="rent-btn"
+                  data-test="buy-btn"
                 >
                   Buy <MdShoppingBag className="ms-1 fs-5" />
                 </button>

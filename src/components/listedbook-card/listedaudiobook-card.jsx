@@ -29,6 +29,7 @@ const ListedAudioBookCard = ({ book }) => {
         to={"/singleaudiobook/" + _id + "/" + author}
         className="btn rent-btn ms-3"
         onClick={window.location.replace}
+        data-test="singlepage"
       >
         <FaChevronCircleRight className="rent-icon" data-test="Vmore-btn" />
       </Link>

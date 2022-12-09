@@ -173,7 +173,7 @@ const BuyAudioBook = ({ _id, bookOwner, name, price }) => {
               backgroundColor: "#5B2C92",
             }}
             variant="contained"
-            data-test="pay-with-khalti-btn"
+            data-test="buyaudiobook-btn"
             endIcon={
               <img src={logo} alt="logo" className="header__logo--img" />
             }

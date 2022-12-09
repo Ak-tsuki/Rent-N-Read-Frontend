@@ -101,6 +101,30 @@ Given("I am on the {string} page", async function (string) {
       return await this.page.goto(
         "http://localhost:3000/dashboard_admin/audio_book"
       );
+    
+    case "homepage":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzg3NThiNDBmMjMwYmQ4MWJhZmFkMDciLCJpYXQiOjE2NzA1Nzc2OTh9.XSN3QE7NAIFgz41BKaQ5EkiGT4YerXuKz0uH1E6xcoQ"
+        );
+      });
+      return await this.page.goto(
+        "http://localhost:3000"
+      );
+
+      case "singleaudiobookpage":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzg3NThiNDBmMjMwYmQ4MWJhZmFkMDciLCJpYXQiOjE2NzA1Nzc2OTh9.XSN3QE7NAIFgz41BKaQ5EkiGT4YerXuKz0uH1E6xcoQ"
+        );
+      });
+      return await this.page.goto(
+        "http://localhost:3000/singleaudiobook/639061e6e895bc8961b0a1a6/Justin%20Bieber"
+      );
 
     default:
       throw new Error(`${string} is not a supported page name`);
