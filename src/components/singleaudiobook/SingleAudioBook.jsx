@@ -7,11 +7,8 @@ import { BsBookmarkPlusFill } from "react-icons/bs";
 import { FaChevronCircleRight } from "react-icons/fa";
 import { RiExchangeFill } from "react-icons/ri";
 import Modal from "@mui/material/Modal";
-// import RentBook from "../components/rent_book/RentBook";
-// import ExchangeBook from "../components/exchange_book/ExchangeBook";
 
 import Box from "@mui/material/Box";
-// import ListedBookCard from "../components/listedbook-card/listedbook-card";
 import ListedAudioBookCard from "../listedbook-card/listedaudiobook-card";
 
 const style = {
@@ -109,29 +106,22 @@ const SingleAudioBook = () => {
                 <h5 className="">/day</h5>
               </div>
             </div>
-            {/* <div className="d-flex flex-wrap align-items-center my-4">
+            <div className="d-flex flex-wrap align-items-center my-4">
               <h5 className="me-2">Available For</h5>
               <div>
                 <button
                   className="request-btn btn-rent m-2"
                   onClick={handleOpenRent}
-                  data-test="rent-btn"
+                //   data-test="rent-btn"
                 >
                   Rent <FaChevronCircleRight className="ms-1 fs-5" />
                 </button>
-                <button
-                  className="request-btn btn-exchange m-2"
-                  onClick={handleOpenExchange}
-                  data-test="exchangeBook-btn"
-                >
-                  Exchange <RiExchangeFill className="ms-1 fs-4" />
-                </button>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
-      {/* <div>
+      <div>
         <Modal
           open={openRent}
           onClose={handleCloseRent}
@@ -140,24 +130,14 @@ const SingleAudioBook = () => {
         >
           <Box sx={style}>
             <RentBook
-              id={book_id}
+              id={audiobook_id}
               bookOwner={bookowner}
               name={name}
               rent_cost={cost}
             />
           </Box>
         </Modal>
-        <Modal
-          open={openExchange}
-          onClose={handleCloseExchange}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <ExchangeBook id={book_id} bookOwner={bookowner} name={name} />
-          </Box>
-        </Modal>
-      </div> */}
+      </div>
       <section className="listedBook-container">
         <div className="heading2">
           <h4 className="ms-2">More Books From This Author</h4>
