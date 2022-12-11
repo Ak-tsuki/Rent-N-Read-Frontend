@@ -58,7 +58,7 @@ const DashboardNav = ({ open }) => {
         Exchange Requests
       </Link>
 
-      <Link className="dash-nav__link" to="/dashboard/ebooks">
+      <Link className="dash-nav__link">
         {" "}
         <BsFillFileEarmarkPdfFill className="dash-nav__link--icon" />
         E-books

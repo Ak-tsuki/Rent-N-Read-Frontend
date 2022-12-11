@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BsBookmarkPlusFill } from "react-icons/bs";
-import { FaChevronCircleRight } from "react-icons/fa";
+import { FaChevronCircleRight, FaDownload } from "react-icons/fa";
 import { MdPreview } from "react-icons/md";
 import { BsCashCoin } from "react-icons/bs";
 import { RiExchangeFill } from "react-icons/ri";
@@ -22,6 +22,17 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { Worker } from "@react-pdf-viewer/core";
 import Checkout from "../components/proceed_to_checkout/Checkout";
 import EbookCheckout from "../components/proceed_to_checkout/EbookCheckout";
+
+import { toolbarPlugin } from "@react-pdf-viewer/toolbar";
+import { ToolbarSlot, TransformToolbarSlot } from "@react-pdf-viewer/toolbar";
+
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/toolbar/lib/styles/index.css";
+
+// interface RemovePartsDefaultToolbarExampleProps {
+//   fileUrl: string;
+// }
+
 const style1 = {
   position: "absolute",
   top: "50%",
@@ -47,7 +58,20 @@ const style = {
   p: 4,
 };
 
-const EbookSingleBook = ({ book }) => {
+const EbookSingleBook = ({ book, fileUrl }) => {
+  const toolbarPluginInstance = toolbarPlugin();
+  const { renderDefaultToolbar, Toolbar } = toolbarPluginInstance;
+
+  // const transform: TransformToolbarSlot = (slot: ToolbarSlot) => ({
+  //   ...slot,
+  //   Download: () => <></>,
+  //   DownloadMenuItem: () => <></>,
+  //   EnterFullScreen: () => <></>,
+  //   EnterFullScreenMenuItem: () => <></>,
+  //   SwitchTheme: () => <></>,
+  //   SwitchThemeMenuItem: () => <></>,
+  // });
+
   const [openRent, setOpenRent] = React.useState(false);
   const handleOpenRent = () => setOpenRent(true);
   const handleCloseRent = () => setOpenRent(false);
@@ -66,6 +90,8 @@ const EbookSingleBook = ({ book }) => {
   const [owner_img, setOwnerImg] = useState("");
   const [bookowner, setBookOwner] = useState("");
 
+  const [payment_status, setPaymentStatus] = useState("");
+
   const [e_book, setEbook] = useState("");
   const [price, setPrice] = useState("");
 
@@ -80,6 +106,10 @@ const EbookSingleBook = ({ book }) => {
   const [see, setSee] = React.useState(false);
   const handleOpen1 = () => setSee(true);
   const handleClose1 = () => setSee(false);
+
+  const [see1, setSee1] = React.useState(false);
+  const handleOpen2 = () => setSee1(true);
+  const handleClose2 = () => setSee1(false);
 
   const [pdfFile, setPDFFile] = useState("null");
 
@@ -163,19 +193,67 @@ const EbookSingleBook = ({ book }) => {
                 <h5 className="ms-1 cost-rent">Rs. {price}</h5>
               </div>
             </div>
-
             <div className="d-flex flex-nowrap my-4">
               <button
-                className="request-btn btn-preview m-2"
+                className="btn-preview m-2"
                 onClick={handleOpen1}
                 data-test="rent-btn"
               >
                 Preview <MdPreview className="ms-1 fs-5" />
               </button>
+              {/* <div> */}
+              {/* <button
+                  className="btn-download  m-2"
+                  onClick={handleOpen2}
+                  data-test="rent-btn"
+                >
+                  Download Pdf
+                  <FaDownload className="ms-1 fs-5" />
+                </button> */}
+
+              {/* {payment_status === "Paid" ? (
+                  <button
+                    className="btn-download  m-2"
+                    onClick={handleOpen2}
+                    data-test="rent-btn"
+                  >
+                    Download Pdf
+                    <FaDownload className="ms-1 fs-5" />
+                  </button>
+                ) : (
+                  <div> </div>
+                )} */}
+              {/* </div> */}
             </div>
             <Modal
               open={see}
               onClose={handleClose1}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+
+              // onSubmit={handlePdfFileSubmit}
+            >
+              <div className="pdf-container">
+                <Box sx={style1}>
+                  {viewPdf && (
+                    <>
+                      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.0.279/build/pdf.worker.min.js">
+                        {/* <Toolbar>{renderDefaultToolbar(transform)}</Toolbar> */}
+                        <Viewer
+                          fileUrl={`http://localhost:90/${e_book}`}
+                          // plugins={[defaultLayoutPluginInstance]}
+                          plugins={[toolbarPluginInstance]}
+                        />
+                      </Worker>
+                    </>
+                  )}
+                </Box>
+              </div>
+            </Modal>
+
+            <Modal
+              open={see1}
+              onClose={handleClose2}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
 

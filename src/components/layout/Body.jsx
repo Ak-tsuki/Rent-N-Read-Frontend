@@ -15,7 +15,6 @@ import AudioBookUpload from "../audio-book/AudioBookUpload";
 import EBookUpload from "../e-book/EBookUpload";
 import MyExchangeRequest from "../dashboard/MyExchangeRequest";
 import SingleAudioBook from "../singleaudiobook/SingleAudioBook";
-import EBooks from "../dashboard/Ebook";
 import EbookSingleBook from "../../pages/EbookSingleBook";
 
 const Body = () => {
@@ -24,16 +23,24 @@ const Body = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/books" element={<Books />} />
-        <Route path="/singlebook/:book_id/:authormain" element={<SingleBook />}/>
-        <Route path="/ebooksinglebook/:book_id/:authormain" element={<EbookSingleBook />}/>
-        <Route path="/singleaudiobook/:audiobook_id/:authormain" element={<SingleAudioBook />} />
+        <Route
+          path="/singlebook/:book_id/:authormain"
+          element={<SingleBook />}
+        />
+        <Route
+          path="/ebooksinglebook/:book_id/:authormain"
+          element={<EbookSingleBook />}
+        />
+        <Route
+          path="/singleaudiobook/:audiobook_id/:authormain"
+          element={<SingleAudioBook />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<MyBooks />} />
           <Route path="request" element={<MyRentRequest />} />
           <Route path="exchangerequest" element={<MyExchangeRequest />} />
-          <Route path="ebooks" element={<EBooks />} />
         </Route>
         <Route path="/dashboard_admin" element={<DashboardAdmin />}>
           <Route path="" element={<DashboardHome />} />
