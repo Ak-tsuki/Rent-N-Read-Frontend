@@ -70,25 +70,30 @@ const Messenger = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const message = {
-      sender: user,
-      text: newMessage,
-      conversationId: currentChat._id,
-    };
-    const receiverusername = currentChat.members.find(
-      (member) => member !== user
-    );
-    socket.current.emit("sendMessage", {
-      senderusername: user,
-      receiverusername,
-      text: newMessage,
-    });
-    try {
-      const res = await axios.post("http://localhost:90/message/add", message);
-      setMessages([...messages, res.data.data]);
-      setNewMessage("");
-    } catch (e) {
-      console.log(e);
+    if (newMessage !== "") {
+      const message = {
+        sender: user,
+        text: newMessage,
+        conversationId: currentChat._id,
+      };
+      const receiverusername = currentChat.members.find(
+        (member) => member !== user
+      );
+      socket.current.emit("sendMessage", {
+        senderusername: user,
+        receiverusername,
+        text: newMessage,
+      });
+      try {
+        const res = await axios.post(
+          "http://localhost:90/message/add",
+          message
+        );
+        setMessages([...messages, res.data.data]);
+        setNewMessage("");
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -101,7 +106,7 @@ const Messenger = () => {
       <div className="messenger">
         <div className="chatMenu">
           <div className="chatmenuWrapper">
-            <p className="fs-5 fw-bold text-center">My Conversations</p>
+            <p className="fs-5 fw-bold text-center"> Conversations</p>
             {conversation.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
                 <Conversation conversation={c} currentuser={user} />
@@ -122,24 +127,22 @@ const Messenger = () => {
                 </div>
 
                 <div class="chat-message clearfix">
-                  <textarea
-                    name="message-to-send"
-                    id="message-to-send"
-                    placeholder="Type your message"
-                    rows="3"
-                    onChange={(e) => {
-                      setNewMessage(e.target.value);
-                    }}
-                    value={newMessage}
-                  ></textarea>
-
-                  <button
-                    className="btn btn-success text-light float-end"
-                    onClick={handleSubmit}
-                  >
-                    <MdSend className="me-3" />
-                    Send
-                  </button>
+                  <form className="chat__form" onSubmit={handleSubmit}>
+                    <input
+                      className="chat__input"
+                      name="message-to-send"
+                      id="message-to-send"
+                      placeholder="Enter your message"
+                      rows="3"
+                      onChange={(e) => {
+                        setNewMessage(e.target.value);
+                      }}
+                      value={newMessage}
+                    />{" "}
+                    <button className="chat__btn" type="submit">
+                      Send message <MdSend />
+                    </button>
+                  </form>
                 </div>
               </>
             ) : (
