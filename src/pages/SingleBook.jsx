@@ -10,9 +10,9 @@ import { RiExchangeFill } from "react-icons/ri";
 import Modal from "@mui/material/Modal";
 import RentBook from "../components/rent_book/RentBook";
 import ExchangeBook from "../components/exchange_book/ExchangeBook";
-
 import Box from "@mui/material/Box";
 import ListedBookCard from "../components/listedbook-card/listedbook-card";
+import { toast } from "react-toastify";
 
 const style = {
   position: "absolute",
@@ -47,6 +47,7 @@ const SingleBook = () => {
 
   const [desc, setDesc] = useState("");
   const [cost, setCost] = useState("");
+  const [receiverId, setReceiverId] = useState("");
 
   const [listedBooks, setListedBooks] = useState([]);
 
@@ -61,15 +62,59 @@ const SingleBook = () => {
       setDesc(res.data.data.rich_desc);
       setCost(res.data.data.rent_cost_perday);
     });
+    axios
+      .get("http://localhost:90/user/get", config)
+      .then((res) => {
+        setReceiverId(res.data.data.username);
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
     axios
       .get("http://localhost:90/book/getauthor/" + authormain)
       .then((res) => {
         console.log(res.data);
         setListedBooks(res.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
       });
   }, []);
-
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+  const sendMessage = (e) => {
+    e.preventDefault();
+    console.log(receiverId);
+    const data1 = {
+      senderId: localStorage.getItem("username"),
+      receiverId: receiverId,
+    };
+    axios
+      .post("http://localhost:90/conversation/post", data1, config)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 201) {
+          toast.success(res.data.msg, {
+            position: "top-center",
+            autoClose: 4000,
+          });
+        }
+        if (res.status === 200) {
+          toast.error(res.data.msg + " . Check your messages", {
+            position: "top-center",
+            autoClose: 4000,
+          });
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <div className="Book-container">
       <div className="row">
@@ -135,9 +180,9 @@ const SingleBook = () => {
             <h1 className="chat__heading">
               Chat with Owner <BsFillChatLeftDotsFill />
             </h1>
-            <form className="chat__form">
+            <form className="chat__form" onSubmit={sendMessage}>
               <input placeholder="Enter message" className="chat__input" />{" "}
-              <button className="chat__btn">
+              <button className="chat__btn" type="submit">
                 Send message <MdSend />
               </button>
             </form>

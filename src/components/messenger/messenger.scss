@@ -1,0 +1,106 @@
+$green: #86BB71;
+$blue: #94C2ED;
+$orange: #E38968;
+$gray: #92959E;
+.messenger {
+    display: flex;
+
+}
+
+.chatMenu {
+    flex: 10%;
+    background-color: #F0F4FF;
+    padding: 10px;
+
+}
+
+
+.chatMenuWrapper, .chatBoxWrapper {
+    height: 600px;
+    padding: 10px;
+}
+
+.chatBox {
+    flex: 90%;
+    min-height: 600px;
+    padding: 20px;
+}
+
+.chatBoxWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+
+}
+
+.chatBoxTop {
+    height: 100%;
+    overflow-y: scroll;
+
+}
+
+.chatBoxBottom {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chatMessageInput {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+}
+
+.chatSubmitButton {
+    margin-top: 10px;
+    width: 70px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+}
+
+.noConversationText {
+    position: absolute;
+    top: 30%;
+    right: 25%;
+    font-size: 50px;
+    color: grey;
+    text-align: center;
+    cursor: default;
+}
+
+
+@media only screen and (max-width: 991px) {
+    .messenger {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .chatMenu .chatBox {
+        flex: 100%;
+    }
+}
+
+
+.chat-message {
+    padding: 30px;
+   
+    textarea {
+      width: 100%;
+      border: none;
+      padding: 10px 20px;
+      font: 14px/22px "Lato", Arial, sans-serif;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      resize: none;
+      background-color: #e8ebed;
+      
+    }
+    
+  
+    
+    
+  }

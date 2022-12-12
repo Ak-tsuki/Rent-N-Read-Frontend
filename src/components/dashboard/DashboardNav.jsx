@@ -71,7 +71,7 @@ const DashboardNav = ({ open }) => {
       <br />
       <div className="divider"></div>
       <br />
-      <Link className="dash-nav__link">
+      <Link className="dash-nav__link" to="/dashboard/messages">
         {" "}
         <RiMessage2Fill className="dash-nav__link--icon" />
         Emails and Messages

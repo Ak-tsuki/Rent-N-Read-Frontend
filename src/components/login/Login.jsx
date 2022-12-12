@@ -34,6 +34,7 @@ const Login = () => {
           console.log(res.data);
           localStorage.setItem("userType", res.data.userType);
           localStorage.setItem("token", res.data.token);
+          localStorage.setItem("username", username);
           toast.success("User Logged In  Sucessfully", {
             position: "top-center",
             autoClose: 4000,
