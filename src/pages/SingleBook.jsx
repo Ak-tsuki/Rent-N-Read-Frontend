@@ -3,7 +3,8 @@ import "./singleBook.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { BsBookmarkPlusFill } from "react-icons/bs";
+import { BsBookmarkPlusFill, BsFillChatLeftDotsFill } from "react-icons/bs";
+import { MdSend } from "react-icons/md";
 import { FaChevronCircleRight } from "react-icons/fa";
 import { RiExchangeFill } from "react-icons/ri";
 import Modal from "@mui/material/Modal";
@@ -61,10 +62,12 @@ const SingleBook = () => {
       setCost(res.data.data.rent_cost_perday);
     });
 
-    axios.get("http://localhost:90/book/getauthor/" + authormain).then((res) => {
-      console.log(res.data);
-      setListedBooks(res.data.data);
-    });
+    axios
+      .get("http://localhost:90/book/getauthor/" + authormain)
+      .then((res) => {
+        console.log(res.data);
+        setListedBooks(res.data.data);
+      });
   }, []);
 
   return (
@@ -128,6 +131,17 @@ const SingleBook = () => {
               </div>
             </div>
           </div>
+          <div className="book-detail chat mt-4">
+            <h1 className="chat__heading">
+              Chat with Owner <BsFillChatLeftDotsFill />
+            </h1>
+            <form className="chat__form">
+              <input placeholder="Enter message" className="chat__input" />{" "}
+              <button className="chat__btn">
+                Send message <MdSend />
+              </button>
+            </form>
+          </div>
         </div>
       </div>
       <div>
@@ -162,11 +176,15 @@ const SingleBook = () => {
           <h4 className="ms-2">More Books From This Author</h4>
         </div>
         <div className="listedBook">
-          {listedBooks.slice(0, 5).map((book) => (
-            (book.name !== name) ?
-            <ListedBookCard book={book} />
-            :<div className="bookspace"></div>
-          ))}
+          {listedBooks
+            .slice(0, 5)
+            .map((book) =>
+              book.name !== name ? (
+                <ListedBookCard book={book} />
+              ) : (
+                <div className="bookspace"></div>
+              )
+            )}
         </div>
       </section>
     </div>

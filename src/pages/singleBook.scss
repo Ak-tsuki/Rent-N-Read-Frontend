@@ -108,6 +108,52 @@
   font-weight: 600;
 }
 
-.bookspace{
+.bookspace {
   position: absolute;
+}
+
+.chat {
+  &__heading {
+    font-family: "Alata";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    svg {
+      color: #42ade2;
+      font-size: 28px;
+    }
+  }
+  &__form {
+    display: flex;
+    gap: 8px;
+    @media (max-width: 560px) {
+      flex-direction: column;
+    }
+  }
+  &__input {
+    padding: 10px 20px;
+    flex: 2;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    gap: 8px;
+    background: #21afff;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    border: none;
+    transition: all 0.3s;
+    &:hover {
+      background: #1ba1ef;
+    }
+  }
 }
