@@ -103,6 +103,7 @@ const SingleBook = () => {
             position: "top-center",
             autoClose: 4000,
           });
+          window.location.replace("/dashboard/messages");
         }
         if (res.status === 200) {
           toast.error(res.data.msg + " . Check your messages", {
@@ -177,15 +178,10 @@ const SingleBook = () => {
             </div>
           </div>
           <div className="book-detail chat mt-4">
-            <h1 className="chat__heading">
-              Chat with Owner <BsFillChatLeftDotsFill />
-            </h1>
-            <form className="chat__form" onSubmit={sendMessage}>
-              <input placeholder="Enter message" className="chat__input" />{" "}
-              <button className="chat__btn" type="submit">
-                Send message <MdSend />
-              </button>
-            </form>
+            <h1 className="chat__heading">Contact Book Owner ?</h1>
+            <button className="chat__btn" onClick={sendMessage}>
+              Start a conversation <BsFillChatLeftDotsFill />
+            </button>
           </div>
         </div>
       </div>

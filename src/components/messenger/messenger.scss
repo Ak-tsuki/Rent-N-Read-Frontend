@@ -12,11 +12,11 @@ $gray: #92959e;
 .chatMenu {
   flex: 10%;
   background-color: #f8f8f8;
-  padding: 10px;
+
   border-radius: 8px;
 }
 
-.chatMenuWrapper,
+.chatmenuWrapper,
 .chatBoxWrapper {
   height: 600px;
   padding: 10px;
@@ -68,14 +68,15 @@ $gray: #92959e;
   border-radius: 10px;
 }
 
-.noConversationText {
-  position: absolute;
-  top: 30%;
-  right: 25%;
-  font-size: 50px;
-  color: grey;
+.no-conversation {
   text-align: center;
-  cursor: default;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  &__img {
+    max-width: 400px;
+  }
 }
 
 @media only screen and (max-width: 991px) {
@@ -108,4 +109,35 @@ $gray: #92959e;
       border: 1px solid rgb(206, 206, 206);
     }
   }
+}
+
+.conversation-users {
+  transition: all 0.2s;
+  border-radius: 8px;
+  &:hover {
+    background-color: rgb(232, 232, 232);
+    border-radius: 8px;
+  }
+  &__active {
+    background-color: rgb(232, 232, 232);
+  }
+}
+
+.conversation-heading {
+  font-size: 14px;
+  text-align: center;
+  font-family: Alata;
+
+  border-bottom: 1px solid grey;
+  padding: 5px;
+}
+
+.search-conversation {
+  margin-bottom: 10px;
+  outline: none;
+  border-radius: 8px;
+  border: 1px solid #e3e1e1;
+  padding: 5px 8px;
+  font-size: 16px;
+  font-family: Alata;
 }

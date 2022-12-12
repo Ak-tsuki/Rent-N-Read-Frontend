@@ -6,13 +6,16 @@ import { MdSend } from "react-icons/md";
 import "./messenger.scss";
 import axios from "axios";
 import { io } from "socket.io-client";
+import no_conversation from "../../assets/no_conversation.svg";
 const Messenger = () => {
-  const [conversation, setConversation] = useState([]);
+  const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
+  const [allConversations, setAllConversations] = useState([]);
 
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
+
   const scrollRef = useRef();
 
   const socket = useRef();
@@ -49,7 +52,8 @@ const Messenger = () => {
       const res = await axios.get(
         "http://localhost:90/conversation/getbyusername/" + user
       );
-      setConversation(res.data.data);
+      setAllConversations(res.data.data);
+      setConversations(res.data.data);
     };
     getConversation();
   }, []);
@@ -101,14 +105,39 @@ const Messenger = () => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const searchConversation = (searchQuery) => {
+    const searchResult = allConversations.filter(
+      (c) =>
+        c.members[0].toLowerCase().includes(searchQuery.toLowerCase()) ||
+        c.members[1].toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setConversations(searchResult);
+
+    if (searchQuery === "") {
+      setConversations(allConversations);
+    }
+  };
+
   return (
     <>
       <div className="messenger">
         <div className="chatMenu">
+          <p className="conversation-heading"> Conversations</p>
+
           <div className="chatmenuWrapper">
-            <p className="fs-5 fw-bold text-center"> Conversations</p>
-            {conversation.map((c) => (
-              <div onClick={() => setCurrentChat(c)}>
+            <input
+              className="search-conversation"
+              placeholder="username"
+              onChange={(e) => searchConversation(e.target.value)}
+            />
+
+            {conversations.map((c) => (
+              <div
+                onClick={() => setCurrentChat(c)}
+                className={`${
+                  currentChat === c && "conversation-users__active"
+                } conversation-users`}
+              >
                 <Conversation conversation={c} currentuser={user} />
               </div>
             ))}
@@ -146,8 +175,12 @@ const Messenger = () => {
                 </div>
               </>
             ) : (
-              <span className="noConversationText">
-                Open a conversation to start a chat
+              <span className="no-conversation">
+                <img
+                  src={no_conversation}
+                  alt="no_conversation"
+                  className="no-conversation__img"
+                />
               </span>
             )}
           </div>

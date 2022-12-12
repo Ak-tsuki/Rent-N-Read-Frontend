@@ -113,11 +113,16 @@
 }
 
 .chat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   &__heading {
     font-family: "Alata";
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
+    margin: 0;
+    padding: 0;
     svg {
       color: #42ade2;
       font-size: 28px;
