@@ -10,21 +10,27 @@ $gray: #92959e;
 }
 
 .chatMenu {
-  flex: 10%;
+  flex: 20%;
   background-color: #f8f8f8;
-
+  min-width: 186px;
   border-radius: 8px;
 }
 
-.chatmenuWrapper,
 .chatBoxWrapper {
   height: 600px;
+  @media only screen and (max-width: 991px) {
+    height: 400px;
+  }
+  padding: 10px;
+}
+
+.chatmenuWrapper {
   padding: 10px;
 }
 
 .chatBox {
-  flex: 90%;
-  min-height: 600px;
+  flex: 80%;
+  min-height: 500px;
   padding: 20px;
   background: #f8f8f8;
   padding: 10px;
@@ -34,12 +40,11 @@ $gray: #92959e;
 .chatBoxWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+
   position: relative;
 }
 
 .chatBoxTop {
-  height: 100%;
   padding: 20px;
   overflow-y: scroll;
   background: #fff;
@@ -124,7 +129,7 @@ $gray: #92959e;
 }
 
 .conversation-heading {
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   font-family: Alata;
 
@@ -133,11 +138,26 @@ $gray: #92959e;
 }
 
 .search-conversation {
-  margin-bottom: 10px;
-  outline: none;
-  border-radius: 8px;
-  border: 1px solid #e3e1e1;
-  padding: 5px 8px;
-  font-size: 16px;
-  font-family: Alata;
+  position: relative;
+  &__input {
+    width: 100%;
+    margin-bottom: 10px;
+    outline: none;
+    border-radius: 8px;
+    border: 1px solid #e3e1e1;
+    padding: 8px 10px;
+    font-size: 16px;
+    font-family: Alata;
+    &:active,
+    &:focus {
+      border: 1px solid rgb(177, 177, 177);
+    }
+  }
+  &__icon {
+    position: absolute;
+    font-size: 20px;
+    right: 10px;
+    top: 10px;
+    color: #a0a0a0;
+  }
 }

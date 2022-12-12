@@ -13,21 +13,22 @@
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .messageText {
-  padding: 10px;
-  border-radius: 15px;
+  padding: 8px;
+  border-radius: 8px;
   background-color: rgb(217, 217, 217);
   color: black;
   max-width: 300px;
   font-family: Alata;
   font-size: 14px;
+  margin-bottom: 6px;
 }
 
 .messageBottom {
-  font-size: 12px;
+  font-size: 11px;
 
   margin-top: 0px;
 }

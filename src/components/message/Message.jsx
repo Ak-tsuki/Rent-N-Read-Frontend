@@ -19,9 +19,11 @@ export default function Message({ message, own }) {
               src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-21.jpg"
               alt=""
             />
-            <p className="messageText">{message.text}</p>
+            <div>
+              <p className="messageText">{message.text}</p>
+              <div className="messageBottom">{format(message.createdAt)}</div>
+            </div>
           </div>
-          <div className="messageBottom">{format(message.createdAt)}</div>
         </div>
       )}
     </>

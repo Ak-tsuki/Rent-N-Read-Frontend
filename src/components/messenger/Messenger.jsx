@@ -7,6 +7,8 @@ import "./messenger.scss";
 import axios from "axios";
 import { io } from "socket.io-client";
 import no_conversation from "../../assets/no_conversation.svg";
+import { BiSearch } from "react-icons/bi";
+
 const Messenger = () => {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
@@ -125,12 +127,14 @@ const Messenger = () => {
           <p className="conversation-heading"> Conversations</p>
 
           <div className="chatmenuWrapper">
-            <input
-              className="search-conversation"
-              placeholder="username"
-              onChange={(e) => searchConversation(e.target.value)}
-            />
-
+            <div className="search-conversation">
+              <input
+                className="search-conversation__input"
+                placeholder="username"
+                onChange={(e) => searchConversation(e.target.value)}
+              />
+              <BiSearch className="search-conversation__icon" />
+            </div>
             {conversations.map((c) => (
               <div
                 onClick={() => setCurrentChat(c)}
