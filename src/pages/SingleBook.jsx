@@ -90,6 +90,13 @@ const SingleBook = () => {
   const sendMessage = (e) => {
     e.preventDefault();
     console.log(receiverId);
+    if (localStorage.getItem("username") === receiverId) {
+      toast.warning("You cannot start a conversation with yourself.", {
+        position: "top-center",
+        autoClose: 4000,
+      });
+      return;
+    }
     const data1 = {
       senderId: localStorage.getItem("username"),
       receiverId: receiverId,
