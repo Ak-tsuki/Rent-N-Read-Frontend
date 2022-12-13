@@ -24,7 +24,18 @@ const Body = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/books" element={<Books />} />
-        <Route path="/singlebook/:book_id/:authormain" element={<SingleBook />} />
+        <Route
+          path="/singlebook/:book_id/:authormain"
+          element={<SingleBook />}
+        />
+        <Route
+          path="/ebooksinglebook/:book_id/:authormain"
+          element={<EbookSingleBook />}
+        />
+        <Route
+          path="/singleaudiobook/:audiobook_id/:authormain"
+          element={<SingleAudioBook />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />}>
