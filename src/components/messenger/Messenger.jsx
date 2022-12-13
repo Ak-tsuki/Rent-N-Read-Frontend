@@ -138,6 +138,7 @@ const Messenger = () => {
             {conversations.map((c) => (
               <div
                 onClick={() => setCurrentChat(c)}
+                data-test="sender-btn"
                 className={`${
                   currentChat === c && "conversation-users__active"
                 } conversation-users`}
@@ -171,8 +172,9 @@ const Messenger = () => {
                         setNewMessage(e.target.value);
                       }}
                       value={newMessage}
+                      data-test="text"
                     />{" "}
-                    <button className="chat__btn" type="submit">
+                    <button className="chat__btn" type="submit" data-test="send-btn">
                       Send message <MdSend />
                     </button>
                   </form>

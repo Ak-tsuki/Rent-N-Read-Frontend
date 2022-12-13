@@ -13,7 +13,6 @@ import ExchangeBook from "../components/exchange_book/ExchangeBook";
 import Box from "@mui/material/Box";
 import ListedBookCard from "../components/listedbook-card/listedbook-card";
 import { toast } from "react-toastify";
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -25,65 +24,67 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
 const SingleBook = () => {
   const [openRent, setOpenRent] = React.useState(false);
   const handleOpenRent = () => setOpenRent(true);
   const handleCloseRent = () => setOpenRent(false);
-
   const [openExchange, setOpenExchange] = React.useState(false);
   const handleOpenExchange = () => setOpenExchange(true);
   const handleCloseExchange = () => setOpenExchange(false);
-
   const { book_id } = useParams();
   const { authormain } = useParams();
-
   const [book_img, setBookImg] = useState("");
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState([]);
   const [owner_img, setOwnerImg] = useState("");
   const [bookowner, setBookOwner] = useState("");
-
   const [desc, setDesc] = useState("");
   const [cost, setCost] = useState("");
   const [receiverId, setReceiverId] = useState("");
-
   const [listedBooks, setListedBooks] = useState([]);
-
   useEffect(() => {
-    axios.get("http://localhost:90/book/getone/" + book_id).then((res) => {
-      console.log(res.data);
-      setBookImg(res.data.data.book_pic);
-      setBookOwner(res.data.data.bookOwner);
-      setName(res.data.data.name);
-      setAuthor(res.data.data.author);
-      setCategory(res.data.data.category);
-      setDesc(res.data.data.rich_desc);
-      setCost(res.data.data.rent_cost_perday);
-    });
     axios
-      .get("http://localhost:90/user/get", config)
+      .get("http://localhost:90/book/getone/" + book_id)
       .then((res) => {
-        setReceiverId(res.data.data.username);
-        console.log(res);
+        console.log(res.data);
+        setBookImg(res.data.data.book_pic);
+        setBookOwner(res.data.data.bookOwner);
+        setName(res.data.data.name);
+        setAuthor(res.data.data.author);
+        setCategory(res.data.data.category);
+        setDesc(res.data.data.rich_desc);
+        setCost(res.data.data.rent_cost_perday);
+        console.log(bookowner);
+        const data = {
+          bookOwnerId: res.data.data.bookOwner,
+        };
+        return data;
+      })
+      .then((data) => {
+        console.log(data);
+        axios
+          .get("http://localhost:90/bookowner/get/" + bookowner, data)
+          .then((res) => {
+            setReceiverId(res.data.data.username);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       })
       .catch((e) => {
         console.log(e);
       });
-
     axios
-      
       .get("http://localhost:90/book/getauthor/" + authormain)
-      
       .then((res) => {
           console.log(res.data);
           setListedBooks(res.data.data);
       })
       .catch((e) => {
         console.log(e);
-        });
-  }, []);
+      });
+  }, [bookowner]);
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -91,39 +92,46 @@ const SingleBook = () => {
   };
   const sendMessage = (e) => {
     e.preventDefault();
-    console.log(receiverId);
+    setReceiverId();
     if (localStorage.getItem("username") === receiverId) {
       toast.warning("You cannot start a conversation with yourself.", {
         position: "top-center",
-        autoClose: 4000,
-      });
+        autoClose: 2000,
+      }, { toastId: "new conversation" });
       return;
     }
-    const data1 = {
-      senderId: localStorage.getItem("username"),
-      receiverId: receiverId,
-    };
-    axios
-      .post("http://localhost:90/conversation/post", data1, config)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 201) {
-          toast.success(res.data.msg, {
-            position: "top-center",
-            autoClose: 4000,
-          });
-          window.location.replace("/dashboard/messages");
-        }
-        if (res.status === 200) {
-          toast.error(res.data.msg + " . Check your messages", {
-            position: "top-center",
-            autoClose: 4000,
-          });
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    if (receiverId !== "") {
+      const data1 = {
+        senderId: localStorage.getItem("username"),
+        receiverId: receiverId,
+      };
+      axios
+        .post("http://localhost:90/conversation/post", data1, config)
+        .then((res) => {
+          console.log(res);
+          if (res.status === 201) {
+            toast.success(res.data.msg,
+            //   {
+            //   position: "top-left",
+            //   autoClose: 4000,
+            // },
+            { toastId: "new conversation" });
+            // setTimeout(
+            //   () => window.location.replace("/dashboard/messages"),
+            //   4000
+            // );
+          }
+          if (res.status === 200) {
+            toast.error(res.data.msg + " . Check your messages", {
+              position: "top-center",
+              autoClose: 4000,
+            }, { toastId: "new conversation" });
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
   };
   return (
     <div className="Book-container">
@@ -188,7 +196,8 @@ const SingleBook = () => {
           </div>
           <div className="book-detail chat mt-4">
             <h1 className="chat__heading">Contact Book Owner ?</h1>
-            <button className="chat__btn" onClick={sendMessage}>
+            <button className="chat__btn" onClick={sendMessage} 
+            data-test="conversation">
               Start a conversation <BsFillChatLeftDotsFill />
             </button>
           </div>
@@ -240,5 +249,4 @@ const SingleBook = () => {
     </div>
   );
 };
-
 export default SingleBook;
