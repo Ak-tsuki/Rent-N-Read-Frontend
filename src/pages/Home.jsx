@@ -127,7 +127,7 @@ const Home = () => {
               <h4 className="ms-2">E-Books</h4>
             </div>
             <div className="Book-list">
-              {eBooks.slice(0, 12).map((book) => (
+              {eBooks.slice(0, 5).map((book) => (
                 <ListedEbookCard book={book} />
               ))}
             </div>

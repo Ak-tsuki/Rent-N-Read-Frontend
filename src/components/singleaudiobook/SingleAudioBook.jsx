@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import ListedAudioBookCard from "../listedbook-card/listedaudiobook-card";
 import BuyAudioBook from "../buy_audio_book/BuyAudioBook";
 import { MdShoppingBag } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
 
 const style = {
   position: "absolute",
@@ -47,6 +48,13 @@ const SingleAudioBook = () => {
   const [cost, setCost] = useState("");
 
   const [listedBooks, setListedBooks] = useState([]);
+
+  const showToastMessage = () => {
+    toast.error("Please Login First!!!", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 4000,
+    });
+  };
 
   useEffect(() => {
     axios
@@ -112,13 +120,22 @@ const SingleAudioBook = () => {
             </div>
             <div className="d-flex flex-wrap align-items-center my-4">
               <div>
-                <button
-                  className="request-btn btn-rent"
-                  onClick={handleOpenRent}
-                  data-test="buy-btn"
-                >
-                  Buy <MdShoppingBag className="ms-1 fs-5" />
-                </button>
+                {localStorage.getItem("token") ? (
+                  <button
+                    className="request-btn btn-rent"
+                    onClick={handleOpenRent}
+                    data-test="buy-btn"
+                  >
+                    Buy <MdShoppingBag className="ms-1 fs-5" />
+                  </button>
+                ) : (
+                  <button
+                    className="request-btn btn-rent"
+                    onClick={showToastMessage}
+                  >
+                    Buy <MdShoppingBag className="ms-1 fs-5" />
+                  </button>
+                )}
               </div>
             </div>
           </div>
