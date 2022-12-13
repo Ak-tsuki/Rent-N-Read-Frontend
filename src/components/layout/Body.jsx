@@ -15,6 +15,8 @@ import AudioBookUpload from "../audio-book/AudioBookUpload";
 import EBookUpload from "../e-book/EBookUpload";
 import MyExchangeRequest from "../dashboard/MyExchangeRequest";
 import Messenger from "../messenger/Messenger";
+import SingleAudioBook from "../singleaudiobook/SingleAudioBook";
+import EbookSingleBook from "../../pages/EbookSingleBook";
 
 const Body = () => {
   return (
@@ -22,10 +24,7 @@ const Body = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/books" element={<Books />} />
-        <Route
-          path="/singlebook/:book_id/:authormain"
-          element={<SingleBook />}
-        />
+        <Route path="/singlebook/:book_id/:authormain" element={<SingleBook />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />}>

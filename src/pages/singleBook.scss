@@ -78,6 +78,30 @@
   color: #ffff;
 }
 
+.btn-preview {
+  border: none;
+  background-color: #8a908c;
+  color: #ffff;
+  border-radius: 10px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.btn-download {
+  border: none;
+  background-color: rgb(216, 22, 22);
+  color: #ffff;
+  border-radius: 10px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
 .btn-exchange {
   background-color: #638d6a;
   color: #ffff;

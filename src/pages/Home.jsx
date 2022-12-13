@@ -5,10 +5,14 @@ import { FaBook } from "react-icons/fa";
 import ListedBookCard from "../components/listedbook-card/listedbook-card";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import ListedEbookCard from "../components/listedbook-card/listed-Ebookcard";
+import ListedAudioBookCard from "../components/listedbook-card/listedaudiobook-card";
 
 const Home = () => {
   const [listedBooks, setListedBooks] = useState([]);
   const [recommendedBooks, setRecommendedBooks] = useState([]);
+  const [eBooks, setEBooks] = useState([]);
+  const [audioBooks, setAudioBooks] = useState([]);
 
   const config = {
     headers: {
@@ -25,6 +29,18 @@ const Home = () => {
     axios.get("http://localhost:90/book/recommendation", config).then((res) => {
       console.log(res.data);
       setRecommendedBooks(res.data.data);
+    });
+
+    axios.get("http://localhost:90/ebook/get").then((res) => {
+      console.log(res.data);
+      setEBooks(res.data.data);
+      console.log(eBooks);
+    });
+
+    axios.get("http://localhost:90/audiobook/get").then((res) => {
+      console.log(res.data);
+      setAudioBooks(res.data.data);
+      console.log(audioBooks);
     });
   }, []);
 
@@ -73,18 +89,60 @@ const Home = () => {
               ))}
             </div>
           </section>
+          <section className="listedBook-container">
+            <div className="heading2">
+              <h4 className="ms-2">E-Books</h4>
+            </div>
+            <div className="listedBook">
+              {eBooks.slice(0, 5).map((book) => (
+                <ListedEbookCard book={book} />
+              ))}
+            </div>
+          </section>
+          <section className="listedBook-container">
+            <div className="heading2">
+              <h4 className="ms-2">Audio Books</h4>
+            </div>
+            <div className="listedBook">
+              {audioBooks.slice(0, 5).map((book) => (
+                <ListedAudioBookCard book={book} />
+              ))}
+            </div>
+          </section>
         </>
       ) : (
-        <section className="listedBook-container">
-          <div className="heading2">
-            <h4 className="ms-2">Newly Listed</h4>
-          </div>
-          <div className="listedBook">
-            {listedBooks.slice(0, 10).map((book) => (
-              <ListedBookCard book={book} />
-            ))}
-          </div>
-        </section>
+        <>
+          <section className="listedBook-container">
+            <div className="heading2">
+              <h4 className="ms-2">Newly Listed</h4>
+            </div>
+            <div className="listedBook">
+              {listedBooks.slice(0, 10).map((book) => (
+                <ListedBookCard book={book} />
+              ))}
+            </div>
+          </section>
+          <section className="listedBook-container">
+            <div className="heading2">
+              <h4 className="ms-2">E-Books</h4>
+            </div>
+            <div className="Book-list">
+              {eBooks.slice(0, 12).map((book) => (
+                <ListedEbookCard book={book} />
+              ))}
+            </div>
+          </section>
+          <section className="listedBook-container">
+            <div className="heading2">
+              <h4 className="ms-2">Audio Books</h4>
+            </div>
+            <div className="listedBook">
+              {audioBooks.slice(0, 5).map((book) => (
+                <ListedAudioBookCard book={book} />
+              ))}
+            </div>
+          </section>
+        </>
       )}
     </div>
   );
