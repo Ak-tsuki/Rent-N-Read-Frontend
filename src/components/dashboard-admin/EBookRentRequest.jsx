@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import PendingCard from "../rentRequest/PendingCard";
+import PendingCardAdmin from "../rentRequest/PendingCardAdmin";
 
 const style = {
   position: "absolute",
@@ -84,8 +85,8 @@ const EBookRentRequest = () => {
       </div>
       <div>
         {currentTab === "all_request"
-          ? requestList.map((book) => <PendingCard book={book} />)
-          : pending.map((book) => <PendingCard book={book} />)}
+          ? requestList.map((book) => <PendingCardAdmin book={book} />)
+          : pending.map((book) => <PendingCardAdmin book={book} />)}
       </div>
     </div>
   );

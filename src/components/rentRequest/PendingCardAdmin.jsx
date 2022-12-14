@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import { GiReturnArrow } from "react-icons/gi";
 
-const PendingCard = ({ book }) => {
+const PendingCardAdmin = ({ book }) => {
   console.log(book);
 
   const {
@@ -34,10 +34,10 @@ const PendingCard = ({ book }) => {
     },
   };
 
-  const approveRequest = (_id, e) => {
+  const approveRequest = (id, e) => {
     e.preventDefault();
     const data = {
-      id: _id,
+      id: id,
     };
     axios
       .put("http://localhost:90/rentEbook/approve", data, config)
@@ -55,10 +55,10 @@ const PendingCard = ({ book }) => {
         console.log(e);
       });
   };
-  const rejectrequest = (_id, e) => {
+  const rejectrequest = (id, e) => {
     e.preventDefault();
     const data = {
-      id: _id,
+      id: id,
     };
     axios
       .put("http://localhost:90/rentEbook/reject", data, config)
@@ -76,10 +76,10 @@ const PendingCard = ({ book }) => {
         console.log(e);
       });
   };
-  const returnBook = (_id, e) => {
+  const returnBook = (id, e) => {
     e.preventDefault();
     const data = {
-      id: _id,
+      id: id,
     };
     axios
       .put("http://localhost:90/rentEbook/returnBook", data, config)
@@ -204,4 +204,4 @@ const PendingCard = ({ book }) => {
   );
 };
 
-export default PendingCard;
+export default PendingCardAdmin;
