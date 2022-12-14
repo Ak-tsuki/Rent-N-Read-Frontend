@@ -92,14 +92,13 @@ const RentEBook = ({ _id, bookOwner, name, rent_cost }) => {
           // window.location.replace("/dashboard");
           toast.success(
             "EBook Rent Request Sent Successfully",
-            setTimeout(() => {
-              window.location.replace("/dashboard");
-            }, 1500),
+            setTimeout(() => {}, 1500),
             {
               position: "top-center",
               autoClose: 4000,
             }
           );
+          
         } else {
           toast.error("Somthing went wrong!!!", {
             toastId: "error",

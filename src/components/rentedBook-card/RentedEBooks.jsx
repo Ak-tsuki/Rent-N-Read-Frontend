@@ -15,6 +15,7 @@ import time from "cucumber/lib/time";
 import moment from "moment";
 import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import KhaltiCheckout from "khalti-checkout-web";
 
 const style = {
   position: "absolute",
@@ -29,19 +30,9 @@ const style = {
 };
 
 const RentedEBook = ({ book }) => {
-  const [open, setOpen] = React.useState(false);
-  const [bookObject, setBookObject] = useState([]);
-
-  const handleOpen = () => {
-    setOpen(true);
-    setBookObject(book);
-  };
-  const handleClose = () => {
-    setOpen(false);
-    setBookObject();
-  };
 
   const {
+    _id,
     start_date,
     no_of_days,
     ebookId,
@@ -50,6 +41,73 @@ const RentedEBook = ({ book }) => {
     payment_status,
     total_price,
   } = book;
+
+  const myKey = {
+    publicTestKey: "test_public_key_b4f2f58210d24adeb3a09f18004822b6",
+    secretKey: "test_secret_key_5eb022defe114eee80231588f185e8c4",
+  };
+
+  const config = {
+    // replace the publicKey with yours
+    publicKey: myKey.publicTestKey,
+    productIdentity: _id,
+    productName: ebookId.name,
+    productUrl: "http://localhost:3000/",
+    paymentPreference: ["KHALTI"],
+    eventHandler: {
+      onSuccess(payload) {
+        // hit merchant api for initiating verfication
+        console.log(payload);
+        const data = {
+          token: payload.token,
+          amount: payload.amount,
+        };
+
+        const config = {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        };
+
+        axios
+          .get(
+            `http://localhost:90/payment/khalti/verification/${data.token}/${data.amount}/${myKey.secretKey}`
+          )
+          .then((response) => {
+            console.log(response.data);
+            const data2 = {
+                id: _id,
+            };
+            axios
+              .put("http://localhost:90/rentEbook/paymentPaid", data2, config)
+              .then((response) => {
+                console.log(response.data.msg);
+                toast.success(
+                  "Payment Successfully",
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 1500)
+                );
+              })
+              .catch((e) => {
+                console.log(e);
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+      onError(error) {
+        console.log(error);
+      },
+      onClose() {
+        console.log("widget is closing");
+      },
+    },
+  };
+
+  const checkout = new KhaltiCheckout(config);
+
 
   return (
     <div className="book-cards">
@@ -80,9 +138,8 @@ const RentedEBook = ({ book }) => {
           Status:
           <span
             className={`book-details__desc  ${
-              (rent_status === "Pending" && "text-warning") ||
               (rent_status === "Approved" && "text-success") ||
-              (rent_status === "Rejected" && "text-danger") ||
+              (rent_status === "Reading" && "text-success") ||
               (rent_status === "Returned" && "text-danger")
             }`}
           >
@@ -113,26 +170,13 @@ const RentedEBook = ({ book }) => {
           ) : (
             <button
               className=" btn-accept request-btn m-2"
-              onClick={handleOpen}
+              onClick={() => checkout.show({ amount: total_price * 100 })}
               data-test="checkout-btn"
             >
-              Proceed To Checkout <FiSend className="ms-1 fs-5" />
+              Make Payment<FiSend className="ms-1 fs-5" />
             </button>
           )}
         </div>
-      </div>
-      <div>
-        {/* <Button onClick={handleOpen}>Open modal</Button> */}
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Checkout bookObject={bookObject}></Checkout>
-          </Box>
-        </Modal>
       </div>
     </div>
   );
