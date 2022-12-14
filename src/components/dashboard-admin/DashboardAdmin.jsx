@@ -162,8 +162,24 @@ function DashboardAdmin(props) {
             </ListItemButton>
           </ListItem>
         </Link>
+        <p className="admin-dashboard__nav--heading"> EBook Rent</p>
+        <Link to="/dashboard_admin/ebook" className="admin-dashboard__nav">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <PictureAsPdfIcon />
+              </ListItemIcon>
+              <ListItemText
+                disableTypography
+                primary={"Rent Requests"}
+                sx={{
+                  fontFamily: "Alata",
+                }}
+              />
+            </ListItemButton>
+          </ListItem>
+        </Link>
       </List>
-
       <Divider />
       <List>
         <Link className="admin-dashboard__nav">

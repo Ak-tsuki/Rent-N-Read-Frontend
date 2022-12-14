@@ -9,8 +9,6 @@ import { MdPreview } from "react-icons/md";
 import { BsCashCoin } from "react-icons/bs";
 import { RiExchangeFill } from "react-icons/ri";
 import Modal from "@mui/material/Modal";
-import RentBook from "../components/rent_book/RentBook";
-import ExchangeBook from "../components/exchange_book/ExchangeBook";
 
 import Box from "@mui/material/Box";
 import ListedEbookCard from "../components/listedbook-card/listed-Ebookcard";
@@ -28,6 +26,7 @@ import { ToolbarSlot, TransformToolbarSlot } from "@react-pdf-viewer/toolbar";
 
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/toolbar/lib/styles/index.css";
+import RentEBook from "../components/rent_ebook/RentEBook";
 
 // interface RemovePartsDefaultToolbarExampleProps {
 //   fileUrl: string;
@@ -130,6 +129,7 @@ const EbookSingleBook = ({ book, fileUrl }) => {
       console.log(res.data);
       setBookImg(res.data.data.book_pic);
       setEbook(res.data.data.e_book);
+      setBookOwner(res.data.data.bookOwner);
       setName(res.data.data.name);
       setAuthor(res.data.data.author);
       setCategory(res.data.data.category);
@@ -305,8 +305,8 @@ const EbookSingleBook = ({ book, fileUrl }) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <RentBook
-              id={book_id}
+            <RentEBook
+              _id={book_id}
               bookOwner={bookowner}
               name={name}
               rent_cost={cost}
