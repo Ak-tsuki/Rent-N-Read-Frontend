@@ -135,41 +135,42 @@ Given("I am on the {string} page", async function (string) {
       return await this.page.goto(
         "http://localhost:3000/ebooksinglebook/63929809c4905c6eadb63343/JK%20Rolling"
       );
-// for conversation................x.............x...........
-      case "singleebookpages":
+
+    case "rentedEbooks":
       await this.page.evaluateOnNewDocument(() => {
         localStorage.clear();
         localStorage.setItem(
           "token",
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzcyNDdlMmRiNTM4ZDhkYTdmZWFhM2IiLCJpYXQiOjE2NzA5Mjc2MDZ9.VoRitTJ_EgvstRDvtyW3AlU9CSuFxSArvKIOnuN5eBE",
-          );
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZTI0YzE2N2RiNTY1MzA4MDU0YmUiLCJpYXQiOjE2NzAzMTUwODR9.Es56s1-At5_I7MKPrfqunjIJY40f-9NmYtWhI7GcuZY"
+        );
+      });
+      return await this.page.goto("http://localhost:3000/dashboard/myebooks");
+    // for conversation................x.............x...........
+    case "singleebookpages":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
         localStorage.setItem(
-          "username",
-          "Aayush",
-          );
-          
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzcyNDdlMmRiNTM4ZDhkYTdmZWFhM2IiLCJpYXQiOjE2NzA5Mjc2MDZ9.VoRitTJ_EgvstRDvtyW3AlU9CSuFxSArvKIOnuN5eBE"
+        );
+        localStorage.setItem("username", "Aayush");
       });
       return await this.page.goto(
         "http://localhost:3000/singlebook/63905f81e895bc8961b0a101/Collen%20Hoover"
       );
 
-      case "messagepage":
+    case "messagepage":
       await this.page.evaluateOnNewDocument(() => {
         localStorage.clear();
         localStorage.setItem(
           "token",
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzcyNDdlMmRiNTM4ZDhkYTdmZWFhM2IiLCJpYXQiOjE2NzA5Mjc2MDZ9.VoRitTJ_EgvstRDvtyW3AlU9CSuFxSArvKIOnuN5eBE",
-          );
-          localStorage.setItem(
-            "username",
-            "Aayush",
-            );
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzcyNDdlMmRiNTM4ZDhkYTdmZWFhM2IiLCJpYXQiOjE2NzA5Mjc2MDZ9.VoRitTJ_EgvstRDvtyW3AlU9CSuFxSArvKIOnuN5eBE"
+        );
+        localStorage.setItem("username", "Aayush");
       });
-      return await this.page.goto(
-        "http://localhost:3000/dashboard/messages"
-      );
+      return await this.page.goto("http://localhost:3000/dashboard/messages");
 
-//..........................x.......................x.......................x....................x...........................x.......x      
+    //..........................x.......................x.......................x....................x...........................x.......x
 
     default:
       throw new Error(`${string} is not a supported page name`);

@@ -281,7 +281,7 @@ const EbookSingleBook = ({ book, fileUrl }) => {
                 <button
                   className="request-btn btn-rent m-2"
                   onClick={handleOpenRent}
-                  data-test="rent-btn"
+                  data-test="rent-ebook-btn"
                 >
                   Rent <FaChevronCircleRight className="ms-1 fs-5" />
                 </button>

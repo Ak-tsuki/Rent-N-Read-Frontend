@@ -63,7 +63,7 @@ const MyEBooks = () => {
             currentTab === "rented" && "tabs__tab--open"
           }`}
           onClick={() => setCurrentTab("rented")}
-          data-test="rented-books-btn"
+          data-test="rented-ebooks-btn"
         >
           Rented EBooks
         </div>
