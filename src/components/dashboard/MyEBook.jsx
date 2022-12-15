@@ -10,6 +10,7 @@ import axios from "axios";
 import Rentedbook from "../rentedBook-card/RentedBook";
 import ExchangeBookCard from "../exchangebook-card/ExchangeBookCard";
 import RentedEBook from "../rentedBook-card/RentedEBooks";
+import EbookCard from "../ebook-card/Ebook-card";
 
 const style = {
   position: "absolute",
@@ -24,8 +25,8 @@ const style = {
 };
 
 const MyEBooks = () => {
-  const [currentTab, setCurrentTab] = useState("listed");
-  const [listedBooks, setListedBooks] = useState([]);
+  const [currentTab, setCurrentTab] = useState("bought");
+  const [boughtEBooks, setBoughtEBooks] = useState([]);
   const [rentedEBooks, setRentedEBooks] = useState([]);
   const [exchangedBooks, setExchangedBooks] = useState([]);
 
@@ -39,6 +40,12 @@ const MyEBooks = () => {
     },
   };
   useEffect(() => {
+    axios.get("http://localhost:90/bought_ebooks/get", config).then((res) => {
+      console.log("boughtEBooks");
+      console.log(res.data);
+      setBoughtEBooks(res.data.data);
+      console.log(boughtEBooks);
+    });
     axios.get("http://localhost:90/rented_ebooks/get", config).then((res) => {
       console.log("rentedEBooks");
       console.log(res.data);
@@ -52,9 +59,9 @@ const MyEBooks = () => {
       <div className="tabs">
         <div
           className={`tabs__tab ${
-            currentTab === "listed" && "tabs__tab--open"
+            currentTab === "bought" && "tabs__tab--open"
           }`}
-          onClick={() => setCurrentTab("listed")}
+          onClick={() => setCurrentTab("bought")}
         >
           Bought EBooks
         </div>
@@ -63,14 +70,14 @@ const MyEBooks = () => {
             currentTab === "rented" && "tabs__tab--open"
           }`}
           onClick={() => setCurrentTab("rented")}
-          data-test="rented-ebooks-btn"
+          data-test="rented-books-btn"
         >
           Rented EBooks
         </div>
       </div>
       <div>
-        {/* {currentTab === "listed" &&
-          listedBooks.map((book) => <BookCard book={book} />)} */}
+        {currentTab === "bought" &&
+          boughtEBooks.map((book) => <EbookCard book={book} />)}
         {currentTab === "rented" &&
           rentedEBooks.map((book) => <RentedEBook book={book} />)}
       </div>

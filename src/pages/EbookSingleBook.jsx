@@ -18,16 +18,17 @@ import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { Worker } from "@react-pdf-viewer/core";
-import Checkout from "../components/proceed_to_checkout/Checkout";
-import EbookCheckout from "../components/proceed_to_checkout/EbookCheckout";
 
 import { toolbarPlugin } from "@react-pdf-viewer/toolbar";
+import { SpecialZoomLevel } from "@react-pdf-viewer/core";
 import { ToolbarSlot, TransformToolbarSlot } from "@react-pdf-viewer/toolbar";
 
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/toolbar/lib/styles/index.css";
 import RentEBook from "../components/rent_ebook/RentEBook";
 
+import Checkout from "../components/proceed_to_checkout/Checkout";
+import EbookCheckout from "../components/proceed_to_checkout/EbookCheckout";
 // interface RemovePartsDefaultToolbarExampleProps {
 //   fileUrl: string;
 // }
@@ -241,6 +242,7 @@ const EbookSingleBook = ({ book, fileUrl }) => {
                         {/* <Toolbar>{renderDefaultToolbar(transform)}</Toolbar> */}
                         <Viewer
                           fileUrl={`http://localhost:90/${e_book}`}
+                          defaultScale={SpecialZoomLevel.PageFit}
                           // plugins={[defaultLayoutPluginInstance]}
                           plugins={[toolbarPluginInstance]}
                         />
@@ -281,7 +283,7 @@ const EbookSingleBook = ({ book, fileUrl }) => {
                 <button
                   className="request-btn btn-rent m-2"
                   onClick={handleOpenRent}
-                  data-test="rent-ebook-btn"
+                  data-test="rent-btn"
                 >
                   Rent <FaChevronCircleRight className="ms-1 fs-5" />
                 </button>
