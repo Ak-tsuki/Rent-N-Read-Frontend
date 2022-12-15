@@ -26,7 +26,6 @@ const EBookRentRequest = () => {
   const [currentTab, setCurrentTab] = useState("pending");
   const [pending, setPending] = useState([]);
   const [requestList, setRequestList] = useState([]);
-  
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -38,25 +37,19 @@ const EBookRentRequest = () => {
     },
   };
   useEffect(() => {
-    axios.get("http://localhost:90/rentEbook/get", config).then((res) => {
-      console.log(res.data);
-      setPending(res.data.data);
-      console.log(pending);
-    });
+    axios
+      .get("http://localhost:90/rentEbook/getHistory", config)
+      .then((res) => {
+        console.log(res.data);
+        setRequestList(res.data.data);
+        console.log(requestList);
+      });
   }, []);
-  useEffect(() => {
-    axios.get("http://localhost:90/rentEbook/getHistory", config).then((res) => {
-      console.log(res.data);
-      setRequestList(res.data.data);
-      console.log(requestList);
-    });
-  }, []);
-
 
   return (
     <div className="mybooks-container">
       <div className="tabs">
-        <div
+        {/* <div
           className={`tabs__tab ${
             currentTab === "pending" && "tabs__tab--open"
           }`}
@@ -73,20 +66,13 @@ const EBookRentRequest = () => {
             {" "}
             ({pending.length})
           </span>
-        </div>
-        <div
-          className={`tabs__tab ${
-            currentTab === "all_request" && "tabs__tab--open"
-          }`}
-          onClick={() => setCurrentTab("all_request")}
-        >
-          Requests History
-        </div>
+        </div> */}
+        <div className={`tabs__tab tabs__tab--open`}>Requests History</div>
       </div>
       <div>
-        {currentTab === "all_request"
-          ? requestList.map((book) => <PendingCardAdmin book={book} />)
-          : pending.map((book) => <PendingCardAdmin book={book} />)}
+        {requestList.map((book) => (
+          <PendingCardAdmin book={book} />
+        ))}
       </div>
     </div>
   );

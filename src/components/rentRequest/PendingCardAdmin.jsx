@@ -22,81 +22,13 @@ const PendingCardAdmin = ({ book }) => {
     userId,
     payment_status,
     end_date,
+    total_price
   } = book;
+
   const endDate = moment(end_date).format("MMMM Do YYYY");
   const currentDate = moment(Date.createdAt).format("MMMM Do YYYY");
   console.log(currentDate);
   console.log(endDate);
-
-  const config = {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("token"),
-    },
-  };
-
-  const approveRequest = (id, e) => {
-    e.preventDefault();
-    const data = {
-      id: id,
-    };
-    axios
-      .put("http://localhost:90/rentEbook/approve", data, config)
-      .then((response) => {
-        console.log(response.data.msg);
-        toast.success(
-          "Approved Successfully",
-          { toastId: "Approve success" },
-          setTimeout(() => {
-            window.location.reload();
-          }, 1500)
-        );
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-  const rejectrequest = (id, e) => {
-    e.preventDefault();
-    const data = {
-      id: id,
-    };
-    axios
-      .put("http://localhost:90/rentEbook/reject", data, config)
-      .then((response) => {
-        console.log(response.data.msg);
-        toast.warn(
-          "Rejected Successfully",
-          { toastId: "Reject success" },
-          setTimeout(() => {
-            window.location.reload();
-          }, 1500)
-        );
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-  const returnBook = (id, e) => {
-    e.preventDefault();
-    const data = {
-      id: id,
-    };
-    axios
-      .put("http://localhost:90/rentEbook/returnBook", data, config)
-      .then((response) => {
-        console.log(response.data.msg);
-        toast.success(
-          "Returned Successfully",
-          { toastId: "Returned success" },
-          setTimeout(() => {
-            window.location.reload();
-          }, 1500)
-        );
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
 
   return (
     <div className="book-cards">
@@ -127,8 +59,8 @@ const PendingCardAdmin = ({ book }) => {
           Status:
           <span
             className={`book-details__desc  ${
-              (rent_status === "Pending" && "text-warning") ||
               (rent_status === "Approved" && "text-success") ||
+              (rent_status === "Reading" && "text-success") ||
               (rent_status === "Rejected" && "text-danger")
             }`}
           >
@@ -149,56 +81,12 @@ const PendingCardAdmin = ({ book }) => {
             {payment_status}
           </span>{" "}
         </p>
-        {rent_status === "Pending" ? (
-          <div>
-            <button
-              className="request-btn btn-accept m-2"
-              onClick={(e) => {
-                approveRequest(book._id, e);
-              }}
-              data-test="btn-accept"
-            >
-              Accept It <FiSend className="ms-1 fs-5" />
-            </button>
-            <button
-              className="reject_btn btn-reject m-2"
-              onClick={(e) => {
-                rejectrequest(book._id, e);
-              }}
-              data-test="btn-reject"
-            >
-              Reject It <TiCancel className="ms-1 fs-4" />
-            </button>
-          </div>
-        ) : (
-          <div></div>
-        )}
-        <div>
-          {rent_status === "Pending" ||
-          payment_status === "Pending" ||
-          currentDate !== endDate ? (
-            <div>
-              <button
-                className="btn-returns request-btn m-2 disabled"
-                data-test="return-btn"
-              >
-                Books Returned <GiReturnArrow className="ms-1 fs-5" />
-              </button>
-            </div>
-          ) : (
-            <div>
-              <button
-                className="btn-return request-btn m-2"
-                onClick={(e) => {
-                  returnBook(book._id, e);
-                }}
-                data-test="return-btn"
-              >
-                Book Returned <GiReturnArrow className="ms-1 fs-5" />
-              </button>
-            </div>
-          )}
-        </div>
+        <p className="book-details__cost">
+          Total Price:{" "}
+          <span className="book-details__cost--amount">
+            Rs {total_price}
+          </span>
+        </p>
       </div>
     </div>
   );
