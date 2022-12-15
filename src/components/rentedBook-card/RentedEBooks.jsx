@@ -37,18 +37,8 @@ const RentedEBook = ({ book }) => {
   const [see, setSee] = React.useState(false);
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
-  //   const toolbarPluginInstance = toolbarPlugin();
-  //     const { renderDefaultToolbar, Toolbar } = toolbarPluginInstance;
-
-  //     const transform = TransformToolbarSlot = (slot= ToolbarSlot) => ({
-  //         ...slot,
-  //         Download: () => <></>,
-  //         DownloadMenuItem: () => <></>,
-  //         EnterFullScreen: () => <></>,
-  //         EnterFullScreenMenuItem: () => <></>,
-  //         SwitchTheme: () => <></>,
-  //         SwitchThemeMenuItem: () => <></>,
-  //     });
+  const toolbarPluginInstance = toolbarPlugin();
+  const { renderDefaultToolbar, Toolbar } = toolbarPluginInstance;
 
   const {
     _id,
@@ -222,7 +212,7 @@ const RentedEBook = ({ book }) => {
                     <Viewer
                       fileUrl={`http://localhost:90/${ebookId.e_book}`}
                       defaultScale={SpecialZoomLevel.PageFit}
-                      plugins={[defaultLayoutPluginInstance]}
+                      plugins={[toolbarPluginInstance]}
                     />
                   </Worker>
                 </>
