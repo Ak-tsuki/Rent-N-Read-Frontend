@@ -1,32 +1,39 @@
 import * as React from "react";
 import "./eBookCard.scss";
-import { FaTrash, FaFilePdf } from "react-icons/fa";
-import { BsCashCoin } from "react-icons/bs";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import UpdateBook from "../update_book/UpdateBook";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
-import { Typography } from "@mui/material";
-import { ImCross } from "react-icons/im";
-import { BsCheckLg } from "react-icons/bs";
+import { FaDownload } from "react-icons/fa";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+
+import { Viewer } from "@react-pdf-viewer/core";
+import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+import { Worker } from "@react-pdf-viewer/core";
+
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/toolbar/lib/styles/index.css";
 
 const EbookCard = ({ book }) => {
+  //   const [updateOpen, setUpdateOpen] = useState(false);
   const [view, setView] = React.useState(false);
   const handleOpen = () => setView(true);
   const handleClose = () => setView(false);
-  //   const handleUpdateOpen = () => setUpdateOpen(true);
-  //   const handleUpdateClose = () => setUpdateOpen(false);
+
+  const [viewPdf, setViewPdf] = useState("null");
+  const defaultLayoutPluginInstance = defaultLayoutPlugin();
+
   const { _id, ebookId, rent_status, payment_status, total_price } = book;
-  const style = {
+  const style1 = {
     position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "70%",
+    width: "90%",
+    height: "90vh",
     bgcolor: "background.paper",
-    borderRadius: "10px",
+    border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
@@ -76,14 +83,38 @@ const EbookCard = ({ book }) => {
               Rs {ebookId.price}
             </span>
           </p>
-          {/* <button
-            className="btn-download m-2"
-            // onClick={handleOpen}
-            data-test="checkout-btn"
+          <button
+            className="btn-download  m-2"
+            onClick={handleOpen}
+            data-test="rent-btn"
           >
-            Download E-book <FaFilePdf className="ms-1 fs-5" />
-          </button> */}
+            Download Pdf
+            <FaDownload className="ms-1 fs-5" />
+          </button>
         </div>
+        <Modal
+          open={view}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+
+          // onSubmit={handlePdfFileSubmit}
+        >
+          <div className="pdf-container">
+            <Box sx={style1}>
+              {viewPdf && (
+                <>
+                  <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.0.279/build/pdf.worker.min.js">
+                    <Viewer
+                      fileUrl={`http://localhost:90/${ebookId.e_book}`}
+                      plugins={[defaultLayoutPluginInstance]}
+                    />
+                  </Worker>
+                </>
+              )}
+            </Box>
+          </div>
+        </Modal>
       </div>
     </>
   );
