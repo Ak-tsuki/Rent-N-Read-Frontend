@@ -63,7 +63,7 @@ const DashboardNav = ({ open }) => {
         <BsFillFileEarmarkPdfFill className="dash-nav__link--icon" />
         E-books
       </Link>
-      <Link className="dash-nav__link">
+      <Link className="dash-nav__link" to="/dashboard/myaudiobooks">
         {" "}
         <GiSpeaker className="dash-nav__link--icon" />
         Audio Books

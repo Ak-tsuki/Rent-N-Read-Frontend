@@ -19,6 +19,7 @@ import SingleAudioBook from "../singleaudiobook/SingleAudioBook";
 import EbookSingleBook from "../../pages/EbookSingleBook";
 import EBookRentRequest from "../dashboard-admin/EBookRentRequest";
 import MyEBooks from "../dashboard/MyEBook";
+import MyAudioBooks from "../dashboard/myaudiobook";
 
 const Body = () => {
   return (
@@ -46,6 +47,7 @@ const Body = () => {
           <Route path="exchangerequest" element={<MyExchangeRequest />} />
           <Route path="messages" element={<Messenger />} />
           <Route path="myebooks" element={<MyEBooks />} />
+          <Route path="myaudiobooks" element={<MyAudioBooks />} />
         </Route>
         <Route path="/dashboard_admin" element={<DashboardAdmin />}>
           <Route path="" element={<DashboardHome />} />
