@@ -12,6 +12,7 @@ import Modal from "@mui/material/Modal";
 import moment from "moment";
 import ReactAudioPlayer from "react-audio-player";
 
+
 const AudioBookCard = ({ book }) => {
   const {
     bought_date,
@@ -68,6 +69,21 @@ const AudioBookCard = ({ book }) => {
       .catch((e) => {
         console.log(e);
       });
+  };
+
+  const onButtonClick = () => {
+    
+    fetch(`http://localhost:90/${audiobookId.audio_book}`).then((response) => {
+      response.blob().then((blob) => {
+        
+        const fileURL = window.URL.createObjectURL(blob);
+        
+        let alink = document.createElement("a");
+        alink.href = fileURL;
+        alink.download = audiobookId.audio_book;
+        alink.click();
+      });
+    });
   };
 
   
@@ -152,15 +168,15 @@ const AudioBookCard = ({ book }) => {
                       />
                     }
                   </p>
-          {/* <div className="book-details__update">
+            <div className="book-details__update">
             <button
               className="book-details__update--btn"
-            //   onClick={handleUpdateOpen}
+              onClick={onButtonClick}
               data-test="update-details-btn"
             >
               Download <FaCloudDownloadAlt />
             </button>
-          </div> */}
+          </div>
         </div>
         </div>
     </>
