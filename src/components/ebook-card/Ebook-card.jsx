@@ -3,6 +3,7 @@ import "./eBookCard.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FaDownload } from "react-icons/fa";
+import { AiFillEye } from "react-icons/ai";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 
@@ -14,6 +15,7 @@ import { Worker } from "@react-pdf-viewer/core";
 
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/toolbar/lib/styles/index.css";
+import { getFilePlugin } from "@react-pdf-viewer/get-file";
 
 const EbookCard = ({ book }) => {
   //   const [updateOpen, setUpdateOpen] = useState(false);
@@ -36,6 +38,21 @@ const EbookCard = ({ book }) => {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
+  };
+
+  const onButtonClick = () => {
+    // using Java Script method to get PDF file
+    fetch(`http://localhost:90/${ebookId.e_book}`).then((response) => {
+      response.blob().then((blob) => {
+        // Creating new object of PDF file
+        const fileURL = window.URL.createObjectURL(blob);
+        // Setting various property values
+        let alink = document.createElement("a");
+        alink.href = fileURL;
+        alink.download = ebookId.e_book;
+        alink.click();
+      });
+    });
   };
 
   const config = {
@@ -85,11 +102,19 @@ const EbookCard = ({ book }) => {
           </p>
           <button
             className="btn-download  m-2"
-            onClick={handleOpen}
+            onClick={onButtonClick}
             data-test="rent-btn"
           >
             Download Pdf
             <FaDownload className="ms-1 fs-5" />
+          </button>
+          <button
+            className="btn-view  m-2"
+            onClick={handleOpen}
+            data-test="rent-btn"
+          >
+            View Pdf
+            <AiFillEye className="ms-1 fs-5" />
           </button>
         </div>
         <Modal

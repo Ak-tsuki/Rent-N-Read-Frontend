@@ -43,6 +43,18 @@
   transition: all 0.5s;
 }
 
+.btn-view {
+  border: none;
+  background-color: rgb(120, 116, 116);
+  color: #ffff;
+  border-radius: 10px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
 .book-details {
   flex: 1;
   &__title {
