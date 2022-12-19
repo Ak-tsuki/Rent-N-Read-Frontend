@@ -151,25 +151,17 @@ const SingleBook = () => {
       .then((res) => {
         console.log(res);
         if (res.status === 201) {
-          toast.success(
-            res.data.msg,
-            {
-              position: "top-right",
-              autoClose: 2000,
-            },
-            { toastId: "new conversation" }
-          );
+          toast.success(res.data.msg, {
+            position: "top-right",
+            autoClose: 2000,
+          });
 
           setTimeout(() => window.location.replace("/wishlist"), 2000);
         } else {
-          toast.error(
-            res.data.msg,
-            {
-              position: "top-right",
-              autoClose: 2000,
-            },
-            { toastId: "new conversation" }
-          );
+          toast.error(res.data.msg, {
+            position: "top-right",
+            autoClose: 2000,
+          });
         }
       })
       .catch((e) => {
