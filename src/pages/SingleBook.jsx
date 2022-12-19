@@ -156,7 +156,7 @@ const SingleBook = () => {
             autoClose: 2000,
           });
 
-          setTimeout(() => window.location.replace("/wishlist"), 2000);
+          setTimeout(() => window.location.replace("/wishlist"), 1000);
         } else {
           toast.error(res.data.msg, {
             position: "top-right",
