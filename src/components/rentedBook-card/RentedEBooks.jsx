@@ -187,15 +187,24 @@ const RentedEBook = ({ book }) => {
           )}
         </div>
         <div>
-          {rent_status === "Reading" || payment_status === "Paid" ? (
+          {rent_status !== "Reading" || payment_status !== "Paid" ? (
+            <></>
+          ) : (
             <div>
               <button class="btn-accept request-btn m-2" onClick={handleOpen1}>
                 Read Book
                 <FaFilePdf size={20} />
               </button>
             </div>
-          ) : (
+          )}
+        </div>
+        <div>
+          {moment(Date.createdAt).format("MMMM Do YYYY") >
+          moment(end_date).format("MMMM Do YYYY") ? (
             <></>
+          ) : (
+            <>
+            </>
           )}
         </div>
         <Modal

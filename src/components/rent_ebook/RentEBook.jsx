@@ -89,7 +89,7 @@ const RentEBook = ({ _id, bookOwner, name, rent_cost }) => {
       .then((res) => {
         if (res.status === 201) {
           console.log("EBook Rent Request Sent Successfully");
-          // window.location.replace("/dashboard");
+          window.location.replace("/dashboard/myebooks");
           toast.success(
             "EBook Rent Request Sent Successfully",
             setTimeout(() => {}, 1500),
