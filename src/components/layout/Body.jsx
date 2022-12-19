@@ -20,6 +20,7 @@ import EbookSingleBook from "../../pages/EbookSingleBook";
 import EBookRentRequest from "../dashboard-admin/EBookRentRequest";
 import MyEBooks from "../dashboard/MyEBook";
 import MyAudioBooks from "../dashboard/myaudiobook";
+import Wishlist from "../../pages/Wishlist";
 
 const Body = () => {
   return (
@@ -56,6 +57,7 @@ const Body = () => {
           <Route path="ebook" element={<EBookUpload />} />
           <Route path="request" element={<EBookRentRequest />} />
         </Route>
+        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
     </>
   );
