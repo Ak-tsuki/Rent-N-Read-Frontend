@@ -78,8 +78,8 @@ const SingleBook = () => {
     axios
       .get("http://localhost:90/book/getauthor/" + authormain)
       .then((res) => {
-          console.log(res.data);
-          setListedBooks(res.data.data);
+        console.log(res.data);
+        setListedBooks(res.data.data);
       })
       .catch((e) => {
         console.log(e);
@@ -94,10 +94,14 @@ const SingleBook = () => {
     e.preventDefault();
     setReceiverId();
     if (localStorage.getItem("username") === receiverId) {
-      toast.warning("You cannot start a conversation with yourself.", {
-        position: "top-center",
-        autoClose: 2000,
-      }, { toastId: "new conversation" });
+      toast.warning(
+        "You cannot start a conversation with yourself.",
+        {
+          position: "top-center",
+          autoClose: 2000,
+        },
+        { toastId: "new conversation" }
+      );
       return;
     }
     if (receiverId !== "") {
@@ -110,28 +114,67 @@ const SingleBook = () => {
         .then((res) => {
           console.log(res);
           if (res.status === 201) {
-            toast.success(res.data.msg,
-            //   {
-            //   position: "top-left",
-            //   autoClose: 4000,
-            // },
-            { toastId: "new conversation" });
-            // setTimeout(
-            //   () => window.location.replace("/dashboard/messages"),
-            //   4000
-            // );
+            toast.success(
+              res.data.msg,
+              {
+                position: "top-left",
+                autoClose: 4000,
+              },
+              { toastId: "new conversation" }
+            );
+            setTimeout(
+              () => window.location.replace("/dashboard/messages"),
+              4000
+            );
           }
           if (res.status === 200) {
-            toast.error(res.data.msg + " . Check your messages", {
-              position: "top-center",
-              autoClose: 4000,
-            }, { toastId: "new conversation" });
+            toast.error(
+              res.data.msg + " . Check your messages",
+              {
+                position: "top-center",
+                autoClose: 4000,
+              },
+              { toastId: "new conversation" }
+            );
           }
         })
         .catch((e) => {
           console.log(e);
         });
     }
+  };
+
+  const addToWishlist = () => {
+    const data = { bookId: book_id };
+    axios
+      .post("http://localhost:90/wishlist/insert/", data, config)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 201) {
+          toast.success(
+            res.data.msg,
+            {
+              position: "top-right",
+              autoClose: 2000,
+            },
+            { toastId: "new conversation" }
+          );
+
+          setTimeout(() => window.location.replace("/wishlist"), 2000);
+        } else {
+          toast.error(
+            res.data.msg,
+            {
+              position: "top-right",
+              autoClose: 2000,
+            },
+            { toastId: "new conversation" }
+          );
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
   return (
     <div className="Book-container">
@@ -143,7 +186,7 @@ const SingleBook = () => {
               className="img-book"
               alt="..."
             />
-            <button className="wishlist-btn my-4">
+            <button className="wishlist-btn my-4" onClick={addToWishlist}>
               Add to wishlist <BsBookmarkPlusFill className="ms-1 fs-4" />
             </button>
           </div>
@@ -196,8 +239,11 @@ const SingleBook = () => {
           </div>
           <div className="book-detail chat mt-4">
             <h1 className="chat__heading">Contact Book Owner ?</h1>
-            <button className="chat__btn" onClick={sendMessage} 
-            data-test="conversation">
+            <button
+              className="chat__btn"
+              onClick={sendMessage}
+              data-test="conversation"
+            >
               Start a conversation <BsFillChatLeftDotsFill />
             </button>
           </div>
