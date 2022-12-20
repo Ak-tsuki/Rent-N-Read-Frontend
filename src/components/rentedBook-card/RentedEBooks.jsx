@@ -40,16 +40,64 @@ const RentedEBook = ({ book }) => {
   const toolbarPluginInstance = toolbarPlugin();
   const { renderDefaultToolbar, Toolbar } = toolbarPluginInstance;
 
+  const [returnCheck, setReturnCheck] = useState(false);
+
   const {
     _id,
-    start_date,
-    no_of_days,
     ebookId,
-    rent_status,
-    end_date,
-    payment_status,
-    total_price,
   } = book;
+
+  const [start_date, setStartDate] = useState("");
+  const [no_of_days, setNoOfDays] = useState("");
+  // const [ebookId, setEBookId] = useState("");
+  const [rent_status, setRentStatus] = useState("");
+  const [end_date, setEndDate] = useState("");
+  const [payment_status, setPaymentStatus] = useState("");
+  const [total_price, setTotalPrice] = useState("");
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+
+    axios
+      .get("http://localhost:90/rented_ebooks/getone/" + _id, config)
+      .then((res) => {
+        console.log(res.data);
+        setStartDate(res.data.data.start_date);
+        setNoOfDays(res.data.data.no_of_days);
+        // setEBookId(res.data.data.ebookId);
+        setRentStatus(res.data.data.rent_status);
+        setEndDate(res.data.data.end_date);
+        setPaymentStatus(res.data.data.payment_status);
+        setTotalPrice(res.data.data.total_price);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    console.log(moment(end_date).format("MMMM Do YYYY"));
+    const currentDate = moment(Date.createdAt).format("MMMM Do YYYY");
+    const deadLine = moment(end_date).format("MMMM Do YYYY");
+
+    console.log(moment(Date.createdAt).isSameOrAfter(end_date));
+
+    if (moment(Date.createdAt).isSameOrAfter(end_date) == true) {
+      axios
+        .put("http://localhost:90/rentEbook/returnBook/" + _id)
+        .then((res) => {
+          console.log(res);
+          if (res.status === 201) {
+            setReturnCheck(true)
+            console.log("Returned Successful");
+          } else {
+            console.log("Failed");
+          }
+        });
+    }
+  }, [end_date, returnCheck]);
 
   const myKey = {
     publicTestKey: "test_public_key_b4f2f58210d24adeb3a09f18004822b6",
@@ -196,15 +244,6 @@ const RentedEBook = ({ book }) => {
                 <FaFilePdf size={20} />
               </button>
             </div>
-          )}
-        </div>
-        <div>
-          {moment(Date.createdAt).format("MMMM Do YYYY") >
-          moment(end_date).format("MMMM Do YYYY") ? (
-            <></>
-          ) : (
-            <>
-            </>
           )}
         </div>
         <Modal
