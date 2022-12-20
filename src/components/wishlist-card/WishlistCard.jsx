@@ -37,7 +37,8 @@ const WishlistCard = ({ book }) => {
       .delete("http://localhost:90/wishlist/delete/" + _id, config)
       .then((res) => {
         if (res.status === 201) {
-          toast.success(res.data.msg);
+          toast.success(res.data.msg,
+            {toastId:"delete-wishlist"});
 
           setTimeout(() => window.location.reload(), 1000);
         } else {

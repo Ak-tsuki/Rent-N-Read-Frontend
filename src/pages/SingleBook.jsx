@@ -158,7 +158,9 @@ const SingleBook = () => {
 
           setTimeout(() => window.location.replace("/wishlist"), 1000);
         } else {
-          toast.error(res.data.msg, {
+          toast.error(res.data.msg,
+            { toastId: "Added-to-wishlist" },
+             {
             position: "top-right",
             autoClose: 2000,
           });
@@ -178,7 +180,7 @@ const SingleBook = () => {
               className="img-book"
               alt="..."
             />
-            <button className="wishlist-btn my-4" onClick={addToWishlist}>
+            <button className="wishlist-btn my-4" onClick={addToWishlist} data-test="wishlist_btn">
               Add to wishlist <BsBookmarkPlusFill className="ms-1 fs-4" />
             </button>
           </div>

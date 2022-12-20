@@ -88,7 +88,7 @@ const SingleAudioBook = () => {
               className="img-book"
               alt="..."
             />
-            <button className="wishlist-btn my-4">
+            <button className="wishlist-btn my-4" data-test="wishlist_btn">
               Add to wishlist <BsBookmarkPlusFill className="ms-1 fs-4" />
             </button>
           </div>

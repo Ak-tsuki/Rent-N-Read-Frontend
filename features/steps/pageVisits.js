@@ -172,6 +172,28 @@ Given("I am on the {string} page", async function (string) {
 
     //..........................x.......................x.......................x....................x...........................x.......x
 
+
+    // add wishlist by user.......................x......................x.........................x...........x
+    
+    case "wishlist":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZTI0YzE2N2RiNTY1MzA4MDU0YmUiLCJpYXQiOjE2NzAzMTUwODR9.Es56s1-At5_I7MKPrfqunjIJY40f-9NmYtWhI7GcuZY"
+        );
+      });
+      return await this.page.goto("http://localhost:3000/singlebook/63905f81e895bc8961b0a101/Collen%20Hoover");
+    case "delete-wishlist":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZTI0YzE2N2RiNTY1MzA4MDU0YmUiLCJpYXQiOjE2NzAzMTUwODR9.Es56s1-At5_I7MKPrfqunjIJY40f-9NmYtWhI7GcuZY"
+        );
+      });
+      return await this.page.goto("http://localhost:3000/wishlist");
+      
     default:
       throw new Error(`${string} is not a supported page name`);
   }
