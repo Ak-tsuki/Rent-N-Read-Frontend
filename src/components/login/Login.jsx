@@ -15,6 +15,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
+  // google login
+  const googleAuth = () => {
+    window.open("http://localhost:90/google/callback", "_self");
+  };
+
   const login = (e) => {
     e.preventDefault();
 
@@ -121,7 +126,7 @@ const Login = () => {
             Sign In
           </button>
         </form>
-        <button className="login__google">
+        <button className="login__google" onClick={googleAuth}>
           <AiFillGoogleCircle className="login__google--icon" size={30} />
           Sign in with google
         </button>
