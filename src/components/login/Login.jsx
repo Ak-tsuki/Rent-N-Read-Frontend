@@ -17,7 +17,10 @@ const Login = () => {
 
   // google login
   const googleAuth = () => {
-    window.open("http://localhost:90/google/callback", "_self");
+    window.open(
+      "http://localhost:90/thirdpartyRouter/google/callback",
+      "_self"
+    );
   };
 
   const login = (e) => {
