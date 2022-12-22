@@ -81,9 +81,13 @@ const PendingCard = ({ book }) => {
     const data = {
       id: id,
     };
+    const data1 = {
+      id: bookId,
+    };
     axios
       .put("http://localhost:90/rent/returnBook", data, config)
       .then((response) => {
+        axios.put("http://localhost:90/book/isAvailable", data1, config);
         console.log(response.data.msg);
         toast.success(
           "Returned Successfully",

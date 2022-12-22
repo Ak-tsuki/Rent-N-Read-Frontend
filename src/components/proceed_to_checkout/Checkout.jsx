@@ -56,9 +56,17 @@ const Checkout = ({ bookObject }) => {
             const data2 = {
               id: _id,
             };
+            const data3 = {
+              id: bookId,
+            };
             axios
               .put("http://localhost:90/rent/paymentPaid", data2, config)
               .then((response) => {
+                axios.put(
+                  "http://localhost:90/book/isNotAvailable",
+                  data3,
+                  config
+                );
                 console.log(response.data.msg);
                 toast.success(
                   "Payment Successfully",
