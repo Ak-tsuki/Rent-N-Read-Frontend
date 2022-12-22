@@ -62,7 +62,7 @@ const categories = [
   "War",
   "Biography",
   "Essays",
-  "Novel"
+  "Novel",
 ];
 
 function getStyles(name, categoryName, theme) {
@@ -79,7 +79,7 @@ const AddEBook = () => {
   const [category, setCategory] = useState([]);
   const [name, setName] = useState("");
   const [richDesc, setRichDesc] = useState("");
-  //   const [desc, setDesc] = useState("");
+  const [desc, setDesc] = useState("");
   const [author, setAuthor] = useState("");
   const [rent_cost_perday, setRent_cost_Perday] = useState("");
   const [price, setPrice] = useState("");
@@ -98,7 +98,7 @@ const AddEBook = () => {
       richDesc === "" ||
       author === "" ||
       bookPic === "" ||
-      //   desc === "" ||
+      desc === "" ||
       rent_cost_perday === "" ||
       price === "" ||
       pdfFile === ""
@@ -115,7 +115,7 @@ const AddEBook = () => {
     data.append("category", category);
     data.append("name", name);
     data.append("rich_desc", richDesc);
-    // data.append("desc", desc);
+    data.append("desc", desc);
     data.append("author", author);
     data.append("rent_cost_perday", rent_cost_perday);
     data.append("price", price);
@@ -212,7 +212,7 @@ const AddEBook = () => {
               setAuthor(e.target.value);
             }}
           />
-          {/* <TextField
+          <TextField
             required
             multiline
             rows={2}
@@ -222,7 +222,7 @@ const AddEBook = () => {
             onChange={(e) => {
               setDesc(e.target.value);
             }}
-          /> */}
+          />
           <TextField
             required
             multiline
