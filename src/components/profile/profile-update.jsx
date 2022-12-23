@@ -157,7 +157,7 @@ const UpdateProfile = () => {
               setFirstName(e.target.value);
             }}
             defaultValue={first_name}
-            data-test="name"
+            data-test="first_name"
           />
           <TextField
             required
@@ -169,7 +169,7 @@ const UpdateProfile = () => {
               setLastName(e.target.value);
             }}
             defaultValue={last_name}
-            data-test="name"
+            data-test="last_name"
           />
           {/* <TextField
             required
@@ -195,6 +195,7 @@ const UpdateProfile = () => {
                 setAddress(e.target.value);
             }}
             defaultValue={address}
+            data-test="address"
           />
           <FormControl sx={{ pb: 2 }} required>
             <InputLabel id="demo-multiple-name-label">Gender</InputLabel>
@@ -244,6 +245,7 @@ const UpdateProfile = () => {
               onChange={(e) => {
                 setContactNum(e.target.value);
               }}
+              data-test="contact_no"
             />
           </FormControl>
           {/* <FormControl fullWidth required>

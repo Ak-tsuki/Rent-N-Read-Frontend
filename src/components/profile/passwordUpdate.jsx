@@ -23,21 +23,18 @@ import { toast } from "react-toastify";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250,
-      },
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
     },
-  };
-
-
+  },
+};
 
 const UpdatePassword = () => {
-   const theme = useTheme();
+  const theme = useTheme();
   const [old_Password, setOldPassword] = useState("");
   const [new_Password, setNewPassword] = useState("");
-
 
   const updatePassword = (e) => {
     // e.perventDefault();
@@ -48,10 +45,7 @@ const UpdatePassword = () => {
     // console.log(author);
     // console.log(book_img);
     // console.log(categoryName);
-    if (
-        old_Password === ""||
-        new_Password === ""
-    ) {
+    if (old_Password === "" || new_Password === "") {
       toast.warn("Fill all Required Field", {
         toastId: "warning",
         position: "top-center",
@@ -65,9 +59,9 @@ const UpdatePassword = () => {
     // data.append("new_Password", new_Password);
     // console.log(data);
     const data = {
-        old_password: old_Password,
-        new_password: new_Password
-    }
+      old_password: old_Password,
+      new_password: new_Password,
+    };
 
     const config = {
       headers: {
@@ -79,10 +73,10 @@ const UpdatePassword = () => {
       .then((res) => {
         if (res.status === 201) {
           console.log("Password Updated Successfully");
-          console.log(res)
+          console.log(res);
           localStorage.clear();
           window.open("http://localhost:90/thirdpartyRouter/logout", "_self");
-        //   window.location.replace("/dashboard");
+          //   window.location.replace("/dashboard");
           toast.success("Password Updated Successfully", {
             toastId: "success",
             position: "top-center",
@@ -109,7 +103,7 @@ const UpdatePassword = () => {
 
   return (
     <div>
-        <div className="form-title row justify-content-center mb-2 p-2">
+      <div className="form-title row justify-content-center mb-2 p-2">
         <h2 className="text-center m-0">Update Your Password</h2>
       </div>
       <Box
@@ -131,9 +125,9 @@ const UpdatePassword = () => {
             width="100%"
             type="password"
             onChange={(e) => {
-            setOldPassword(e.target.value);
+              setOldPassword(e.target.value);
             }}
-            data-test="new-password"
+            data-test="old-password"
           />
           <TextField
             required
@@ -143,18 +137,17 @@ const UpdatePassword = () => {
             width="100%"
             type="password"
             onChange={(e) => {
-                setNewPassword(e.target.value);
+              setNewPassword(e.target.value);
             }}
-            
             data-test="new-password"
           />
-          
+
           <Button
             className="mt-2 fs-5 fw-bold bg-success"
             variant="contained"
             endIcon={<FaPenAlt className="fs-3" />}
             onClick={updatePassword}
-            data-test="update-profile-btn"
+            data-test="change-password-btn"
           >
             Update Password
           </Button>

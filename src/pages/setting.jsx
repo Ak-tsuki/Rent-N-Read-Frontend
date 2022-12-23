@@ -64,14 +64,12 @@ const Setting = () => {
             General profile settings <AiFillSetting />
             </h1>
                 <div className="profile-update row">
-                    <button className="btn-update-profile" onClick={handleUpdateProfileOpen}>
+                    <button className="btn-update-profile" onClick={handleUpdateProfileOpen} data-test="updateProfile-btn">
                         Update Profile  <CgProfile />
                     </button>
-                    <button className="btn-update-password" onClick={handleUpdatePasswordOpen}>
+                    <button className="btn-update-password" onClick={handleUpdatePasswordOpen} data-test="password-btn">
                         Update Password  <RiLockPasswordFill />
                     </button>
-
-
                 </div>
         </div>
         </>
