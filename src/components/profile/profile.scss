@@ -1,0 +1,34 @@
+.container{
+   
+    border-left: 2px solid #40c114;
+    border-bottom: 2px solid #40c114;
+    border-right: 2px solid #40c114;
+}
+.heading-profile{
+    text-align: center;
+    background-color: #ff636379;
+
+}
+.img{
+    
+    border-radius: 15%;
+    height: 50%;
+    width: 50%;
+    object-fit: contain;
+    margin-bottom: 16px;
+}
+.user_profilePicture{
+    // align-items: center;
+    padding: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    // align-items: center;
+}
+.user_details{
+    padding:15px;
+}
+.detail{
+    font-weight: 500;
+    font-size: 25px;
+}

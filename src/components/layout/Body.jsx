@@ -21,6 +21,8 @@ import EBookRentRequest from "../dashboard-admin/EBookRentRequest";
 import MyEBooks from "../dashboard/MyEBook";
 import MyAudioBooks from "../dashboard/myaudiobook";
 import Wishlist from "../../pages/Wishlist";
+import Setting from "../../pages/setting";
+import ProfilePage from "../profile/profilePage";
 
 const Body = () => {
   return (
@@ -49,6 +51,12 @@ const Body = () => {
           <Route path="messages" element={<Messenger />} />
           <Route path="myebooks" element={<MyEBooks />} />
           <Route path="myaudiobooks" element={<MyAudioBooks />} />
+          <Route path="setting" element={<Setting />} />
+          <Route path="Profilepage" element={<ProfilePage />} >
+            
+            
+            
+          </Route>
         </Route>
         <Route path="/dashboard_admin" element={<DashboardAdmin />}>
           <Route path="" element={<DashboardHome />} />

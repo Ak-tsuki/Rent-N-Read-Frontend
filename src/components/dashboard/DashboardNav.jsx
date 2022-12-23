@@ -7,6 +7,7 @@ import { GiOpenBook } from "react-icons/gi";
 import { BsFillFileEarmarkPdfFill } from "react-icons/bs";
 import { GiSpeaker } from "react-icons/gi";
 import { RiExchangeBoxFill, RiMessage2Fill } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
 import "./dashboard.scss";
 const DashboardNav = ({ open }) => {
   const [userDetails, setUserDetails] = useState("");
@@ -21,7 +22,7 @@ const DashboardNav = ({ open }) => {
       .get("http://localhost:90/user/get", config)
       .then((res) => {
         setUserDetails(res.data.data);
-        console.log(userDetails.username);
+        console.log(userDetails.first_name);
       })
       .catch((e) => {
         console.log(e);
@@ -32,15 +33,19 @@ const DashboardNav = ({ open }) => {
     <div className={`dash-nav ${open ? "dash-nav__open" : "dash-nav__close"} `}>
       <div className="dash-nav__profile">
         <img
+        // src={`http://localhost:90/${userDetails.profile_pic}`}
           src={
             userDetails.profile_pic
-              ? userDetails.profile_pic
+              ? `http://localhost:90/${userDetails.profile_pic}`
               : "https://www.pngitem.com/pimgs/m/421-4212341_default-avatar-svg-hd-png-download.png"
           }
           alt="profile_img"
           className="dash-nav__profile--img"
         />
-        <p className="dash-nav__profile--username">{userDetails.username}</p>
+        
+        <p className="dash-nav__profile--username">{userDetails.first_name} {userDetails.last_name}</p>
+        <Link className="dash-nav__profile--view" to="ProfilePage"><CgProfile />  View profile</Link>
+        
       </div>
       <Link className="dash-nav__link" to="/dashboard">
         {" "}
@@ -76,7 +81,7 @@ const DashboardNav = ({ open }) => {
         <RiMessage2Fill className="dash-nav__link--icon" />
         Messages
       </Link>
-      <Link className="dash-nav__link">
+      <Link className="dash-nav__link" to="/dashboard/setting">
         {" "}
         <ImCog className="dash-nav__link--icon" />
         Settings

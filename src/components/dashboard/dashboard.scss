@@ -57,6 +57,20 @@
       object-fit: cover;
       margin-bottom: 16px;
     }
+    &--view{
+      font-family: "Alata";
+      font-size: 15px;
+      text-decoration: none;
+      color: #000;
+      &:hover {
+        color: #ff6363;
+        transition: all 0.2s;
+        svg {
+          color: #ff6363;
+        }
+      }
+
+    }
     &--username {
       font-family: "Alata";
       font-size: 16px;

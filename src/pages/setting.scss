@@ -1,0 +1,67 @@
+.setting {
+    padding: 10px;
+  }
+.setting-heading {
+    margin-top: 30px;
+    font-size: 25px;
+    font-weight: 700;
+    font-family: Alata;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    svg {
+        color: #ff6363;
+        }
+        @media (max-width: 380px) {
+            font-size: 15px;
+            }
+    }
+.profile-update{
+    margin: 20px;
+
+    border-bottom: 3px solid #b2ab00;
+    border-top: 3px solid #b2ab00;
+    @media (max-width: 380px) {
+        font-size: 10px;
+        }
+}
+
+.btn-update-profile{
+    border: 3px  ;
+    padding: 20px;
+    background-color: linear-gradient(to right, rgba(255,0,0,1), rgba(255,0,0,0));
+    margin-top: 20px;
+    text-align: left;
+
+    font-size: 20px;
+    font-weight: 600;
+    svg {
+        color: #ff6363;
+        size: 50px;
+        }
+    @media (max-width: 380px) {
+        font-size: 15px;
+        }
+
+}
+
+.btn-update-password{
+    border: 3px  ;
+    padding: 20px;
+    background-color: linear-gradient(to right, #dadaae, rgba(255, 255, 255, 0));
+    text-align: left;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    svg {
+        color: #ff6363;
+        size: 50px;
+        }
+    @media (max-width: 380px) {
+        font-size: 15px;
+        }
+}
