@@ -10,8 +10,13 @@ const Header = () => {
     setOpenMenu((p) => !p);
   };
   const logout = () => {
-    localStorage.clear();
-    window.open("http://localhost:90/thirdpartyRouter/logout", "_self");
+    if (localStorage.getItem("googlelogin")) {
+      localStorage.clear();
+      window.open("http://localhost:90/thirdpartyRouter/logout", "_self");
+    } else {
+      localStorage.clear();
+      window.location.replace("/login");
+    }
   };
 
   return (

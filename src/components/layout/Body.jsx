@@ -25,12 +25,15 @@ import Setting from "../../pages/setting";
 import ProfilePage from "../profile/profilePage";
 import AdminProfile from "../admin-profile/AdminProfile";
 import AdminSettings from "../admin-profile/AdminSettings";
+import Loginsuccess from "../../pages/Loginsuccess";
 
 const Body = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/loginsuccess" element={<Loginsuccess />} />
+
         <Route path="/books" element={<Books />} />
         <Route
           path="/singlebook/:book_id/:authormain"

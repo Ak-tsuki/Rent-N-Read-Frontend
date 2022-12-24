@@ -42,32 +42,6 @@ const Home = () => {
       setAudioBooks(res.data.data);
       console.log(audioBooks);
     });
-
-    const getUser = () => {
-      fetch("http://localhost:90/thirdpartyRouter/login/sucess", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("authentication has been failed!");
-        })
-        .then((resObject) => {
-          console.log(resObject);
-          localStorage.setItem("userType", resObject.userType);
-          localStorage.setItem("token", resObject.token);
-          localStorage.setItem("username", resObject.username);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getUser();
   }, []);
 
   return (
