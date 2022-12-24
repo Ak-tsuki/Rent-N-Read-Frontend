@@ -58,17 +58,17 @@ const UpdatePassword = () => {
     axios
       .put("http://localhost:90/password/updateadmin", data, config)
       .then((res) => {
-        if (res.status === 201) {
+        if (res.status === 200) {
           console.log("Password Updated Successfully");
           console.log(res);
           localStorage.clear();
-          window.open("http://localhost:90/thirdpartyRouter/logout", "_self");
-          // window.location.replace("/login");
+
           toast.success("Password Updated Successfully", {
             toastId: "success",
             position: "top-center",
             autoClose: 4000,
           });
+          window.location.replace("/login");
         } else {
           console.log("Please Try Again! Something Went Wrong!!!", res);
           toast.error("Incorrect Current Password", {

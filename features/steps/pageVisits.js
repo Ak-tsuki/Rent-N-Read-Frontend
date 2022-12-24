@@ -221,7 +221,7 @@ Given("I am on the {string} page", async function (string) {
       );
 
     // Admin update  password =========================================
-    case "updatepassword":
+    case "setting":
       await this.page.evaluateOnNewDocument(() => {
         localStorage.clear();
         localStorage.setItem(
@@ -230,7 +230,7 @@ Given("I am on the {string} page", async function (string) {
         );
       });
       return await this.page.goto(
-        "  http://localhost:3000/dashboard_admin/changepassword"
+        "  http://localhost:3000/dashboard_admin/adminSetting"
       );
 
     default:
