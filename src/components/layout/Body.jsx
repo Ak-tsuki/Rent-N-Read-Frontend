@@ -23,6 +23,8 @@ import MyAudioBooks from "../dashboard/myaudiobook";
 import Wishlist from "../../pages/Wishlist";
 import Setting from "../../pages/setting";
 import ProfilePage from "../profile/profilePage";
+import AdminProfile from "../admin-profile/AdminProfile";
+import AdminSettings from "../admin-profile/AdminSettings";
 
 const Body = () => {
   return (
@@ -52,11 +54,7 @@ const Body = () => {
           <Route path="myebooks" element={<MyEBooks />} />
           <Route path="myaudiobooks" element={<MyAudioBooks />} />
           <Route path="setting" element={<Setting />} />
-          <Route path="Profilepage" element={<ProfilePage />} >
-            
-            
-            
-          </Route>
+          <Route path="Profilepage" element={<ProfilePage />}></Route>
         </Route>
         <Route path="/dashboard_admin" element={<DashboardAdmin />}>
           <Route path="" element={<DashboardHome />} />
@@ -64,6 +62,8 @@ const Body = () => {
           <Route path="audio_book" element={<AudioBookUpload />} />
           <Route path="ebook" element={<EBookUpload />} />
           <Route path="request" element={<EBookRentRequest />} />
+          <Route path="profile" element={<AdminProfile />} />
+          <Route path="adminSetting" element={<AdminSettings />} />
         </Route>
         <Route path="/wishlist" element={<Wishlist />} />
       </Routes>

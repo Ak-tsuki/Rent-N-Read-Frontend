@@ -1,0 +1,73 @@
+
+  
+  .update-btn{
+    background: #03770f;
+    padding: 5px 10px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-family: Alata;
+    border-radius: 13px;
+    color: #fff;
+    font-weight: 500;
+    border: none;
+    transition: all 0.2s;
+    &:hover {
+      background: #023b13;
+      transform: translateY(-2px);
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+        rgba(0, 0, 0, 0.05) 0px 5px 10px;
+    }
+  }
+    
+.head-text{
+    font-size: 3rem;
+    font-weight: 400;
+    color: rgb(6, 6, 6);
+}
+.outer-container{
+    min-height: 100vh;
+}
+.profile-container{
+    width: 100%;
+}
+.profile-card {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+   max-width: 900px;
+   align-items: center;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+
+.card-info{
+    max-width: 300px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+.profile-card img{
+    max-height: 350px;
+    border-radius: 12%;
+    object-fit: cover;
+    max-width: 300px;
+}
+.user-data{
+    display:block;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5px;
+    min-width: 280px;
+    max-width: 300px;
+    min-height: 30px;
+    padding: 6px;
+    background-color: rgb(247, 247, 247);
+    margin-top: 4px;
+    color: rgb(133, 133, 133);
+    font-size: 1rem;
+}
+@media (max-width:631px){
+    .profile-card{
+        justify-content: center;
+    }
+}

@@ -12,6 +12,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
+import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
 import MenuIcon from "@mui/icons-material/Menu";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
@@ -191,6 +192,42 @@ function DashboardAdmin(props) {
               <ListItemText
                 disableTypography
                 primary={"Inbox"}
+                sx={{
+                  fontFamily: "Alata",
+                }}
+              />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+
+        <Link to="/dashboard_admin/profile" className="admin-dashboard__nav">
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText
+                disableTypography
+                primary={"Profile"}
+                sx={{
+                  fontFamily: "Alata",
+                }}
+              />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+        <Link
+          to="/dashboard_admin/adminSetting"
+          className="admin-dashboard__nav"
+        >
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText
+                disableTypography
+                primary={"Settings"}
                 sx={{
                   fontFamily: "Alata",
                 }}

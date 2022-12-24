@@ -207,6 +207,32 @@ Given("I am on the {string} page", async function (string) {
       });
       return await this.page.goto("http://localhost:3000/dashboard/setting");
 
+    // Admin Profile =========================================
+    case "adminprofileupdate":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZjBkZjgxOGEyMTAzYTQ5ZmRhNDMiLCJpYXQiOjE2NzE4MDQzNDl9.mbpMg4ztqFgx1oX5JjPwfesgKWPIP0L5_B1po4XslDE"
+        );
+      });
+      return await this.page.goto(
+        "http://localhost:3000/dashboard_admin/profile"
+      );
+
+    // Admin update  password =========================================
+    case "updatepassword":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZjBkZjgxOGEyMTAzYTQ5ZmRhNDMiLCJpYXQiOjE2NzE4MDQzNDl9.mbpMg4ztqFgx1oX5JjPwfesgKWPIP0L5_B1po4XslDE"
+        );
+      });
+      return await this.page.goto(
+        "  http://localhost:3000/dashboard_admin/changepassword"
+      );
+
     default:
       throw new Error(`${string} is not a supported page name`);
   }
