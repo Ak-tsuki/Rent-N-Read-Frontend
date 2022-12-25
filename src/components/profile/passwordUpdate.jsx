@@ -74,9 +74,8 @@ const UpdatePassword = () => {
         if (res.status === 201) {
           console.log("Password Updated Successfully");
           console.log(res);
-          localStorage.clear();
-          window.open("http://localhost:90/thirdpartyRouter/logout", "_self");
-          //   window.location.replace("/dashboard");
+          localStorage.clear();         
+          window.location.replace("/login");
           toast.success("Password Updated Successfully", {
             toastId: "success",
             position: "top-center",

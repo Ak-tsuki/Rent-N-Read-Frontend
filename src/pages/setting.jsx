@@ -3,13 +3,17 @@ import { AiFillSetting } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { RiLockPasswordFill } from "react-icons/ri";
 import "./setting.scss";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import UpdateProfile from "../components/profile/profile-update";
 import UpdatePassword from "../components/profile/passwordUpdate";
 
 const Setting = () => {
+
+  const [userDetails, setUserDetails] = useState("");
+
   const [updateProfileOpen, setUpdateProfileOpen] = useState(false);
   const handleUpdateProfileOpen = () => setUpdateProfileOpen(true);
   const handleUpdateProfileClose = () => setUpdateProfileOpen(false);
@@ -22,7 +26,7 @@ const Setting = () => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "70%",
+    width: "50%",
     bgcolor: "background.paper",
     borderRadius: "10px",
     boxShadow: 24,
@@ -34,6 +38,17 @@ const Setting = () => {
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
   };
+  useEffect(() => {
+    axios
+      .get("http://localhost:90/user/get", config)
+      .then((res) => {
+        setUserDetails(res.data.data);
+        
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
   return (
     <>
       <Modal
@@ -43,7 +58,7 @@ const Setting = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <UpdateProfile></UpdateProfile>
+          <UpdateProfile profile={userDetails}></UpdateProfile>
         </Box>
       </Modal>
       <Modal
@@ -59,7 +74,7 @@ const Setting = () => {
 
       <div className="setting">
         <h1 className="setting-heading">
-          General profile settings <AiFillSetting />
+          General Profile Settings <AiFillSetting />
         </h1>
         <div className="profile-update row">
           <button
@@ -74,7 +89,7 @@ const Setting = () => {
             onClick={handleUpdatePasswordOpen}
             data-test="password-btn"
           >
-            Update Password <RiLockPasswordFill />
+            Change Password <RiLockPasswordFill />
           </button>
         </div>
       </div>

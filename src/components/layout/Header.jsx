@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import logo from "../../assets/logo.svg";
 import "./header.scss";
+import AccountMenu from "./profile_dropdown";
+
+
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const menuClickHandler = (e) => {
@@ -42,11 +45,13 @@ const Header = () => {
           Books
         </Link>
         <Link className="nav__links">About</Link>
-        {localStorage.getItem("token") ? (
-          <Link className="nav__btn nav__links" to="login" onClick={logout}>
-            Log out
-          </Link>
-        ) : (
+        {localStorage.getItem("token") ? 
+        (<AccountMenu></AccountMenu>
+          // <Link className="nav__btn nav__links" to="login" onClick={logout}>
+          //   Log out
+          // </Link>
+        ) 
+        : (
           <Link className="nav__btn nav__links" to="login">
             Login
           </Link>

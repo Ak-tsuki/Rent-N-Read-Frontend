@@ -46,14 +46,14 @@ const genders = [
 
 
 
-const UpdateProfile = () => {
+const UpdateProfile = ({profile}) => {
    const theme = useTheme();
-  const [first_name, setFirstName] = useState("");
-  const [last_name, setLastName] = useState("");
-  const [gender, setGender] = useState([]);
-  const [address, setAddress] = useState("");
-  const [contact_no, setContactNum] = useState("");
-  const [user_img, setUser_img] = useState("");
+  const [first_name, setFirstName] = useState(profile.first_name);
+  const [last_name, setLastName] = useState(profile.last_name);
+  const [gender, setGender] = useState([profile.gender]);
+  const [address, setAddress] = useState(profile.address);
+  const [contact_no, setContactNum] = useState(profile.contact_no);
+  const [user_img, setUser_img] = useState(profile.user_img);
 
   const updateProfile = (e) => {
     // e.perventDefault();
@@ -99,7 +99,7 @@ const UpdateProfile = () => {
       .then((res) => {
         if (res.status === 201) {
           console.log("Profile Updated Successfully");
-        //   window.location.replace("/dashboard");
+          window.location.replace("/dashboard/ProfilePage");
           toast.success("Profile Updated Successfully", {
             toastId: "success",
             position: "top-center",
@@ -156,7 +156,7 @@ const UpdateProfile = () => {
             onChange={(e) => {
               setFirstName(e.target.value);
             }}
-            defaultValue={first_name}
+            defaultValue={profile.first_name}
             data-test="first_name"
           />
           <TextField
@@ -168,7 +168,7 @@ const UpdateProfile = () => {
             onChange={(e) => {
               setLastName(e.target.value);
             }}
-            defaultValue={last_name}
+            defaultValue={profile.last_name}
             data-test="last_name"
           />
           {/* <TextField
@@ -194,7 +194,7 @@ const UpdateProfile = () => {
             onChange={(e) => {
                 setAddress(e.target.value);
             }}
-            defaultValue={address}
+            defaultValue={profile.address}
             data-test="address"
           />
           <FormControl sx={{ pb: 2 }} required>
@@ -202,11 +202,12 @@ const UpdateProfile = () => {
             <Select
               labelId="demo-multiple-name-label"
               id="demo-multiple-name"
-              multiple
+              // multiple
               value={gender}
               onChange={handleChange}
               input={<OutlinedInput label="Gender" />}
               MenuProps={MenuProps}
+              defaultValue={profile.gender}
             >
               {genders.map((name) => (
                 <MenuItem
@@ -232,6 +233,7 @@ const UpdateProfile = () => {
             onChange={(e) => {
               setUser_img(e.target.files[0]);
             }}
+            defaultValue={profile.user_img}
           />
           <FormControl fullWidth required>
             <InputLabel htmlFor="outlined-adornment-amount">
@@ -245,6 +247,7 @@ const UpdateProfile = () => {
               onChange={(e) => {
                 setContactNum(e.target.value);
               }}
+              defaultValue={profile.contact_no}
               data-test="contact_no"
             />
           </FormControl>

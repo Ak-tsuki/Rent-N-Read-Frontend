@@ -67,6 +67,7 @@ const SingleBook = () => {
           .get("http://localhost:90/bookowner/get/" + bookowner, data)
           .then((res) => {
             setReceiverId(res.data.data.username);
+            setReceiverId(res.data.data.profile_pic);
           })
           .catch((e) => {
             console.log(e);
@@ -188,7 +189,7 @@ const SingleBook = () => {
         <div className="col-12 col-md-8  ">
           <div className="book-detail">
             <img
-              src="https://media.harrypotterfanzone.com/deathly-hallows-us-childrens-edition.jpg"
+              src={`http://localhost:90/${bookowner.profile_pic}`}
               alt="Avatar"
               class="avatar"
             />
