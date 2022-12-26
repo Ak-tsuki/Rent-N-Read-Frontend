@@ -173,3 +173,20 @@
     }
   }
 }
+
+.name {
+
+  font-weight: 700 !important;
+  text-transform: capitalize !important;
+  background:linear-gradient(
+    180deg,
+    #ff6363 0%,
+    rgba(157, 74, 38, 0.61) 100%
+  ) !important;
+
+}
+.name-container{
+  margin: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
