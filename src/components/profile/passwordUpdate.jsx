@@ -71,7 +71,7 @@ const UpdatePassword = () => {
     axios
       .put("http://localhost:90/password/update", data, config)
       .then((res) => {
-        if (res.status === 201) {
+        if (res.status === 200) {
           console.log("Password Updated Successfully");
           console.log(res);
           localStorage.clear();         
