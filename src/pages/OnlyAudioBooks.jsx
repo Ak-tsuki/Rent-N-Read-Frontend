@@ -68,7 +68,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-const Books = () => {
+const OnlyAudioBooks = () => {
   const [listedBooks, setListedBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [allBooks, setAllBooks] = useState([]);
@@ -85,18 +85,6 @@ const Books = () => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:90/book/get").then((res) => {
-      console.log(res.data);
-      setAllBooks(res.data.data);
-      setListedBooks(res.data.data);
-    });
-
-    axios.get("http://localhost:90/ebook/get").then((res) => {
-      console.log(res.data);
-      setEBooks(res.data.data);
-      console.log(eBooks);
-    });
-
     axios.get("http://localhost:90/audiobook/get").then((res) => {
       console.log(res.data);
       setAudioBooks(res.data.data);
@@ -192,32 +180,6 @@ const Books = () => {
           </Link>
         </StyledMenu>
       </form>
-      <div className="Book-container">
-        <div className="Book-list">
-          {listedBooks.length ? (
-            listedBooks.map((book) => (
-              <ListedBookCard book={book} data-test="search-result" />
-            ))
-          ) : (
-            <img
-              src={notfound}
-              alt="not_found"
-              className="not-found-img"
-              data-test="not-found"
-            />
-          )}
-        </div>
-      </div>
-      <section className="Book-container">
-        <div className="heading2">
-          <h4 className="ms-2">E-Books</h4>
-        </div>
-        <div className="Book-list">
-          {eBooks.slice(0, 12).map((book) => (
-            <ListedEbookCard book={book} />
-          ))}
-        </div>
-      </section>
       <section className="Book-container">
         <div className="heading2">
           <h4 className="ms-2">Audio Books</h4>
@@ -232,4 +194,4 @@ const Books = () => {
   );
 };
 
-export default Books;
+export default OnlyAudioBooks;

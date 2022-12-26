@@ -26,6 +26,9 @@ import ProfilePage from "../profile/profilePage";
 import AdminProfile from "../admin-profile/AdminProfile";
 import AdminSettings from "../admin-profile/AdminSettings";
 import Loginsuccess from "../../pages/Loginsuccess";
+import Onlybooks from "../../pages/Onlybooks";
+import OnlyEBooks from "../../pages/OnlyEBook";
+import OnlyAudioBooks from "../../pages/OnlyAudioBooks";
 
 const Body = () => {
   return (
@@ -35,6 +38,10 @@ const Body = () => {
         <Route path="/loginsuccess" element={<Loginsuccess />} />
 
         <Route path="/books" element={<Books />} />
+        <Route path="/onlybooks" element={<Onlybooks />} />
+        <Route path="/onlyebooks" element={<OnlyEBooks />} />
+        <Route path="/onlyaudiobooks" element={<OnlyAudioBooks />} />
+
         <Route
           path="/singlebook/:book_id/:authormain"
           element={<SingleBook />}
