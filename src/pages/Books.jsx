@@ -136,63 +136,67 @@ const Books = () => {
           <BiSearch />
           Search
         </button>
-
-        <button
-          className=" search__btn view__btn"
-          id="demo-customized-button"
-          aria-controls={open ? "demo-customized-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          variant="contained"
-          disableElevation
-          onClick={handleClick}
-          endIcon={<KeyboardArrowDownIcon />}
-        >
-          {" "}
-          <RemoveRedEyeIcon />
-          View By
-          <KeyboardArrowDownIcon />
-        </button>
-        <StyledMenu
-          id="demo-customized-menu"
-          MenuListProps={{
-            "aria-labelledby": "demo-customized-button",
-          }}
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-        >
-          <Link className="text-decoration-none text-dark" to="/onlybooks">
-            <MenuItem onClick={handleClose} disableRipple>
-              <MenuBookIcon />
-              Books
-            </MenuItem>
-          </Link>
-
-          <Link className="text-decoration-none text-dark" to="/onlyebooks">
-            {" "}
-            <MenuItem onClick={handleClose} disableRipple>
-              <PictureAsPdfIcon />
-              E-Book
-            </MenuItem>
-          </Link>
-
-          <Link className="text-decoration-none text-dark" to="/onlyaudiobooks">
-            <MenuItem onClick={handleClose} disableRipple>
-              <VolumeUpIcon />
-              Audio Book
-            </MenuItem>
-          </Link>
-          <Divider sx={{ my: 0.5 }} />
-          <Link className="text-decoration-none text-dark" to="/books">
-            <MenuItem onClick={handleClose} disableRipple>
-              <MenuBookIcon />
-              All Books
-            </MenuItem>
-          </Link>
-        </StyledMenu>
       </form>
       <div className="Book-container">
+        <div className="name-container">
+          <button
+            className="view__btn"
+            id="demo-customized-button"
+            aria-controls={open ? "demo-customized-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            variant="contained"
+            disableElevation
+            onClick={handleClick}
+            endIcon={<KeyboardArrowDownIcon />}
+          >
+            {" "}
+            <RemoveRedEyeIcon />
+            View By
+            <KeyboardArrowDownIcon />
+          </button>
+          <StyledMenu
+            id="demo-customized-menu"
+            MenuListProps={{
+              "aria-labelledby": "demo-customized-button",
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+          >
+            <Link className="text-decoration-none text-dark" to="/onlybooks">
+              <MenuItem onClick={handleClose} disableRipple>
+                <MenuBookIcon />
+                Books
+              </MenuItem>
+            </Link>
+
+            <Link className="text-decoration-none text-dark" to="/onlyebooks">
+              {" "}
+              <MenuItem onClick={handleClose} disableRipple>
+                <PictureAsPdfIcon />
+                E-Book
+              </MenuItem>
+            </Link>
+
+            <Link
+              className="text-decoration-none text-dark"
+              to="/onlyaudiobooks"
+            >
+              <MenuItem onClick={handleClose} disableRipple>
+                <VolumeUpIcon />
+                Audio Book
+              </MenuItem>
+            </Link>
+            <Divider sx={{ my: 0.5 }} />
+            <Link className="text-decoration-none text-dark" to="/books">
+              <MenuItem onClick={handleClose} disableRipple>
+                <MenuBookIcon />
+                All Books
+              </MenuItem>
+            </Link>
+          </StyledMenu>
+        </div>
         <div className="Book-list">
           {listedBooks.length ? (
             listedBooks.map((book) => (
