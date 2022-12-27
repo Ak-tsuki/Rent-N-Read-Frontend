@@ -21,8 +21,7 @@ const ListedEbookCard = ({ book }) => {
         <h2 className="book-Author my-2">{author}</h2>
         <div className="d-flex justify-content-between mt-2">
           <div className="d-flex flex-nowrap">
-            <p className="bookcost">Rs. {rent_cost_perday}</p>
-            <p className="bookday">/day</p>
+            <p className="bookcost">Rs. {price}</p>
           </div>
         </div>
       </div>
