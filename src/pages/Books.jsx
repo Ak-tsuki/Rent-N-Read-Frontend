@@ -11,9 +11,7 @@ import ListedAudioBookCard from "../components/listedbook-card/listedaudiobook-c
 import { styled } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-
 import Divider from "@mui/material/Divider";
-
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
@@ -23,6 +21,9 @@ import { useTheme } from "@mui/material/styles";
 import { RiFilter3Fill } from "react-icons/ri";
 import FormControl from "@mui/material/FormControl";
 import { InputLabel, OutlinedInput, Select } from "@mui/material";
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -67,6 +68,10 @@ const StyledMenu = styled((props) => (
   },
 }));
 
+function valuetext(value) {
+  return `${value}°C`;
+}
+
 const Books = () => {
   const [listedBooks, setListedBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -76,7 +81,6 @@ const Books = () => {
   const [audioBooks, setAudioBooks] = useState([]);
   const [allAudioBooks, setAllAudioBooks] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
   const [categoryName, setcategoryName] = React.useState([]);
   const categories = [
     "Fantasy",
@@ -106,8 +110,12 @@ const Books = () => {
     "Essays",
     "Novel",
   ];
-
   const open = Boolean(anchorEl);
+  const [value, setValue] = React.useState([40, 100]);
+
+  const handleSliderChange = (event, newValue) => {
+    setValue(newValue);
+  };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -211,6 +219,37 @@ const Books = () => {
         console.log(e);
       });
   };
+  const filterPriceHandler = () => {
+    axios
+      .get("http://localhost:90/book/pricefilter/" + value[0] + "/" + value[1])
+      .then((res) => {
+        console.log(res);
+        setListedBooks(res.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    axios
+      .get(
+        "http://localhost:90/audiobook/pricefilter/" + value[0] + "/" + value[1]
+      )
+      .then((res) => {
+        console.log(res);
+        setAudioBooks(res.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    axios
+      .get("http://localhost:90/ebook/pricefilter/" + value[0] + "/" + value[1])
+      .then((res) => {
+        console.log(res);
+        setEBooks(res.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   const clearFilter = () => {
     setListedBooks(allBooks);
     setEBooks(allEBooks);
@@ -234,43 +273,65 @@ const Books = () => {
         </button>
       </form>
       <div className="filter-options-container">
-        <div className="filter-elements">
-          <FormControl className="category-dropdown">
-            <InputLabel
-              id="demo-multiple-name-label"
-              className="category-dropdown__label"
+        <div>
+          <div className="filter-elements">
+            <FormControl className="category-dropdown">
+              <InputLabel
+                id="demo-multiple-name-label"
+                className="category-dropdown__label"
+              >
+                Select Category
+              </InputLabel>
+              <Select
+                labelId="demo-multiple-name-label"
+                id="demo-multiple-name"
+                multiple
+                value={categoryName}
+                onChange={handleChange}
+                input={<OutlinedInput label="Book Category" />}
+                MenuProps={MenuProps}
+                className="category-dropdown__select"
+              >
+                {categories.map((name) => (
+                  <MenuItem
+                    key={name}
+                    value={name}
+                    style={getStyles(name, categoryName, theme)}
+                  >
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <button className="filter-elements__btn" onClick={handleFilter}>
+              <RiFilter3Fill size={20} />
+              Filter
+            </button>
+            <button className="filter-elements__btn" onClick={clearFilter}>
+              Clear
+            </button>
+          </div>
+          <div className="filter-elements mt-3">
+            <Box sx={{ width: 180 }}>
+              <Slider
+                getAriaLabel={() => "Temperature range"}
+                value={value}
+                onChange={handleSliderChange}
+                valueLabelDisplay="auto"
+                getAriaValueText={valuetext}
+                max={200}
+              />
+            </Box>
+            <button
+              className="filter-elements__btn"
+              onClick={filterPriceHandler}
             >
-              Select Category
-            </InputLabel>
-            <Select
-              labelId="demo-multiple-name-label"
-              id="demo-multiple-name"
-              multiple
-              value={categoryName}
-              onChange={handleChange}
-              input={<OutlinedInput label="Book Category" />}
-              MenuProps={MenuProps}
-              className="category-dropdown__select"
-            >
-              {categories.map((name) => (
-                <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, categoryName, theme)}
-                >
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <button className="filter-elements__btn" onClick={handleFilter}>
-            <RiFilter3Fill size={20} />
-            Filter
-          </button>
-          <button className="filter-elements__btn" onClick={clearFilter}>
-            Clear
-          </button>
+              <RiFilter3Fill size={20} />
+              Filter Price
+            </button>
+          </div>
         </div>
+
         <div>
           <button
             className="view__btn"
