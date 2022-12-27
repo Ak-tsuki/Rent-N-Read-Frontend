@@ -1,113 +1,114 @@
 .Book-container {
-    margin: 80px 7%;
-    min-height: 650px;
-  }
-  .img-book {
-    max-width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-  }
-  .wishlist-btn {
-    border: 3px solid #b2ab00;
-    border-radius: 10px;
-    background-color: white;
-    font-size: 15px;
-    font-weight: 600;
-    color: #b2ab00;
-    padding: 14px 28px;
-    cursor: pointer;
-    width: 100%;
-    transition: all 0.5s;
-  }
-  
-  .wishlist-btn:hover {
-    color: white;
-    background-color: #b2ab00;
-  }
-  
-  .book-cover {
-    max-width: 250px;
-  }
-  
-  .book-detail {
-    background-color: #f1f1f1;
-    padding: 30px 20px;
-    overflow-wrap: break-word;
-    border-radius: 10px;
-    position: relative;
-  }
-  .book-name {
-    color: #783a0d;
-    font-weight: 600;
-    font-size: 20px;
-    text-transform: capitalize;
-  }
-  
-  .book-author {
-    color: #8a908c;
-    font-size: 16px;
-  }
-  .book-desc-head {
-    font-weight: 600;
-    font-size: 18px;
-  }
-  .book-desc {
-    // max-width: 600px;
-    text-align: justify;
-  }
-  
-  .rent-cost {
-    font-weight: 600;
-    font-size: 18px;
-  }
-  
-  .request-btn {
-    border: none;
-    background-color: white;
-    color: black;
-    border-radius: 10px;
-    padding: 8px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.5s;
-  }
-  
-  .btn-rent {
-    background-color: #ff6363;
-    color: #ffff;
-  }
-  
-  .btn-exchange {
-    background-color: #638d6a;
-    color: #ffff;
-  }
-  
-  .btn-rent:hover {
-    background-color: #690a0a;
-  }
-  .btn-exchange:hover {
-    background-color: #0c4c17;
-  }
-  .cost-rent {
-    color: #0dcd2c;
-    font-weight: 600;
-  }
-  .avatar {
-    vertical-align: middle;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    position: absolute;
-    top: -20px;
-    right: 50px;
-  }
-  
-  .availabefor {
-    font-size: 18px;
-    font-weight: 600;
-  }
-  
-  .bookspace{
-    position: absolute;
-  }
+  // margin: 80px 7%;
+  margin: 0 7%;
+  min-height: 650px;
+}
+.img-book {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+.wishlist-btn {
+  border: 3px solid #b2ab00;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 15px;
+  font-weight: 600;
+  color: #b2ab00;
+  padding: 14px 28px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.wishlist-btn:hover {
+  color: white;
+  background-color: #b2ab00;
+}
+
+.book-cover {
+  max-width: 250px;
+}
+
+.book-detail {
+  background-color: #f1f1f1;
+  padding: 30px 20px;
+  overflow-wrap: break-word;
+  border-radius: 10px;
+  position: relative;
+}
+.book-name {
+  color: #783a0d;
+  font-weight: 600;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.book-author {
+  color: #8a908c;
+  font-size: 16px;
+}
+.book-desc-head {
+  font-weight: 600;
+  font-size: 18px;
+}
+.book-desc {
+  // max-width: 600px;
+  text-align: justify;
+}
+
+.rent-cost {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.request-btn {
+  border: none;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.btn-rent {
+  background-color: #ff6363;
+  color: #ffff;
+}
+
+.btn-exchange {
+  background-color: #638d6a;
+  color: #ffff;
+}
+
+.btn-rent:hover {
+  background-color: #690a0a;
+}
+.btn-exchange:hover {
+  background-color: #0c4c17;
+}
+.cost-rent {
+  color: #0dcd2c;
+  font-weight: 600;
+}
+.avatar {
+  vertical-align: middle;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  top: -20px;
+  right: 50px;
+}
+
+.availabefor {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.bookspace {
+  position: absolute;
+}
