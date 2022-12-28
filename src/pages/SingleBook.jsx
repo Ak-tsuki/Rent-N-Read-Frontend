@@ -172,7 +172,7 @@ const SingleBook = () => {
       });
   };
   return (
-    <div className="Book-container">
+    <div className="single-container">
       <div className="row">
         <div className="col-12 col-md-4 d-flex justify-content-center">
           <div className="book-cover">
