@@ -298,7 +298,7 @@ const UpdateEBook = ({ book }) => {
             variant="contained"
             endIcon={<FaPenAlt className="fs-3" />}
             onClick={updateEBook}
-            data-test="update-book-btn"
+            data-test="update-ebook-btn"
           >
             Update EBook
           </Button>

@@ -66,7 +66,7 @@ function Row(props) {
   };
 
   const deleteAudioBook = () => {
-    console.log(row._id)
+    console.log(row._id);
     axios
       .delete("http://localhost:90/audiobook/delete/" + row._id, config)
       .then((result) => {
@@ -109,7 +109,7 @@ function Row(props) {
             <button
               className="approve--btn"
               onClick={handleUpdateOpen}
-              data-test="approve--btn"
+              data-test="update-details-btn"
             >
               Update&nbsp; <BsPencilSquare size={15} />
             </button>
@@ -118,6 +118,7 @@ function Row(props) {
               onClose={handleUpdateClose}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
+              data-test="update-audiobook"
             >
               <Box sx={style3}>
                 <UpdateAudioBook book={row}></UpdateAudioBook>

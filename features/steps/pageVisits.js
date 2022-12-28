@@ -233,6 +233,32 @@ Given("I am on the {string} page", async function (string) {
         "  http://localhost:3000/dashboard_admin/adminSetting"
       );
 
+    // Admin Ebook =========================================
+    case "admin-ebook":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZjBkZjgxOGEyMTAzYTQ5ZmRhNDMiLCJpYXQiOjE2NzIyNDAwMjh9.gsFju0R5JW7CeNLIhF_RXTwUUs-HV9GODAnQyCiN5Mc"
+        );
+      });
+      return await this.page.goto(
+        "http://localhost:3000/dashboard_admin/ebook"
+      );
+
+    // Admin Audiobook =========================================
+    case "admin-audiobook":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+        localStorage.setItem(
+          "token",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZjBkZjgxOGEyMTAzYTQ5ZmRhNDMiLCJpYXQiOjE2NzIyNDAwMjh9.gsFju0R5JW7CeNLIhF_RXTwUUs-HV9GODAnQyCiN5Mc"
+        );
+      });
+      return await this.page.goto(
+        "http://localhost:3000/dashboard_admin/audio_book"
+      );
+
     default:
       throw new Error(`${string} is not a supported page name`);
   }
