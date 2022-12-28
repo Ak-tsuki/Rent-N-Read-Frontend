@@ -22,7 +22,7 @@ import { useState, useEffect } from "react";
 import AddEBook from "./AddEBook";
 import { BsPencilSquare, BsTrashFill } from "react-icons/bs";
 import { FaFilePdf } from "react-icons/fa";
-
+import { toast } from "react-toastify";
 import { Viewer } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
@@ -36,7 +36,7 @@ const config = {
   },
 };
 function Row(props) {
-  const { row, approveBook, rejectBook } = props;
+  const { row } = props;
   const [open, setOpen] = React.useState(false);
   const [view, setView] = React.useState(false);
   const [see, setSee] = React.useState(false);
@@ -99,6 +99,30 @@ function Row(props) {
     }
   };
 
+  const deleteEBook = () => {
+    console.log(row._id)
+    axios
+      .delete("http://localhost:90/ebook/delete/" + row._id, config)
+      .then((result) => {
+        console.log(result);
+        if (result.data.success) {
+          console.log("EBook Deleted Successfull");
+          toast.success(
+            "EBook Deleted Successfully",
+            { toastId: "Delete Success" },
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500)
+          );
+        } else {
+          console.log("Please Try Again!!!");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <React.Fragment>
       <StyledTableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -157,7 +181,7 @@ function Row(props) {
                     <button
                       className="approve--btn"
                       onClick={(e) => {
-                        rejectBook(row._id, e);
+                        deleteEBook(row._id, e);
                       }}
                       data-test="yes-btn"
                     >

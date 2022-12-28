@@ -17,6 +17,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PlayLessonIcon from "@mui/icons-material/PlayLesson";
 import { BsCheckLg } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
+import { toast } from "react-toastify";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -30,7 +31,7 @@ const config = {
   },
 };
 function Row(props) {
-  const { row, approveBook, rejectBook } = props;
+  const { row } = props;
   const [open, setOpen] = React.useState(false);
   const [view, setView] = React.useState(false);
   const handleOpen = () => setView(true);
@@ -62,6 +63,30 @@ function Row(props) {
     borderRadius: "10px",
     boxShadow: 24,
     p: 4,
+  };
+
+  const deleteAudioBook = () => {
+    console.log(row._id)
+    axios
+      .delete("http://localhost:90/audiobook/delete/" + row._id, config)
+      .then((result) => {
+        console.log(result);
+        if (result.data.success) {
+          console.log("Audio Book Deleted Successfull");
+          toast.success(
+            "Audio Book Deleted Successfully",
+            { toastId: "Delete Success" },
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500)
+          );
+        } else {
+          console.log("Please Try Again!!!");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -114,14 +139,14 @@ function Row(props) {
             >
               <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Are you sure you want to reject this book?
+                  Are you sure you want to delete this audiobook?
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   <div className="d-flex align-items-center ">
                     <button
                       className="approve--btn"
                       onClick={(e) => {
-                        rejectBook(row._id, e);
+                        deleteAudioBook(row._id, e);
                       }}
                       data-test="yes-btn"
                     >
