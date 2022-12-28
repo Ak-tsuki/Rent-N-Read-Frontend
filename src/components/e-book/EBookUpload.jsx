@@ -28,6 +28,7 @@ import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { Worker } from "@react-pdf-viewer/core";
+import UpdateEBook from "../update_ebook/UpdateEbook";
 
 const config = {
   headers: {
@@ -41,6 +42,10 @@ function Row(props) {
   const [see, setSee] = React.useState(false);
   const handleOpen = () => setView(true);
   const handleClose = () => setView(false);
+
+  const [updateOpen, setUpdateOpen] = useState(false);
+  const handleUpdateOpen = () => setUpdateOpen(true);
+  const handleUpdateClose = () => setUpdateOpen(false);
 
   const handleOpen1 = () => setSee(true);
   const handleClose1 = () => setSee(false);
@@ -69,6 +74,18 @@ function Row(props) {
     height: "90vh",
     bgcolor: "background.paper",
     border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const style3 = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "70%",
+    bgcolor: "background.paper",
+    borderRadius: "10px",
     boxShadow: 24,
     p: 4,
   };
@@ -102,13 +119,23 @@ function Row(props) {
           <div className="d-flex  align-items-center justify-content-center">
             <button
               className="approve--btn"
-              onClick={(e) => {
-                approveBook(row._id, e);
-              }}
+              onClick={handleUpdateOpen}
               data-test="approve--btn"
             >
               Update&nbsp; <BsPencilSquare size={15} />
             </button>
+            <div>
+              <Modal
+                open={updateOpen}
+                onClose={handleUpdateClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style3}>
+                  <UpdateEBook book={row}></UpdateEBook>
+                </Box>
+              </Modal>
+            </div>
             <button
               onClick={handleOpen}
               class="reject--btn"
