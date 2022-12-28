@@ -124,18 +124,16 @@ function Row(props) {
             >
               Update&nbsp; <BsPencilSquare size={15} />
             </button>
-            <div>
-              <Modal
-                open={updateOpen}
-                onClose={handleUpdateClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-                <Box sx={style3}>
-                  <UpdateEBook book={row}></UpdateEBook>
-                </Box>
-              </Modal>
-            </div>
+            <Modal
+              open={updateOpen}
+              onClose={handleUpdateClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style3}>
+                <UpdateEBook book={row}></UpdateEBook>
+              </Box>
+            </Modal>
             <button
               onClick={handleOpen}
               class="reject--btn"

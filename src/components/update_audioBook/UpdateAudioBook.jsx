@@ -62,19 +62,16 @@ function getStyles(name, categoryName, theme) {
   };
 }
 
-const UpdateEBook = ({ book }) => {
+const UpdateAudioBook = ({ book }) => {
   const theme = useTheme();
   const [categoryName, setcategoryName] = useState(book.category);
   const [name, setName] = useState(book.name);
   const [rich_desc, setRich_desc] = useState(book.rich_desc);
   const [desc, setDesc] = useState(book.desc);
   const [author, setAuthor] = useState(book.author);
-  const [rent_cost_perday, setRent_cost_Perday] = useState(
-    book.rent_cost_perday
-  );
   const [price, setPrice] = useState(book.price);
   const [book_img, setBook_img] = useState("");
-  const [e_book, setEbook] = useState("");
+  const [audio_book, setAudioBook] = useState("");
 
   const updateEBook = (e) => {
     if (
@@ -83,7 +80,6 @@ const UpdateEBook = ({ book }) => {
       rich_desc === "" ||
       author === "" ||
       desc === "" ||
-      rent_cost_perday === "" ||
       price === ""
     ) {
       toast.warn("Fill all Required Field", {
@@ -101,10 +97,9 @@ const UpdateEBook = ({ book }) => {
     data.append("rich_desc", rich_desc);
     data.append("desc", desc);
     data.append("author", author);
-    data.append("rent_cost_perday", rent_cost_perday);
     data.append("price", price);
     data.append("book_img", book_img);
-    data.append("e_book", e_book);
+    data.append("audio_book", audio_book);
     console.log(data);
 
     const config = {
@@ -113,12 +108,12 @@ const UpdateEBook = ({ book }) => {
       },
     };
     axios
-      .put("http://localhost:90/ebook/update", data, config)
+      .put("http://localhost:90/audiobook/update", data, config)
       .then((res) => {
         if (res.status === 201) {
-          console.log("Book Updated Successfully");
-          window.location.replace("/dashboard_admin/ebook");
-          toast.success("EBook Updated Successfully", {
+          console.log("AudioBook Updated Successfully");
+          window.location.replace("/dashboard_admin/audio_book");
+          toast.success("Book Updated Successfully", {
             toastId: "success",
             position: "top-center",
             autoClose: 4000,
@@ -249,34 +244,16 @@ const UpdateEBook = ({ book }) => {
             required
             id="outlined-required fullWidth"
             type="file"
-            label="EBook"
+            label="Audio File"
             fullWidth
             width="100%"
             InputLabelProps={{
               shrink: true,
             }}
             onChange={(e) => {
-              setEbook(e.target.files[0]);
+              setAudioBook(e.target.files[0]);
             }}
           />
-          <FormControl fullWidth required sx={{ pb: 2 }}>
-            <InputLabel htmlFor="outlined-adornment-amount">
-              Rent Price
-            </InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-amount"
-              startAdornment={
-                <InputAdornment position="start">Rs.</InputAdornment>
-              }
-              label="Amount"
-              type="number"
-              defaultValue={book.rent_cost_perday}
-              onChange={(e) => {
-                setRent_cost_Perday(e.target.value);
-              }}
-              data-test="rent-cost"
-            />
-          </FormControl>
           <FormControl fullWidth required>
             <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
             <OutlinedInput
@@ -300,7 +277,7 @@ const UpdateEBook = ({ book }) => {
             onClick={updateEBook}
             data-test="update-book-btn"
           >
-            Update EBook
+            Update Audio Book
           </Button>
         </div>
       </Box>
@@ -308,4 +285,4 @@ const UpdateEBook = ({ book }) => {
   );
 };
 
-export default UpdateEBook;
+export default UpdateAudioBook;

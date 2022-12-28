@@ -23,6 +23,7 @@ import { useState, useEffect } from "react";
 import AddAudioBook from "./AddAudioBook";
 import { BsPencilSquare, BsTrashFill } from "react-icons/bs";
 import ReactAudioPlayer from "react-audio-player";
+import UpdateAudioBook from "../update_audioBook/UpdateAudioBook";
 const config = {
   headers: {
     Authorization: "Bearer " + localStorage.getItem("token"),
@@ -46,6 +47,23 @@ function Row(props) {
     boxShadow: 24,
     p: 4,
   };
+
+  const [updateOpen, setUpdateOpen] = useState(false);
+  const handleUpdateOpen = () => setUpdateOpen(true);
+  const handleUpdateClose = () => setUpdateOpen(false);
+
+  const style3 = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "70%",
+    bgcolor: "background.paper",
+    borderRadius: "10px",
+    boxShadow: 24,
+    p: 4,
+  };
+
   return (
     <React.Fragment>
       <StyledTableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -65,13 +83,21 @@ function Row(props) {
           <div className="d-flex  align-items-center justify-content-center">
             <button
               className="approve--btn"
-              onClick={(e) => {
-                approveBook(row._id, e);
-              }}
+              onClick={handleUpdateOpen}
               data-test="approve--btn"
             >
               Update&nbsp; <BsPencilSquare size={15} />
             </button>
+            <Modal
+              open={updateOpen}
+              onClose={handleUpdateClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style3}>
+                <UpdateAudioBook book={row}></UpdateAudioBook>
+              </Box>
+            </Modal>
             <button
               onClick={handleOpen}
               class="reject--btn"
@@ -223,7 +249,11 @@ export default function AudioBookUpload() {
         >
           Add a book <FaBook />
         </button> */}
-          <button className="add-book__btn" onClick={handleOpen} data-test="add-audiobook-btn">
+          <button
+            className="add-book__btn"
+            onClick={handleOpen}
+            data-test="add-audiobook-btn"
+          >
             Add audio book <PlayLessonIcon />
           </button>
         </div>
