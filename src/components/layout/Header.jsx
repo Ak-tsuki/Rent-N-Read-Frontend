@@ -45,6 +45,9 @@ const Header = () => {
           Books
         </Link>
         <Link className="nav__links">About</Link>
+        <Link className="nav__links" to="/contact">
+          Contact Us
+        </Link>
         {localStorage.getItem("token") ? 
         (<AccountMenu></AccountMenu>
           // <Link className="nav__btn nav__links" to="login" onClick={logout}>

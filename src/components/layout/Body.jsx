@@ -29,6 +29,7 @@ import Loginsuccess from "../../pages/Loginsuccess";
 import Onlybooks from "../../pages/Onlybooks";
 import OnlyEBooks from "../../pages/OnlyEBook";
 import OnlyAudioBooks from "../../pages/OnlyAudioBooks";
+import ContactUs from "../../pages/ContactUs";
 
 const Body = () => {
   return (
@@ -41,7 +42,7 @@ const Body = () => {
         <Route path="/onlybooks" element={<Onlybooks />} />
         <Route path="/onlyebooks" element={<OnlyEBooks />} />
         <Route path="/onlyaudiobooks" element={<OnlyAudioBooks />} />
-
+        <Route path="/contact" element={<ContactUs />} />
         <Route
           path="/singlebook/:book_id/:authormain"
           element={<SingleBook />}
