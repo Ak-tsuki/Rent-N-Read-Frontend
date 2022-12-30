@@ -293,7 +293,7 @@ function DashboardAdmin(props) {
                 alt="profile image"
                 src={
                   userDetails.profile_pic
-                    ? userDetails.profile_pic
+                    ? `http://localhost:90/${userDetails.profile_pic}`
                     : "https://www.pngitem.com/pimgs/m/421-4212341_default-avatar-svg-hd-png-download.png"
                 }
               />
