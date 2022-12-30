@@ -22,6 +22,21 @@ const ContactUs = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
+  const [emailError, setEmailError] = useState(false);
+
+  const emailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  const handleEmail = (e) => {
+    let email = e.target.value;
+    if (!email.match(emailRegex)) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+    setEmail(email);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -145,10 +160,9 @@ const ContactUs = () => {
                       variant="outlined"
                       fullWidth
                       required
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                      }}
+                      onChange={handleEmail}
                     />
+                    {emailError ? <span>Enter valid email</span> : ""}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField

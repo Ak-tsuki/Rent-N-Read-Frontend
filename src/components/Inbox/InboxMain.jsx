@@ -108,6 +108,7 @@ function Row(props) {
         <TableCell align="center">{row.last_name}</TableCell>
         <TableCell align="center">{row.email}</TableCell>
         <TableCell align="center">{row.contact_no}</TableCell>
+        <TableCell align="center">{row.status}</TableCell>
         <TableCell align="center">
           <div className="d-flex  align-items-center justify-content-center">
             <button
@@ -293,6 +294,9 @@ export default function InboxMain() {
               </StyledTableCell>
               <StyledTableCell className="tableheading" align="center">
                 Contact No.
+              </StyledTableCell>
+              <StyledTableCell className="tableheading" align="center">
+                Problem Status
               </StyledTableCell>
               <StyledTableCell className="tableheading" align="center">
                 Action
