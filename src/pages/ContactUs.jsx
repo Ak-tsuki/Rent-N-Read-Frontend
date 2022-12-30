@@ -162,7 +162,7 @@ const ContactUs = () => {
                       required
                       onChange={handleEmail}
                     />
-                    {emailError ? <span>Enter valid email</span> : ""}
+                    {emailError ? <span className="text-danger">Enter valid email</span> : ""}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
