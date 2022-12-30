@@ -183,7 +183,7 @@ function DashboardAdmin(props) {
       </List>
       <Divider />
       <List>
-        <Link className="admin-dashboard__nav">
+        <Link to="/dashboard_admin/inbox" className="admin-dashboard__nav">
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>

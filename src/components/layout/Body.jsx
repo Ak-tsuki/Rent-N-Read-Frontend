@@ -30,6 +30,7 @@ import Onlybooks from "../../pages/Onlybooks";
 import OnlyEBooks from "../../pages/OnlyEBook";
 import OnlyAudioBooks from "../../pages/OnlyAudioBooks";
 import ContactUs from "../../pages/ContactUs";
+import InboxMain from "../Inbox/InboxMain";
 
 const Body = () => {
   return (
@@ -70,6 +71,7 @@ const Body = () => {
         <Route path="/dashboard_admin" element={<DashboardAdmin />}>
           <Route path="" element={<DashboardHome />} />
           <Route path="admin_approve" element={<AdminApprove />} />
+          <Route path="inbox" element={<InboxMain />} />
           <Route path="audio_book" element={<AudioBookUpload />} />
           <Route path="ebook" element={<EBookUpload />} />
           <Route path="request" element={<EBookRentRequest />} />

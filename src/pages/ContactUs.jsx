@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, Grid, TextField } from "@mui/material";
-import logo from "../assets/Contactus.svg";
+import logo from "../assets/contact.svg";
 import "./contactUs.scss";
 import { Col } from "react-bootstrap";
 import { useState } from "react";
@@ -49,7 +49,7 @@ const ContactUs = () => {
     };
     console.log(data);
     axios
-      .post("http://localhost:90/contactus", data)
+      .post("http://localhost:90/contactus/send", data)
       .then((response) => {
         console.log(response);
         if (response.status === 201) {
@@ -85,7 +85,7 @@ const ContactUs = () => {
       >
         <CardMedia
           component="img"
-          className="p-4 bg-dark rounded-start w-50"
+          className="support-image p-4 rounded-start w-50"
           image={logo}
           alt="Live from space album cover"
         />

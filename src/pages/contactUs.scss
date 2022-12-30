@@ -9,4 +9,14 @@
     font-style: normal;
     font-weight: 600;
     background: url("../assets/back.jpg");
+    @media (max-width: 671px) {
+        padding: 5% !important;
+    }
+}
+
+.support-image{
+    @media (max-width: 880px) {
+        display: none !important;
+    }
+    
 }
