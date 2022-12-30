@@ -162,7 +162,7 @@ const Rentedbook = ({ book }) => {
             <button
               className=" btn-accept request-btn m-2"
               onClick={handleOpenreview}
-              data-test="checkout-btn"
+              data-test="review-btn"
             >
               Give Review <FiSend className="ms-1 fs-5" />
             </button>

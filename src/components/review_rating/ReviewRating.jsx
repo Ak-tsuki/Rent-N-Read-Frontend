@@ -16,6 +16,7 @@ const ReviewRating = ({ id, book }) => {
 
     if (review === "") {
       toast.warn("Please fill review section", {
+        toastId: "success",
         position: "top-center",
         autoClose: 4000,
       });
@@ -100,6 +101,7 @@ const ReviewRating = ({ id, book }) => {
         onChange={(e) => {
           setReview(e.target.value);
         }}
+        data-test="review_feild"
       />
       <div className="d-flex justify-content-center mt-2">
         <Button
@@ -107,6 +109,7 @@ const ReviewRating = ({ id, book }) => {
           className="bg-success"
           endIcon={<SendIcon />}
           onClick={addReview}
+          data-test="send-btn"
         >
           Send
         </Button>

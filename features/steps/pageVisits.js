@@ -51,7 +51,7 @@ Given("I am on the {string} page", async function (string) {
         localStorage.clear();
         localStorage.setItem(
           "token",
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZTI0YzE2N2RiNTY1MzA4MDU0YmUiLCJpYXQiOjE2NzAzMTUwODR9.Es56s1-At5_I7MKPrfqunjIJY40f-9NmYtWhI7GcuZY"
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc1ZTI0YzE2N2RiNTY1MzA4MDU0YmUiLCJpYXQiOjE2NzI0MDg5MDR9.1ho5fPnvuNyXNaSLJJT9AH5w_qJv80r3u1LzfpntvuA"
         );
       });
       return await this.page.goto("http://localhost:3000/dashboard");
