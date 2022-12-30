@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./myaudiobook.scss";
-import {  FaCloudDownloadAlt } from "react-icons/fa";
+import { FaCloudDownloadAlt } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Typography } from "@mui/material";
@@ -11,16 +11,15 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import moment from "moment";
 import ReactAudioPlayer from "react-audio-player";
-
+import { FiSend } from "react-icons/fi";
+import ReviewRating from "../review_rating/ReviewRating";
 
 const AudioBookCard = ({ book }) => {
-  const {
-    bought_date,
-    payment_status,
-    audiobookId,
-    _id,
-    
-  } = book;
+  const [openreview, setOpenreview] = React.useState(false);
+  const handleOpenreview = () => setOpenreview(true);
+  const handleClosereview = () => setOpenreview(false);
+
+  const { bought_date, payment_status, audiobookId, _id } = book;
   const style = {
     position: "absolute",
     top: "50%",
@@ -72,12 +71,10 @@ const AudioBookCard = ({ book }) => {
   };
 
   const onButtonClick = () => {
-    
     fetch(`http://localhost:90/${audiobookId.audio_book}`).then((response) => {
       response.blob().then((blob) => {
-        
         const fileURL = window.URL.createObjectURL(blob);
-        
+
         let alink = document.createElement("a");
         alink.href = fileURL;
         alink.download = audiobookId.audio_book;
@@ -86,13 +83,10 @@ const AudioBookCard = ({ book }) => {
     });
   };
 
-  
-  
-
   return (
     <>
       <div className="book-card">
-      <FaTrash
+        <FaTrash
           className="book-card__delete"
           onClick={handleOpen}
           data-test="delete-book-btn"
@@ -136,7 +130,6 @@ const AudioBookCard = ({ book }) => {
           <p className="book-details__author">{audiobookId.author}</p>
           <p className="book-details__desc">{audiobookId.desc}</p>
           <p className="book-details__desc">{boughtdate}</p>
-          
 
           <p className="book-details__desc">
             Payment Status:
@@ -157,18 +150,16 @@ const AudioBookCard = ({ book }) => {
             <span className="book-details__cost--amount">
               Rs {audiobookId.price}
             </span>
-            
           </p>
           <p className="book-details__desc">
-                    {
-                      <ReactAudioPlayer
-                        src={`http://localhost:90/${audiobookId.audio_book}`}
-                        controls
-
-                      />
-                    }
-                  </p>
-            <div className="book-details__update">
+            {
+              <ReactAudioPlayer
+                src={`http://localhost:90/${audiobookId.audio_book}`}
+                controls
+              />
+            }
+          </p>
+          <div className="book-details__update">
             <button
               className="book-details__update--btn"
               onClick={onButtonClick}
@@ -176,9 +167,26 @@ const AudioBookCard = ({ book }) => {
             >
               Download <FaCloudDownloadAlt />
             </button>
+            <button
+              className=" btn-accept request-btn m-2"
+              onClick={handleOpenreview}
+              data-test="checkout-btn"
+            >
+              Give Review <FiSend className="ms-1 fs-5" />
+            </button>
+            <Modal
+              open={openreview}
+              onClose={handleClosereview}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <ReviewRating id={book._id} book={"audiobook"}></ReviewRating>
+              </Box>
+            </Modal>
           </div>
         </div>
-        </div>
+      </div>
     </>
   );
 };

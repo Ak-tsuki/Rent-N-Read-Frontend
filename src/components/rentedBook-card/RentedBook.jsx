@@ -56,6 +56,8 @@ const Rentedbook = ({ book }) => {
     total_price,
   } = book;
 
+  const reviewdata = [bookId, "book"];
+
   // const currentDate = new Date();
 
   // const config = {
@@ -204,7 +206,7 @@ const Rentedbook = ({ book }) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <ReviewRating></ReviewRating>
+            <ReviewRating id={book._id} book={"Realbook"}></ReviewRating>
           </Box>
         </Modal>
       </div>

@@ -13,6 +13,9 @@ import ExchangeBook from "../components/exchange_book/ExchangeBook";
 import Box from "@mui/material/Box";
 import ListedBookCard from "../components/listedbook-card/listedbook-card";
 import { toast } from "react-toastify";
+import Avatar from "@mui/material/Avatar";
+import Rating from "@mui/material/Rating";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -159,12 +162,14 @@ const SingleBook = () => {
 
           setTimeout(() => window.location.replace("/wishlist"), 1000);
         } else {
-          toast.error(res.data.msg,
+          toast.error(
+            res.data.msg,
             { toastId: "Added-to-wishlist" },
-             {
-            position: "top-right",
-            autoClose: 2000,
-          });
+            {
+              position: "top-right",
+              autoClose: 2000,
+            }
+          );
         }
       })
       .catch((e) => {
@@ -181,7 +186,11 @@ const SingleBook = () => {
               className="img-book"
               alt="..."
             />
-            <button className="wishlist-btn my-4" onClick={addToWishlist} data-test="wishlist_btn">
+            <button
+              className="wishlist-btn my-4"
+              onClick={addToWishlist}
+              data-test="wishlist_btn"
+            >
               Add to wishlist <BsBookmarkPlusFill className="ms-1 fs-4" />
             </button>
           </div>
@@ -241,6 +250,37 @@ const SingleBook = () => {
             >
               Start a conversation <BsFillChatLeftDotsFill />
             </button>
+          </div>
+
+          {/* review */}
+          <div className="book-detail mt-4">
+            <h6 className="chat__heading">Book Review</h6>
+            <hr />
+            {/* review container */}
+            <div className="my-2">
+              <div className="d-flex justify-content-between">
+                <div className="d-flex align-items-center">
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={`http://localhost:90/${bookowner.profile_pic}`}
+                  />
+                  <div className="ms-2">
+                    <p className="reviewuserfont mb-1">By Tsering Sherpa</p>
+                    <Rating
+                      name="read-only"
+                      className="fs-6"
+                      value={3}
+                      readOnly
+                    />
+                  </div>
+                </div>
+                <p>3days ago</p>
+              </div>
+              <p className="text-justify bg-white p-3 mt-2 rounded-3">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
+                accusantium, aliquam ducimus ea veritatis necessitatibus
+              </p>
+            </div>
           </div>
         </div>
       </div>

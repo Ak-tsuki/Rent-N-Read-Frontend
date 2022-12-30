@@ -15,7 +15,18 @@ import { SpecialZoomLevel, Viewer, Worker } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import { toolbarPlugin } from "@react-pdf-viewer/toolbar";
 import { ToolbarSlot, TransformToolbarSlot } from "@react-pdf-viewer/toolbar";
-
+import ReviewRating from "../review_rating/ReviewRating";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "50%",
+  bgcolor: "background.paper",
+  borderRadius: "10px",
+  boxShadow: 24,
+  p: 4,
+};
 const style1 = {
   position: "absolute",
   top: "50%",
@@ -37,15 +48,16 @@ const RentedEBook = ({ book }) => {
   const [see, setSee] = React.useState(false);
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
+  const [openreview, setOpenreview] = React.useState(false);
+  const handleOpenreview = () => setOpenreview(true);
+  const handleClosereview = () => setOpenreview(false);
+
   const toolbarPluginInstance = toolbarPlugin();
   const { renderDefaultToolbar, Toolbar } = toolbarPluginInstance;
 
   const [returnCheck, setReturnCheck] = useState(false);
 
-  const {
-    _id,
-    ebookId,
-  } = book;
+  const { _id, ebookId } = book;
 
   const [start_date, setStartDate] = useState("");
   const [no_of_days, setNoOfDays] = useState("");
@@ -90,7 +102,7 @@ const RentedEBook = ({ book }) => {
         .then((res) => {
           console.log(res);
           if (res.status === 201) {
-            setReturnCheck(true)
+            setReturnCheck(true);
             console.log("Returned Successful");
           } else {
             console.log("Failed");
@@ -246,6 +258,23 @@ const RentedEBook = ({ book }) => {
             </div>
           )}
         </div>
+        <button
+          className=" btn-accept request-btn m-2"
+          onClick={handleOpenreview}
+          data-test="checkout-btn"
+        >
+          Give Review <FiSend className="ms-1 fs-5" />
+        </button>
+        <Modal
+          open={openreview}
+          onClose={handleClosereview}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <ReviewRating id={book._id} book={"ebook"}></ReviewRating>
+          </Box>
+        </Modal>
         <Modal
           open={see}
           onClose={handleClose1}
