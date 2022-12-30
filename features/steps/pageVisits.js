@@ -259,6 +259,13 @@ Given("I am on the {string} page", async function (string) {
         "http://localhost:3000/dashboard_admin/audio_book"
       );
 
+    // Contact Us =========================================
+    case "Contact-Us":
+      await this.page.evaluateOnNewDocument(() => {
+        localStorage.clear();
+      });
+      return await this.page.goto("http://localhost:3000/contact");
+
     default:
       throw new Error(`${string} is not a supported page name`);
   }

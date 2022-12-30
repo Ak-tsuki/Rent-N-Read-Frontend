@@ -69,6 +69,7 @@ const ContactUs = () => {
         console.log(response);
         if (response.status === 201) {
           toast.success("Message Sent Successfully", {
+            toastId: "contactUs",
             position: "top-center",
             autoClose: 4000,
           });
@@ -76,7 +77,7 @@ const ContactUs = () => {
         } else {
           console.log("Please Try Again! Something Went Wrong!!!", response);
           toast.error("Somthing went wrong!", {
-            toastId: "error",
+            toastId: "contactUs",
             position: "top-center",
             autoClose: 4000,
           });
@@ -84,7 +85,7 @@ const ContactUs = () => {
       })
       .catch((e) => {
         toast.error("Something Went Wrong, Please Try Again!!", {
-          toastId: "error",
+          toastId: "contactUs",
           position: "top-center",
           autoClose: 4000,
         });
@@ -128,16 +129,18 @@ const ContactUs = () => {
               </Typography>
               <form>
                 <Grid container spacing={1}>
-                  <Grid xs={12} sm={6} item>
+                  <Grid xs={12} sm={6} item >
                     <TextField
                       placeholder="Enter first name"
                       label="First Name"
                       variant="outlined"
                       fullWidth
                       required
+                      
                       onChange={(e) => {
                         setFirstName(e.target.value);
                       }}
+                      data-test="contactus-Fname"
                     />
                   </Grid>
                   <Grid xs={12} sm={6} item>
@@ -150,6 +153,7 @@ const ContactUs = () => {
                       onChange={(e) => {
                         setLastName(e.target.value);
                       }}
+                      data-test="contactus-Lname"
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -160,6 +164,7 @@ const ContactUs = () => {
                       variant="outlined"
                       fullWidth
                       required
+                      data-test="contactus-email"
                       onChange={handleEmail}
                     />
                     {emailError ? <span className="text-danger">Enter valid email</span> : ""}
@@ -172,6 +177,7 @@ const ContactUs = () => {
                       variant="outlined"
                       fullWidth
                       required
+                      data-test="contactus-phone"
                       onChange={(e) => {
                         setContactNo(e.target.value);
                       }}
@@ -186,6 +192,7 @@ const ContactUs = () => {
                       variant="outlined"
                       fullWidth
                       required
+                      data-test="contactus-sub"
                       onChange={(e) => {
                         setSubject(e.target.value);
                       }}
@@ -200,6 +207,7 @@ const ContactUs = () => {
                       variant="outlined"
                       fullWidth
                       required
+                      data-test="contactus-message"
                       onChange={(e) => {
                         setMessage(e.target.value);
                       }}
@@ -212,6 +220,7 @@ const ContactUs = () => {
                       color="primary"
                       onClick={handleSubmit}
                       fullWidth
+                      data-test="btn-contactus"
                     >
                       Submit
                     </Button>
