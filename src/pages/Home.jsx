@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ListedEbookCard from "../components/listedbook-card/listed-Ebookcard";
 import ListedAudioBookCard from "../components/listedbook-card/listedaudiobook-card";
+import background from "../assets/background-main.svg";
 
 const Home = () => {
   const [listedBooks, setListedBooks] = useState([]);
@@ -46,8 +47,9 @@ const Home = () => {
 
   return (
     <div className="home-container">
+      <img src={background} alt="background" className="home-img" />
       <section className="hero">
-        <form className="search">
+        {/* <form className="search">
           <input
             type="text"
             className="search__input"
@@ -57,14 +59,19 @@ const Home = () => {
             <BiSearch />
             Search
           </button>
-        </form>
+        </form> */}
         <h2 className="hero__text">
           A book worm’s paradise <br />{" "}
           <span className="hero__text--red"> RENT</span> &{" "}
           <span className="hero__text--green">EXCHANGE</span>
         </h2>
-        <button className="hero__btn">
-          List Books for Rent <FaBook />
+        <button
+          className="hero__btn"
+          onClick={(e) => {
+            window.location.replace("/books");
+          }}
+        >
+          Explore Books <FaBook />
         </button>
       </section>
       {localStorage.getItem("token") ? (
