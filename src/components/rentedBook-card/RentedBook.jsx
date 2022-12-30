@@ -15,7 +15,7 @@ import time from "cucumber/lib/time";
 import moment from "moment";
 import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
+import ReviewRating from "../review_rating/ReviewRating";
 
 const style = {
   position: "absolute",
@@ -31,9 +31,9 @@ const style = {
 
 const Rentedbook = ({ book }) => {
   const [open, setOpen] = React.useState(false);
+  const [openreview, setOpenreview] = React.useState(false);
   const [bookObject, setBookObject] = useState([]);
 
-  
   const handleOpen = () => {
     setOpen(true);
     setBookObject(book);
@@ -42,8 +42,9 @@ const Rentedbook = ({ book }) => {
     setOpen(false);
     setBookObject();
   };
-  
 
+  const handleOpenreview = () => setOpenreview(true);
+  const handleClosereview = () => setOpenreview(false);
 
   const {
     start_date,
@@ -57,24 +58,17 @@ const Rentedbook = ({ book }) => {
 
   // const currentDate = new Date();
 
-
-
-  
-
-
   // const config = {
   //   headers: {
   //     Authorization: "Bearer " + localStorage.getItem("token"),
   //   },
   // };
 
-
   // const returnBook = (id, e) => {
   //   e.preventDefault();
   //   const data = {
   //     id: id,
-      
-      
+
   //   };
   //   axios
   //     .put("http://localhost:90/rent/returnBook", data, config)
@@ -100,7 +94,7 @@ const Rentedbook = ({ book }) => {
         alt="book_img"
         className="rented-book__img"
       />
-      <div className="book-details">  
+      <div className="book-details">
         <h2 className="book-details__title">{bookId.name}</h2>
         <p className="book-details__author">{bookId.author}</p>
         <p className="book-details__cost">
@@ -111,8 +105,12 @@ const Rentedbook = ({ book }) => {
           /day
         </p>
         <p className="book-details__desc">Duration: {no_of_days} Days</p>
-        <p className="book-details__desc">Start Date: {moment(start_date).format("MMMM Do YYYY")}</p>
-        <p className="book-details__desc">End Date: {moment(end_date).format("MMMM Do YYYY")}</p>
+        <p className="book-details__desc">
+          Start Date: {moment(start_date).format("MMMM Do YYYY")}
+        </p>
+        <p className="book-details__desc">
+          End Date: {moment(end_date).format("MMMM Do YYYY")}
+        </p>
         <p className="book-details__desc">
           Status:
           <span
@@ -143,7 +141,7 @@ const Rentedbook = ({ book }) => {
           Total Cost:{" "}
           <span className="book-details__cost--amount">Rs {total_price}</span>
         </p>
-       
+
         <div>
           {rent_status !== "Approved" || payment_status === "Paid" ? (
             <div> </div>
@@ -155,6 +153,19 @@ const Rentedbook = ({ book }) => {
             >
               Proceed To Checkout <FiSend className="ms-1 fs-5" />
             </button>
+          )}
+        </div>
+        <div>
+          {payment_status === "Pending" ? (
+            <button
+              className=" btn-accept request-btn m-2"
+              onClick={handleOpenreview}
+              data-test="checkout-btn"
+            >
+              Give Review <FiSend className="ms-1 fs-5" />
+            </button>
+          ) : (
+            <div></div>
           )}
         </div>
         {/* <div>
@@ -173,7 +184,6 @@ const Rentedbook = ({ book }) => {
             </button>
           )}
         </div> */}
-     
       </div>
       <div>
         {/* <Button onClick={handleOpen}>Open modal</Button> */}
@@ -185,6 +195,16 @@ const Rentedbook = ({ book }) => {
         >
           <Box sx={style}>
             <Checkout bookObject={bookObject}></Checkout>
+          </Box>
+        </Modal>
+        <Modal
+          open={openreview}
+          onClose={handleClosereview}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <ReviewRating></ReviewRating>
           </Box>
         </Modal>
       </div>
