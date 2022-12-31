@@ -29,6 +29,8 @@ import RentEBook from "../components/rent_ebook/RentEBook";
 
 import Checkout from "../components/proceed_to_checkout/Checkout";
 import EbookCheckout from "../components/proceed_to_checkout/EbookCheckout";
+import { Avatar, Rating } from "@mui/material";
+import { format } from "timeago.js";
 // interface RemovePartsDefaultToolbarExampleProps {
 //   fileUrl: string;
 // }
@@ -116,6 +118,8 @@ const EbookSingleBook = ({ book, fileUrl }) => {
   const [open, setOpen] = React.useState(false);
   const [bookObject, setBookObject] = useState([]);
 
+  const [listreviews, setListReviews] = useState([]);
+
   const handleOpen = () => {
     setOpen(true);
     setBookObject(book);
@@ -144,6 +148,15 @@ const EbookSingleBook = ({ book, fileUrl }) => {
       .then((res) => {
         console.log(res.data);
         setEBooks(res.data.data);
+      });
+    axios
+      .get("http://localhost:90/get/ebook_reviews/" + book_id)
+      .then((res) => {
+        console.log(res.data);
+        setListReviews(res.data.reviews);
+      })
+      .catch((e) => {
+        console.log(e);
       });
   }, []);
 
@@ -334,6 +347,41 @@ const EbookSingleBook = ({ book, fileUrl }) => {
           </Modal>
         </div>
       </div>
+      {/* review */}
+
+      <div className="book-detail mt-4">
+        <h6 className="chat__heading">Book Review</h6>
+        <hr />
+        {/* review container */}
+        {listreviews.map((reviews) => (
+          <div className="my-2">
+            <div className="d-flex justify-content-between">
+              <div className="d-flex align-items-center">
+                <Avatar
+                  alt="Remy Sharp"
+                  src={`http://localhost:90/${reviews.userId.profile_pic}`}
+                />
+                <div className="ms-2">
+                  <p className="reviewuserfont mb-1">
+                    By {reviews.userId.username}
+                  </p>
+                  <Rating
+                    name="read-only"
+                    className="fs-6"
+                    value={reviews.rating}
+                    readOnly
+                  />
+                </div>
+              </div>
+              <p> {format(reviews.createdAt)}</p>
+            </div>
+            <p className="text-justify bg-white p-3 mt-2 rounded-3">
+              {reviews.review}
+            </p>
+          </div>
+        ))}
+      </div>
+
       <section className="listedBook-container">
         <div className="heading2">
           <h4 className="ms-2">More Books From This Author</h4>

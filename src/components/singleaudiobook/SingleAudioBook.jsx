@@ -12,6 +12,8 @@ import ListedAudioBookCard from "../listedbook-card/listedaudiobook-card";
 import BuyAudioBook from "../buy_audio_book/BuyAudioBook";
 import { MdShoppingBag } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
+import { format } from "timeago.js";
+import { Avatar, Rating } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -49,6 +51,8 @@ const SingleAudioBook = () => {
 
   const [listedBooks, setListedBooks] = useState([]);
 
+  const [listreviews, setListReviews] = useState([]);
+
   const showToastMessage = () => {
     toast.error("Please Login First!!!", {
       position: toast.POSITION.TOP_CENTER,
@@ -75,6 +79,15 @@ const SingleAudioBook = () => {
       .then((res) => {
         console.log(res.data);
         setListedBooks(res.data.data);
+      });
+    axios
+      .get("http://localhost:90/get/audiobook_reviews/" + audiobook_id)
+      .then((res) => {
+        console.log(res.data);
+        setListReviews(res.data.reviews);
+      })
+      .catch((e) => {
+        console.log(e);
       });
   }, []);
 
@@ -157,6 +170,40 @@ const SingleAudioBook = () => {
             />
           </Box>
         </Modal>
+      </div>
+      {/* review */}
+
+      <div className="book-detail mt-4">
+        <h6 className="chat__heading">Book Review</h6>
+        <hr />
+        {/* review container */}
+        {listreviews.map((reviews) => (
+          <div className="my-2">
+            <div className="d-flex justify-content-between">
+              <div className="d-flex align-items-center">
+                <Avatar
+                  alt="Remy Sharp"
+                  src={`http://localhost:90/${reviews.userId.profile_pic}`}
+                />
+                <div className="ms-2">
+                  <p className="reviewuserfont mb-1">
+                    By {reviews.userId.username}
+                  </p>
+                  <Rating
+                    name="read-only"
+                    className="fs-6"
+                    value={reviews.rating}
+                    readOnly
+                  />
+                </div>
+              </div>
+              <p> {format(reviews.createdAt)}</p>
+            </div>
+            <p className="text-justify bg-white p-3 mt-2 rounded-3">
+              {reviews.review}
+            </p>
+          </div>
+        ))}
       </div>
       <section className="listedBook-container">
         <div className="heading2">
