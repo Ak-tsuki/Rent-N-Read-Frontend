@@ -133,6 +133,9 @@ const Login = () => {
           <AiFillGoogleCircle className="login__google--icon" size={30} />
           Sign in with google
         </button>
+        <Link to="/forgetpassword" className="login-link">
+          forgot password ?
+        </Link>
       </div>
     </div>
   );

@@ -31,6 +31,8 @@ import OnlyEBooks from "../../pages/OnlyEBook";
 import OnlyAudioBooks from "../../pages/OnlyAudioBooks";
 import ContactUs from "../../pages/ContactUs";
 import InboxMain from "../Inbox/InboxMain";
+import ForgetPasswordEmail from "../../pages/ForgetPasswordEmail";
+import OtpPasswordreset from "../../pages/OtpPasswordreset";
 
 const Body = () => {
   return (
@@ -58,6 +60,8 @@ const Body = () => {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgetpassword" element={<ForgetPasswordEmail />} />
+
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<MyBooks />} />
           <Route path="request" element={<MyRentRequest />} />
