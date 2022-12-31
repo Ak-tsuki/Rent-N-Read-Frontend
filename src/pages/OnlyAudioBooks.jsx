@@ -135,15 +135,15 @@ const OnlyAudioBooks = () => {
   const searchBooks = (e) => {
     e.preventDefault();
     console.log(searchQuery);
-    const searchResult = allBooks.filter(
+    const searchResult = allAudioBooks.filter(
       (book) =>
         book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
         book.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setListedBooks(searchResult);
+    setAudioBooks(searchResult);
 
     if (searchQuery === "") {
-      setListedBooks(allBooks);
+      setAudioBooks(allAudioBooks);
     }
   };
 

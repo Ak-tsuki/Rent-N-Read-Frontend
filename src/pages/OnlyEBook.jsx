@@ -135,15 +135,15 @@ const OnlyEBook = () => {
   const searchBooks = (e) => {
     e.preventDefault();
     console.log(searchQuery);
-    const searchResult = allBooks.filter(
+    const searchResult = allEBooks.filter(
       (book) =>
         book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
         book.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setListedBooks(searchResult);
+    setEBooks(searchResult);
 
     if (searchQuery === "") {
-      setListedBooks(allBooks);
+      setEBooks(allEBooks);
     }
   };
 
