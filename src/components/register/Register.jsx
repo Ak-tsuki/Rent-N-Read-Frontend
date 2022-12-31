@@ -34,46 +34,6 @@ const Register = () => {
   const contactRegex =
     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 
-  // const handleUsername = (e) => {
-  //   let username = e.target.value;
-  //   if (!username.match(usernameRegex)) {
-  //     setUsernameError(true);
-  //   } else {
-  //     setUsernameError(false);
-  //   }
-  //   setUsername(username);
-  // };
-
-  // const handleEmail = (e) => {
-  //   let email = e.target.value;
-  //   if (!email.match(emailRegex)) {
-  //     setEmailError(true);
-  //   } else {
-  //     setEmailError(false);
-  //   }
-  //   setEmail(email);
-  // };
-
-  // const handleContact = (e) => {
-  //   let contact_no = e.target.value;
-  //   if (!contact_no.match(contactRegex)) {
-  //     setContactError(true);
-  //   } else {
-  //     setContactError(false);
-  //   }
-  //   setContactNo(contact_no);
-  // };
-
-  // const handlePassword = (e) => {
-  //   let password = e.target.value;
-  //   if (!password.match(passwordRegex)) {
-  //     setPasswordError(true);
-  //   } else {
-  //     setPasswordError(false);
-  //   }
-  //   setPassword(password);
-  // };
-
   const validate = () => {
     if (username === "") {
       toast.error("Please fill all the fields");
@@ -128,33 +88,6 @@ const Register = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // let username = e.target[0].value;
-    // if (username.length < 3) {
-    //   setUsernameError(true);
-    // } else {
-    //   setUsernameError(false);
-    // }
-    // let email = e.target[1].value;
-    // if (!email.match(emailRegex)) {
-    //   setEmailError(true);
-    // } else {
-    //   setEmailError(false);
-    // }
-
-    // let contact_no = e.target[2].value;
-    // if (!contact_no.match(contactRegex)) {
-    //   setContactError(true);
-    // } else {
-    //   setContactError(false);
-    // }
-
-    // let password = e.target[3].value;
-    // if (!password.match(passwordRegex)) {
-    //   setPasswordError(true);
-    // } else {
-    //   setPasswordError(false);
-    // }
 
     const data = {
       username: username,
@@ -229,8 +162,6 @@ const Register = () => {
                   required="true"
                   type="text"
                   placeholder="Username"
-                  // value={username}
-                  // onChange={handleUsername}
                   onChange={(e) => {
                     setUsername(e.target.value);
                   }}
@@ -252,8 +183,6 @@ const Register = () => {
                   required
                   type="email"
                   placeholder="Email address"
-                  // value={email}
-                  // onChange={handleEmail}
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
@@ -268,8 +197,6 @@ const Register = () => {
                   required
                   type="number"
                   placeholder="Contact No."
-                  // value={contact_no}
-                  // onChange={handleContact}
                   onChange={(e) => {
                     setContactNo(e.target.value);
                   }}
@@ -284,8 +211,6 @@ const Register = () => {
                   required
                   type="password"
                   placeholder="Enter password"
-                  // value={password}
-                  // onChange={handlePassword}
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
