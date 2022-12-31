@@ -34,47 +34,99 @@ const Register = () => {
   const contactRegex =
     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 
-  const handleUsername = (e) => {
-    let username = e.target.value;
-    if (!username.match(usernameRegex)) {
+  // const handleUsername = (e) => {
+  //   let username = e.target.value;
+  //   if (!username.match(usernameRegex)) {
+  //     setUsernameError(true);
+  //   } else {
+  //     setUsernameError(false);
+  //   }
+  //   setUsername(username);
+  // };
+
+  // const handleEmail = (e) => {
+  //   let email = e.target.value;
+  //   if (!email.match(emailRegex)) {
+  //     setEmailError(true);
+  //   } else {
+  //     setEmailError(false);
+  //   }
+  //   setEmail(email);
+  // };
+
+  // const handleContact = (e) => {
+  //   let contact_no = e.target.value;
+  //   if (!contact_no.match(contactRegex)) {
+  //     setContactError(true);
+  //   } else {
+  //     setContactError(false);
+  //   }
+  //   setContactNo(contact_no);
+  // };
+
+  // const handlePassword = (e) => {
+  //   let password = e.target.value;
+  //   if (!password.match(passwordRegex)) {
+  //     setPasswordError(true);
+  //   } else {
+  //     setPasswordError(false);
+  //   }
+  //   setPassword(password);
+  // };
+
+  const validate = () => {
+    if (username === "") {
+      toast.error("Please fill all the fields");
+      return false;
+    }
+    if (username === "") {
+      toast.error("Name is required");
+      return false;
+    }
+    if (username == "") {
+      toast.error("Username is required");
+    } else if (!usernameRegex.test(username)) {
       setUsernameError(true);
+      toast.error(
+        " Username should be 4-16 characters and shouldn't include any special characters and numbers"
+      );
+      return false;
     } else {
       setUsernameError(false);
     }
-    setUsername(username);
-  };
-
-  const handleEmail = (e) => {
-    let email = e.target.value;
-    if (!email.match(emailRegex)) {
+    if (email == "") {
+      toast.error("Email is required");
+    } else if (!emailRegex.test(email)) {
       setEmailError(true);
+      toast.error("Enter valid email");
+      return false;
     } else {
       setEmailError(false);
     }
-    setEmail(email);
-  };
 
-  const handleContact = (e) => {
-    let contact_no = e.target.value;
-    if (!contact_no.match(contactRegex)) {
+    if (contact_no == "") {
+      toast.error("Contact number is required");
+    } else if (!contactRegex.test(contact_no)) {
       setContactError(true);
+      toast.error("Enter valid Contact number ");
+      return false;
     } else {
       setContactError(false);
     }
-    setContactNo(contact_no);
-  };
-
-  const handlePassword = (e) => {
-    let password = e.target.value;
-    if (!password.match(passwordRegex)) {
+    if (password == "") {
+      toast.error("Password is required");
+    } else if (!passwordRegex.test(password)) {
       setPasswordError(true);
+      toast.error(
+        "Password is  Password must be at least 8 characters long, must contain at least 1 uppercase letters, 1 special characters"
+      );
+      return false;
     } else {
       setPasswordError(false);
     }
-    setPassword(password);
+    return true;
   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // let username = e.target[0].value;
@@ -111,41 +163,46 @@ const Register = () => {
       password: password,
     };
     console.log(data);
-    axios
-      .post("http://localhost:90/user/register", data)
-      .then((response) => {
-        console.log(response);
-        if (response.status === 201) {
-          toast.success("User Registered Sucessfully", {
-            position: "top-center",
-            autoClose: 4000,
+    if (validate()) {
+      try {
+        await axios
+          .post("http://localhost:90/user/register", data)
+          .then((response) => {
+            console.log(response);
+            if (response.status === 201) {
+              toast.success("User Registered Sucessfully", {
+                position: "top-center",
+                autoClose: 4000,
+              });
+              window.location.replace("/login");
+            } else if (response.status === 200) {
+              toast.error("Username Already Registered", {
+                toastId: "error",
+                position: "top-center",
+                autoClose: 4000,
+              });
+            } else if (response.status === 401) {
+              toast.error("Something Went Wrong, Please Try Again!!", {
+                toastId: "error",
+                position: "top-center",
+                autoClose: 4000,
+              });
+            }
+            console.log(response.data.msg);
+          })
+          .catch((e) => {
+            toast.error("Something Went Wrong, Please Try Again!!", {
+              toastId: "error",
+              position: "top-center",
+              autoClose: 4000,
+            });
+            console.log(e);
           });
-          window.location.replace("/login");
-        } else if (response.status === 200) {
-          toast.error("Username Already Registered", {
-            toastId: "error",
-            position: "top-center",
-            autoClose: 4000,
-          });
-        } else if (response.status === 401) {
-          toast.error("Something Went Wrong, Please Try Again!!", {
-            toastId: "error",
-            position: "top-center",
-            autoClose: 4000,
-          });
-        }
-        console.log(response.data.msg);
-      })
-      .catch((e) => {
-        toast.error("Something Went Wrong, Please Try Again!!", {
-          toastId: "error",
-          position: "top-center",
-          autoClose: 4000,
-        });
-        console.log(e);
-      });
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    }
   };
-
   return (
     <>
       <div className="register-container" data-test="register">
@@ -173,10 +230,10 @@ const Register = () => {
                   type="text"
                   placeholder="Username"
                   // value={username}
-                  onChange={handleUsername}
-                  // onChange={(e) => {
-                  //   setUsername(e.target.value);
-                  // }}
+                  // onChange={handleUsername}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
                   data-test="username"
                 />
                 {usernameError ? (
@@ -196,10 +253,10 @@ const Register = () => {
                   type="email"
                   placeholder="Email address"
                   // value={email}
-                  onChange={handleEmail}
-                  // onChange={(e) => {
-                  //   setEmail(e.target.value);
-                  // }}
+                  // onChange={handleEmail}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   data-test="email"
                 />
                 {emailError ? <span>Enter valid email</span> : ""}
@@ -212,10 +269,10 @@ const Register = () => {
                   type="number"
                   placeholder="Contact No."
                   // value={contact_no}
-                  onChange={handleContact}
-                  // onChange={(e) => {
-                  //   setContactNo(e.target.value);
-                  // }}
+                  // onChange={handleContact}
+                  onChange={(e) => {
+                    setContactNo(e.target.value);
+                  }}
                   data-test="contactno"
                 />
                 {contactError ? <span>Enter valid Contact number</span> : ""}
@@ -228,10 +285,10 @@ const Register = () => {
                   type="password"
                   placeholder="Enter password"
                   // value={password}
-                  onChange={handlePassword}
-                  // onChange={(e) => {
-                  //   setPassword(e.target.value);
-                  // }}
+                  // onChange={handlePassword}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   data-test="password"
                 />
                 {passwordError ? (
