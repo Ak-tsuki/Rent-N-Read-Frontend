@@ -206,7 +206,7 @@ const Rentedbook = ({ book }) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <ReviewRating id={book._id} book={"Realbook"}></ReviewRating>
+            <ReviewRating id={book.bookId} book={"Realbook"}></ReviewRating>
           </Box>
         </Modal>
       </div>

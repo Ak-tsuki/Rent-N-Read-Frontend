@@ -15,7 +15,7 @@ import ListedBookCard from "../components/listedbook-card/listedbook-card";
 import { toast } from "react-toastify";
 import Avatar from "@mui/material/Avatar";
 import Rating from "@mui/material/Rating";
-
+import { format } from "timeago.js";
 const style = {
   position: "absolute",
   top: "50%",
@@ -34,6 +34,7 @@ const SingleBook = () => {
   const [openExchange, setOpenExchange] = React.useState(false);
   const handleOpenExchange = () => setOpenExchange(true);
   const handleCloseExchange = () => setOpenExchange(false);
+
   const { book_id } = useParams();
   const { authormain } = useParams();
   const [book_img, setBookImg] = useState("");
@@ -46,6 +47,8 @@ const SingleBook = () => {
   const [cost, setCost] = useState("");
   const [receiverId, setReceiverId] = useState("");
   const [listedBooks, setListedBooks] = useState([]);
+
+  const [listreviews, setListReviews] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:90/book/getone/" + book_id)
@@ -88,7 +91,16 @@ const SingleBook = () => {
       .catch((e) => {
         console.log(e);
       });
-  }, [bookowner]);
+    axios
+      .get("http://localhost:90/get/book_reviews/" + book_id)
+      .then((res) => {
+        console.log(res.data);
+        setListReviews(res.data.reviews);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -253,34 +265,38 @@ const SingleBook = () => {
           </div>
 
           {/* review */}
+
           <div className="book-detail mt-4">
             <h6 className="chat__heading">Book Review</h6>
             <hr />
             {/* review container */}
-            <div className="my-2">
-              <div className="d-flex justify-content-between">
-                <div className="d-flex align-items-center">
-                  <Avatar
-                    alt="Remy Sharp"
-                    src={`http://localhost:90/${bookowner.profile_pic}`}
-                  />
-                  <div className="ms-2">
-                    <p className="reviewuserfont mb-1">By Tsering Sherpa</p>
-                    <Rating
-                      name="read-only"
-                      className="fs-6"
-                      value={3}
-                      readOnly
+            {listreviews.map((reviews) => (
+              <div className="my-2">
+                <div className="d-flex justify-content-between">
+                  <div className="d-flex align-items-center">
+                    <Avatar
+                      alt="Remy Sharp"
+                      src={`http://localhost:90/${reviews.userId.profile_pic}`}
                     />
+                    <div className="ms-2">
+                      <p className="reviewuserfont mb-1">
+                        By {reviews.userId.username}
+                      </p>
+                      <Rating
+                        name="read-only"
+                        className="fs-6"
+                        value={reviews.rating}
+                        readOnly
+                      />
+                    </div>
                   </div>
+                  <p> {format(reviews.createdAt)}</p>
                 </div>
-                <p>3days ago</p>
+                <p className="text-justify bg-white p-3 mt-2 rounded-3">
+                  {reviews.review}
+                </p>
               </div>
-              <p className="text-justify bg-white p-3 mt-2 rounded-3">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam
-                accusantium, aliquam ducimus ea veritatis necessitatibus
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </div>

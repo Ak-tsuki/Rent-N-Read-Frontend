@@ -272,7 +272,7 @@ const RentedEBook = ({ book }) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <ReviewRating id={book._id} book={"ebook"}></ReviewRating>
+            <ReviewRating id={book.ebookId} book={"ebook"}></ReviewRating>
           </Box>
         </Modal>
         <Modal

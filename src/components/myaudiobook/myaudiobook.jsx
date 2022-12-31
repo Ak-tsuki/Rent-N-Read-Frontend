@@ -181,7 +181,10 @@ const AudioBookCard = ({ book }) => {
               aria-describedby="modal-modal-description"
             >
               <Box sx={style}>
-                <ReviewRating id={book._id} book={"audiobook"}></ReviewRating>
+                <ReviewRating
+                  id={book.audiobookId}
+                  book={"audiobook"}
+                ></ReviewRating>
               </Box>
             </Modal>
           </div>
