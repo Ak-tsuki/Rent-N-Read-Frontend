@@ -138,9 +138,13 @@ label{
 
 .forget-link {
   margin-top: 10px;
-  margin-left: 135px;
+  // margin-left: 135px;
+  text-align: end;
   text-decoration: none;
   color: #f52a2a;
+  @media (max-width: 440px) {
+    font-size: 14px;
+  }
 
   &:hover {
     text-decoration: none;
