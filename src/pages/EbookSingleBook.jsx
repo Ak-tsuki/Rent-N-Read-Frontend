@@ -9,6 +9,7 @@ import { MdPreview } from "react-icons/md";
 import { BsCashCoin } from "react-icons/bs";
 import { RiExchangeFill } from "react-icons/ri";
 import Modal from "@mui/material/Modal";
+import logo from "../assets/logo.svg";
 
 import Box from "@mui/material/Box";
 import ListedEbookCard from "../components/listedbook-card/listed-Ebookcard";
@@ -161,7 +162,7 @@ const EbookSingleBook = ({ book, fileUrl }) => {
   }, []);
 
   return (
-    <div className="Book-container" data-test="singleebookpage">
+    <div className="EBook-container" data-test="singleebookpage">
       <div className="row">
         <div className="col-12 col-md-4 d-flex justify-content-center">
           <div className="book-cover">
@@ -178,9 +179,9 @@ const EbookSingleBook = ({ book, fileUrl }) => {
         <div className="col-12 col-md-8  ">
           <div className="book-detail">
             <img
-              src="https://media.harrypotterfanzone.com/deathly-hallows-us-childrens-edition.jpg"
+              src={logo}
               alt="Avatar"
-              class="avatar"
+              class="Eavatar"
             />
             <div className="my-4">
               <h3 className="book-name">{name}</h3>

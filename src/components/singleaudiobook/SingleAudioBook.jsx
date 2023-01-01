@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { BsBookmarkPlusFill } from "react-icons/bs";
 import { FaChevronCircleRight } from "react-icons/fa";
 import Modal from "@mui/material/Modal";
-
+import logo from "../../assets/logo.svg";
 import Box from "@mui/material/Box";
 import ListedAudioBookCard from "../listedbook-card/listedaudiobook-card";
 import BuyAudioBook from "../buy_audio_book/BuyAudioBook";
@@ -92,7 +92,7 @@ const SingleAudioBook = () => {
   }, []);
 
   return (
-    <div className="Book-container" data-test="singleaudiobookpage">
+    <div className="AudioBook-container" data-test="singleaudiobookpage">
       <div className="row">
         <div className="col-12 col-md-4 d-flex justify-content-center">
           <div className="book-cover">
@@ -109,7 +109,7 @@ const SingleAudioBook = () => {
         <div className="col-12 col-md-8  ">
           <div className="book-detail">
             <img
-              src="https://media.harrypotterfanzone.com/deathly-hallows-us-childrens-edition.jpg"
+              src={logo}
               alt="Avatar"
               class="avatar"
             />

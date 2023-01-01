@@ -1,6 +1,6 @@
-.Book-container {
-  // margin: 80px 7%;
-  margin: 0 7%;
+.AudioBook-container {
+  margin: 80px 7%;
+  // margin: 0 7%;
   min-height: 650px;
 }
 .img-book {
@@ -96,12 +96,13 @@
 }
 .avatar {
   vertical-align: middle;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  // border-radius: 50%;
   position: absolute;
-  top: -20px;
+  top: -70px;
   right: 50px;
+  object-fit: contain;
 }
 
 .availabefor {
