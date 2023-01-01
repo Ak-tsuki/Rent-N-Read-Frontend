@@ -148,15 +148,29 @@ const Books = () => {
   const searchBooks = (e) => {
     e.preventDefault();
     console.log(searchQuery);
-    const searchResult = allBooks.filter(
+    const listedBooksSearchResult = allBooks.filter(
       (book) =>
         book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
         book.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setListedBooks(searchResult);
+    const eBooksSearchResult = allEBooks.filter(
+      (book) =>
+        book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        book.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    const audioBooksSearchResult = allAudioBooks.filter(
+      (book) =>
+        book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        book.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setListedBooks(listedBooksSearchResult);
+    setEBooks(eBooksSearchResult);
+    setAudioBooks(audioBooksSearchResult);
 
     if (searchQuery === "") {
       setListedBooks(allBooks);
+      setEBooks(allEBooks);
+      setAudioBooks(allAudioBooks);
     }
   };
 
