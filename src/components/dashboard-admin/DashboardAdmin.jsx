@@ -199,23 +199,6 @@ function DashboardAdmin(props) {
             </ListItemButton>
           </ListItem>
         </Link>
-
-        <Link to="/dashboard_admin/profile" className="admin-dashboard__nav">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              <ListItemText
-                disableTypography
-                primary={"Profile"}
-                sx={{
-                  fontFamily: "Alata",
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
-        </Link>
         <Link
           to="/dashboard_admin/adminSetting"
           className="admin-dashboard__nav"
@@ -280,6 +263,7 @@ function DashboardAdmin(props) {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography
             variant="h6"
             noWrap
@@ -287,18 +271,20 @@ function DashboardAdmin(props) {
             className="alata"
             flexGrow={1}
           ></Typography>
-          <Box sx={{ flexGrow: 0 }}>
-            <IconButton sx={{ p: 0 }}>
-              <Avatar
-                alt="profile image"
-                src={
-                  userDetails.profile_pic
-                    ? `http://localhost:90/${userDetails.profile_pic}`
-                    : "https://www.pngitem.com/pimgs/m/421-4212341_default-avatar-svg-hd-png-download.png"
-                }
-              />
-            </IconButton>
-          </Box>
+          <Link to="/dashboard_admin/profile">
+            <Box sx={{ flexGrow: 0 }}>
+              <IconButton sx={{ p: 0 }}>
+                <Avatar
+                  alt="profile image"
+                  src={
+                    userDetails.profile_pic
+                      ? `http://localhost:90/${userDetails.profile_pic}`
+                      : "https://www.pngitem.com/pimgs/m/421-4212341_default-avatar-svg-hd-png-download.png"
+                  }
+                />
+              </IconButton>
+            </Box>
+          </Link>
         </Toolbar>
       </AppBar>
       <Box
