@@ -33,6 +33,7 @@ import ContactUs from "../../pages/ContactUs";
 import InboxMain from "../Inbox/InboxMain";
 import ForgetPasswordEmail from "../../pages/ForgetPasswordEmail";
 import OtpPasswordreset from "../../pages/OtpPasswordreset";
+import PrivateRoute from "../../ProtectedRoute";
 
 const Body = () => {
   return (
@@ -40,7 +41,6 @@ const Body = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/loginsuccess" element={<Loginsuccess />} />
-
         <Route path="/books" element={<Books />} />
         <Route path="/onlybooks" element={<Onlybooks />} />
         <Route path="/onlyebooks" element={<OnlyEBooks />} />
@@ -62,27 +62,161 @@ const Body = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/forgetpassword" element={<ForgetPasswordEmail />} />
 
-        <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="" element={<MyBooks />} />
-          <Route path="request" element={<MyRentRequest />} />
-          <Route path="exchangerequest" element={<MyExchangeRequest />} />
-          <Route path="messages" element={<Messenger />} />
-          <Route path="myebooks" element={<MyEBooks />} />
-          <Route path="myaudiobooks" element={<MyAudioBooks />} />
-          <Route path="setting" element={<Setting />} />
-          <Route path="Profilepage" element={<ProfilePage />}></Route>
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        >
+          <Route
+            path=""
+            element={
+              <PrivateRoute>
+                <MyBooks />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="request"
+            element={
+              <PrivateRoute>
+                <MyRentRequest />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="exchangerequest"
+            element={
+              <PrivateRoute>
+                <MyExchangeRequest />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="messages"
+            element={
+              <PrivateRoute>
+                <Messenger />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="myebooks"
+            element={
+              <PrivateRoute>
+                <MyEBooks />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="myaudiobooks"
+            element={
+              <PrivateRoute>
+                <MyAudioBooks />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="setting"
+            element={
+              <PrivateRoute>
+                <Setting />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="Profilepage"
+            element={
+              <PrivateRoute>
+                <ProfilePage />
+              </PrivateRoute>
+            }
+          ></Route>
         </Route>
-        <Route path="/dashboard_admin" element={<DashboardAdmin />}>
-          <Route path="" element={<DashboardHome />} />
-          <Route path="admin_approve" element={<AdminApprove />} />
-          <Route path="inbox" element={<InboxMain />} />
-          <Route path="audio_book" element={<AudioBookUpload />} />
-          <Route path="ebook" element={<EBookUpload />} />
-          <Route path="request" element={<EBookRentRequest />} />
-          <Route path="profile" element={<AdminProfile />} />
-          <Route path="adminSetting" element={<AdminSettings />} />
+        <Route
+          path="/dashboard_admin"
+          element={
+            <PrivateRoute>
+              <DashboardAdmin />
+            </PrivateRoute>
+          }
+        >
+          <Route
+            path=""
+            element={
+              <PrivateRoute>
+                <DashboardHome />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="admin_approve"
+            element={
+              <PrivateRoute>
+                {" "}
+                <AdminApprove />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="inbox"
+            element={
+              <PrivateRoute>
+                <InboxMain />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="audio_book"
+            element={
+              <PrivateRoute>
+                <AudioBookUpload />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="ebook"
+            element={
+              <PrivateRoute>
+                <EBookUpload />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="request"
+            element={
+              <PrivateRoute>
+                <EBookRentRequest />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <PrivateRoute>
+                <AdminProfile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="adminSetting"
+            element={
+              <PrivateRoute>
+                <AdminSettings />
+              </PrivateRoute>
+            }
+          />
         </Route>
-        <Route path="/wishlist" element={<Wishlist />} />
+        <Route
+          path="/wishlist"
+          element={
+            <PrivateRoute>
+              <Wishlist />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </>
   );
