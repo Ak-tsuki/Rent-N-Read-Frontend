@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AiFillRightCircle } from "react-icons/ai";
 import users from "../../assets/users.svg";
@@ -17,6 +17,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "./dashboardHome.scss";
+import axios from "axios";
 const barChartData = [
   { year: "2016", users: 30 },
   { year: "2017", users: 50 },
@@ -37,19 +38,39 @@ const LineChartData = [
 ];
 
 const DashboardHome = () => {
+  const [booksCount, setBooksCount] = useState(0);
+  const [usersCount, setUsersCount] = useState(0);
+  useEffect(() => {
+    axios
+      .get("http://localhost:90/books/count")
+      .then((res) => {
+        setBooksCount(res.data.count);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    axios
+      .get("http://localhost:90/users/count")
+      .then((res) => {
+        setUsersCount(res.data.count);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
   return (
     <div className="dashboard-home">
       <div className="dashboard-home__cards">
         <DashboardCard
           heading="users"
           icon={users}
-          count={200}
+          count={usersCount}
           link={"/users"}
         />
         <DashboardCard
           heading="books"
           icon={books}
-          count={200}
+          count={booksCount}
           link={"/books"}
         />
         <DashboardCard
@@ -59,7 +80,14 @@ const DashboardHome = () => {
           link={"/sales"}
         />
       </div>
-      <div className="dashboard-charts">
+      <iframe
+      className="mongodbchart"
+        title="chart"
+        width="640"
+        height="480"
+        src="https://charts.mongodb.com/charts-rentnread-kujtp/embed/charts?id=63b185c1-b222-4378-8345-6652df4f2d1c&maxDataAge=3600&theme=light&autoRefresh=true"
+      ></iframe>
+      {/* <div className="dashboard-charts">
         <div className="dashboard-charts__chart">
           <h1 className="dashboard-charts__chart--heading">Users Growth</h1>
 
@@ -87,7 +115,7 @@ const DashboardHome = () => {
             </LineChart>
           </ResponsiveContainer>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -97,9 +125,6 @@ const DashboardCard = ({ heading, icon, count, link }) => {
     <div className="dash-card">
       <div className="dash-card__heading">
         <span className="dash-card__heading--text">{heading}</span>
-        <Link to={link}>
-          <AiFillRightCircle className="dash-card__heading--icon" />
-        </Link>
       </div>
       <div className="dash-card__icon">
         <img src={icon} alt={heading} />
