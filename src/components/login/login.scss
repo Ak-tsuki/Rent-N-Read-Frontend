@@ -135,3 +135,14 @@ label{
     text-decoration: underline;
   }
 }
+
+.forget-link {
+  margin-top: 10px;
+  margin-left: 135px;
+  text-decoration: none;
+  color: #f52a2a;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

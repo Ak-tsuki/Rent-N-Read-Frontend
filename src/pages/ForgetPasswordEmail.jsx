@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./forgetPasswordEmail.scss";
 import { toast } from "react-toastify";
+import { MdEmail } from "react-icons/md";
 import OtpPasswordreset from "./OtpPasswordreset";
 
 const ForgetPasswordEmail = () => {
@@ -9,8 +11,10 @@ const ForgetPasswordEmail = () => {
   const [otpForm, showForm] = useState(true);
 
   const sendOTP = (e) => {
+    e.preventDefault();
+
     if (email === "") {
-      toast.error("Enter Your Email", {
+      toast.error("Enter your Email", {
         toastId: "error",
         position: "top-center",
         autoClose: 4000,
@@ -54,21 +58,29 @@ const ForgetPasswordEmail = () => {
   };
 
   return (
-    <div>
+    <div className="forget-container">
       {otpForm ? (
         // Email Sending
-        <div>
-          <p>Enter Your Email</p>
-          <label htmlFor="">Email</label>
-          <input
-            type="email"
-            name="Email"
-            id=""
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <button onClick={sendOTP}>Send OTP</button>
+        <div className="forget">
+          <h2 className="forget__heading">Enter your Email</h2>
+          <form className="forget__form">
+            <div className="forget__input">
+              <p className="feild_heading" htmlFor="">
+                Email Address
+              </p>
+              <input
+                type="email"
+                name="Email"
+                id=""
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+            </div>
+            <button className="forget__btn" onClick={sendOTP}>
+              Send OTP
+            </button>
+          </form>
         </div>
       ) : (
         // Password Reset form

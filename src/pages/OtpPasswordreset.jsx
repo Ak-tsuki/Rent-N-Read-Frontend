@@ -7,7 +7,9 @@ const OtpPasswordreset = (email) => {
   const [confirmpassword, setConfirmPassword] = useState("");
   const [otpcode, setOTPcode] = useState("");
 
-  const changePassword = () => {
+  const changePassword = (e) => {
+    e.preventDefault();
+
     if (password === "" || otpcode === "" || confirmpassword === "") {
       toast.error("Please fill the empty feilds", {
         toastId: "error",
@@ -17,7 +19,7 @@ const OtpPasswordreset = (email) => {
       return;
     }
     if (password !== confirmpassword) {
-      toast.error("Password and Confirm Password Does not match", {
+      toast.error("Password and Confirm Password doesnot match", {
         toastId: "error",
         position: "top-center",
         autoClose: 4000,
@@ -70,36 +72,48 @@ const OtpPasswordreset = (email) => {
   };
 
   return (
-    <div>
-      <p>Enter Your OTP code</p>
-      <label htmlFor="">OTP Code:</label>
-      <input
-        type="number"
-        name="otp"
-        id=""
-        onChange={(e) => {
-          setOTPcode(e.target.value);
-        }}
-      />
-      <label htmlFor="">Password:</label>
-      <input
-        type="password"
-        name=""
-        id=""
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-      />
-      <label htmlFor="">Confirm Password:</label>
-      <input
-        type="password"
-        name=""
-        id=""
-        onChange={(e) => {
-          setConfirmPassword(e.target.value);
-        }}
-      />
-      <button onClick={changePassword}>Change Password</button>
+    <div className="forget">
+      {/* <h2 className="forget__heading">Change Password</h2> */}
+      <form className="forget__form">
+        <div className="forget__input">
+          <p className="feild_heading" htmlFor="">
+            OTP Code
+          </p>
+          <input
+            type="number"
+            name="otp"
+            id=""
+            onChange={(e) => {
+              setOTPcode(e.target.value);
+            }}
+          />
+          <p className="feild_heading" htmlFor="">
+            New Password
+          </p>
+          <input
+            type="password"
+            name=""
+            id=""
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <p className="feild_heading" htmlFor="">
+            Confirm Password
+          </p>
+          <input
+            type="password"
+            name=""
+            id=""
+            onChange={(e) => {
+              setConfirmPassword(e.target.value);
+            }}
+          />
+        </div>
+        <button className="forget__btn" onClick={changePassword}>
+          Change Password
+        </button>
+      </form>
     </div>
   );
 };
