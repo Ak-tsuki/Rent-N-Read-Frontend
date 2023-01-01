@@ -260,6 +260,7 @@ const Onlybooks = () => {
             </button>
           </div>
           <div className="filter-elements mt-3">
+          <div className="price-box">{value[0]}</div>
             <Box sx={{ width: 180 }}>
               <Slider
                 getAriaLabel={() => "Temperature range"}
@@ -270,6 +271,7 @@ const Onlybooks = () => {
                 max={200}
               />
             </Box>
+            <div className="price-box">{value[1]}</div>
             <button
               className="filter-elements__btn"
               onClick={filterPriceHandler}
