@@ -41,14 +41,13 @@ const SingleBook = () => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState([]);
-  const [owner_img, setOwnerImg] = useState("");
   const [bookowner, setBookOwner] = useState("");
   const [desc, setDesc] = useState("");
   const [cost, setCost] = useState("");
   const [receiverId, setReceiverId] = useState("");
   const [listedBooks, setListedBooks] = useState([]);
-
   const [listreviews, setListReviews] = useState([]);
+  const [bookOwnerValueExists, setBookOwnerValueExists] = useState(false);
   useEffect(() => {
     axios
       .get("http://localhost:90/book/getone/" + book_id)
@@ -61,19 +60,18 @@ const SingleBook = () => {
         setCategory(res.data.data.category);
         setDesc(res.data.data.rich_desc);
         setCost(res.data.data.rent_cost_perday);
-        console.log(bookowner);
+        setBookOwnerValueExists(true);
         const data = {
           bookOwnerId: res.data.data.bookOwner,
         };
         return data;
       })
       .then((data) => {
-        console.log(data);
+        console.log(bookowner);
         axios
-          .get("http://localhost:90/bookowner/get/" + bookowner, data)
+          .get("http://localhost:90/bookowner/get/" + bookowner._id, data)
           .then((res) => {
             setReceiverId(res.data.data.username);
-            setReceiverId(res.data.data.profile_pic);
           })
           .catch((e) => {
             console.log(e);
@@ -100,7 +98,7 @@ const SingleBook = () => {
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [bookOwnerValueExists]);
   const config = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
@@ -108,7 +106,8 @@ const SingleBook = () => {
   };
   const sendMessage = (e) => {
     e.preventDefault();
-    setReceiverId();
+    // setReceiverId();
+    console.log(receiverId);
     if (localStorage.getItem("username") === receiverId) {
       toast.warning(
         "You cannot start a conversation with yourself.",
