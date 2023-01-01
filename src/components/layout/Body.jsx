@@ -34,6 +34,7 @@ import InboxMain from "../Inbox/InboxMain";
 import ForgetPasswordEmail from "../../pages/ForgetPasswordEmail";
 import OtpPasswordreset from "../../pages/OtpPasswordreset";
 import PrivateRoute from "../../ProtectedRoute";
+import NotFound from "../../pages/NotFound";
 
 const Body = () => {
   return (
@@ -217,6 +218,7 @@ const Body = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </>
   );
