@@ -40,6 +40,7 @@ const Messenger = () => {
     arrivalMessage &&
       currentChat?.members.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage]);
+    console.log(currentChat);
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
@@ -155,7 +156,11 @@ const Messenger = () => {
                 <div className="chatBoxTop">
                   {messages.map((m) => (
                     <div ref={scrollRef}>
-                      <Message message={m} own={m.sender === user} />
+                      <Message
+                        message={m}
+                        senderuser={m.sender}
+                        own={m.sender === user}
+                      />
                     </div>
                   ))}
                 </div>
@@ -174,7 +179,11 @@ const Messenger = () => {
                       value={newMessage}
                       data-test="text"
                     />{" "}
-                    <button className="chat__btn" type="submit" data-test="send-btn">
+                    <button
+                      className="chat__btn"
+                      type="submit"
+                      data-test="send-btn"
+                    >
                       Send message <MdSend />
                     </button>
                   </form>

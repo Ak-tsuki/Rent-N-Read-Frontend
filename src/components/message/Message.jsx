@@ -1,7 +1,28 @@
 import "./message.scss";
 import { format } from "timeago.js";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-export default function Message({ message, own }) {
+export default function Message({ message, own, senderuser }) {
+  var convuser;
+
+  const [userimg, setUserimg] = useState("");
+  const user = localStorage.getItem("username");
+  if (user !== senderuser) {
+    convuser = senderuser;
+  }
+  console.log(convuser);
+  useEffect(() => {
+    axios
+      .get("http://localhost:90/conversation/get_userimg/" + convuser)
+      .then((res) => {
+        console.log(res.data.data);
+        setUserimg(res.data.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [convuser]);
   return (
     <>
       {own ? (
@@ -16,7 +37,12 @@ export default function Message({ message, own }) {
           <div className="messageTop">
             <img
               className="messageImg"
-              src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-21.jpg"
+              src={
+                userimg
+                  ? `http://localhost:90/${userimg}`
+                  : "https://icon-library.com/images/no-user-image-icon/no-user-image-icon-21.jpg"
+              }
+              //
               alt=""
             />
             <div>
