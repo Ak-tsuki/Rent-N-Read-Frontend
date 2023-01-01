@@ -209,7 +209,11 @@ const SingleBook = () => {
         <div className="col-12 col-md-8  ">
           <div className="book-detail">
             <img
-              src={`http://localhost:90/${bookowner.profile_pic}`}
+              src={
+                bookowner.profile_pic
+                  ? `http://localhost:90/${bookowner.profile_pic}`
+                  : "https://icon-library.com/images/no-user-image-icon/no-user-image-icon-21.jpg"
+              }
               alt="Avatar"
               class="book-avatar"
             />
