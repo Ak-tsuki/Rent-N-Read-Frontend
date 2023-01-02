@@ -35,6 +35,7 @@ import ForgetPasswordEmail from "../../pages/ForgetPasswordEmail";
 import OtpPasswordreset from "../../pages/OtpPasswordreset";
 import PrivateRoute from "../../ProtectedRoute";
 import NotFound from "../../pages/NotFound";
+import About from "../../pages/About";
 
 const Body = () => {
   return (
@@ -47,6 +48,7 @@ const Body = () => {
         <Route path="/onlyebooks" element={<OnlyEBooks />} />
         <Route path="/onlyaudiobooks" element={<OnlyAudioBooks />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/about" element={<About />} />
         <Route
           path="/singlebook/:book_id/:authormain"
           element={<SingleBook />}

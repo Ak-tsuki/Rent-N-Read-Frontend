@@ -5,7 +5,6 @@ import logo from "../../assets/logo.svg";
 import "./header.scss";
 import AccountMenu from "./profile_dropdown";
 
-
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const menuClickHandler = (e) => {
@@ -44,17 +43,18 @@ const Header = () => {
         <Link className="nav__links" to="/books">
           Books
         </Link>
-        <Link className="nav__links">About</Link>
+        <Link className="nav__links" to="/about">
+          About
+        </Link>
         <Link className="nav__links" to="/contact">
           Contact Us
         </Link>
-        {localStorage.getItem("token") ? 
-        (<AccountMenu></AccountMenu>
+        {localStorage.getItem("token") ? (
+          <AccountMenu></AccountMenu>
+        ) : (
           // <Link className="nav__btn nav__links" to="login" onClick={logout}>
           //   Log out
           // </Link>
-        ) 
-        : (
           <Link className="nav__btn nav__links" to="login">
             Login
           </Link>
