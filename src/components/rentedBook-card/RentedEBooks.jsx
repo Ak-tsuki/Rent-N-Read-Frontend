@@ -67,12 +67,22 @@ const RentedEBook = ({ book }) => {
   const [payment_status, setPaymentStatus] = useState("");
   const [total_price, setTotalPrice] = useState("");
 
+  const [reviewexist, setReviewExist] = useState(false);
   useEffect(() => {
     const config = {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     };
+    axios
+      .get("http://localhost:90/check/reviewexist/" + ebookId._id, config)
+      .then((res) => {
+        console.log(res.data);
+        setReviewExist(res.data.success);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
     axios
       .get("http://localhost:90/rented_ebooks/getone/" + _id, config)
@@ -258,13 +268,18 @@ const RentedEBook = ({ book }) => {
             </div>
           )}
         </div>
-        <button
-          className=" btn-accept request-btn m-2"
-          onClick={handleOpenreview}
-          data-test="checkout-btn"
-        >
-          Give Review <FiSend className="ms-1 fs-5" />
-        </button>
+        {!reviewexist ? (
+          <button
+            className=" btn-review request-btn m-2"
+            onClick={handleOpenreview}
+            data-test="checkout-btn"
+          >
+            Give Review <FiSend className="ms-1 fs-5" />
+          </button>
+        ) : (
+          <div></div>
+        )}
+
         <Modal
           open={openreview}
           onClose={handleClosereview}

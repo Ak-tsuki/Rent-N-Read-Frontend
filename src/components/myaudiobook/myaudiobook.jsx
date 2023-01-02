@@ -13,12 +13,13 @@ import moment from "moment";
 import ReactAudioPlayer from "react-audio-player";
 import { FiSend } from "react-icons/fi";
 import ReviewRating from "../review_rating/ReviewRating";
+import { useState } from "react";
 
 const AudioBookCard = ({ book }) => {
   const [openreview, setOpenreview] = React.useState(false);
   const handleOpenreview = () => setOpenreview(true);
   const handleClosereview = () => setOpenreview(false);
-
+  const [reviewexist, setReviewExist] = useState(false);
   const { bought_date, payment_status, audiobookId, _id } = book;
   const style = {
     position: "absolute",
@@ -42,6 +43,19 @@ const AudioBookCard = ({ book }) => {
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
   };
+
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:90/check/reviewexist/" + audiobookId._id, config)
+      .then((res) => {
+        console.log(res.data);
+        setReviewExist(res.data.success);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   const deleteAudioBook = () => {
     // e.preventDefault();
     // const data ={
@@ -167,13 +181,19 @@ const AudioBookCard = ({ book }) => {
             >
               Download <FaCloudDownloadAlt />
             </button>
-            <button
-              className=" btn-accept request-btn m-2"
-              onClick={handleOpenreview}
-              data-test="checkout-btn"
-            >
-              Give Review <FiSend className="ms-1 fs-5" />
-            </button>
+
+            {!reviewexist ? (
+              <button
+                className="book-details__review--btn"
+                onClick={handleOpenreview}
+                data-test="checkout-btn"
+              >
+                Give Review <FiSend className="ms-1 fs-5" />
+              </button>
+            ) : (
+              <div></div>
+            )}
+
             <Modal
               open={openreview}
               onClose={handleClosereview}

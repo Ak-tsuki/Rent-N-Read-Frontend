@@ -28,12 +28,16 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
+const config = {
+  headers: {
+    Authorization: "Bearer " + localStorage.getItem("token"),
+  },
+};
 const Rentedbook = ({ book }) => {
   const [open, setOpen] = React.useState(false);
   const [openreview, setOpenreview] = React.useState(false);
   const [bookObject, setBookObject] = useState([]);
-
+  const [reviewexist, setReviewExist] = useState(false);
   const handleOpen = () => {
     setOpen(true);
     setBookObject(book);
@@ -88,6 +92,19 @@ const Rentedbook = ({ book }) => {
   //       console.log(e);
   //     });
   // };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:90/check/reviewexist/" + bookId._id, config)
+      .then((res) => {
+        console.log(res.data);
+        setReviewExist(res.data.success);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   return (
     <div className="book-cards">
       <FaTrash className="book-card__delete" />
@@ -159,13 +176,17 @@ const Rentedbook = ({ book }) => {
         </div>
         <div>
           {payment_status === "Pending" ? (
-            <button
-              className=" btn-accept request-btn m-2"
-              onClick={handleOpenreview}
-              data-test="review-btn"
-            >
-              Give Review <FiSend className="ms-1 fs-5" />
-            </button>
+            !reviewexist ? (
+              <button
+                className="btn-review request-btn m-2"
+                onClick={handleOpenreview}
+                data-test="review-btn"
+              >
+                Give Review <FiSend className="ms-1 fs-5" />
+              </button>
+            ) : (
+              <div></div>
+            )
           ) : (
             <div></div>
           )}

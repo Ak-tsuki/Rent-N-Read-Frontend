@@ -82,14 +82,16 @@ const ReviewRating = ({ id, book }) => {
       <p className="fontreview text-center mb-2 fs-4 fw-500">
         Give Your Review About The Book
       </p>
-      <Rating
-        className="d-flex justify-content-center my-4"
-        name="simple-controlled"
-        value={ratings}
-        onChange={(event, newValue) => {
-          setRatings(newValue);
-        }}
-      />
+      <div className="d-flex justify-content-center my-4">
+        <Rating
+          name="simple-controlled"
+          value={ratings}
+          onChange={(event, newValue) => {
+            setRatings(newValue);
+          }}
+        />
+      </div>
+
       <TextField
         required
         multiline

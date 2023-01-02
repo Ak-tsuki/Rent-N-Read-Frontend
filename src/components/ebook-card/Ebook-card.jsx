@@ -16,6 +16,8 @@ import { Worker } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/toolbar/lib/styles/index.css";
 import { getFilePlugin } from "@react-pdf-viewer/get-file";
+import ReviewRating from "../review_rating/ReviewRating";
+import { FiSend } from "react-icons/fi";
 
 const EbookCard = ({ book }) => {
   //   const [updateOpen, setUpdateOpen] = useState(false);
@@ -25,6 +27,12 @@ const EbookCard = ({ book }) => {
 
   const [viewPdf, setViewPdf] = useState("null");
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
+
+  const [openreview, setOpenreview] = React.useState(false);
+  const handleOpenreview = () => setOpenreview(true);
+  const handleClosereview = () => setOpenreview(false);
+
+  const [reviewexist, setReviewExist] = useState(false);
 
   const { _id, ebookId, rent_status, payment_status, total_price } = book;
   const style1 = {
@@ -39,6 +47,35 @@ const EbookCard = ({ book }) => {
     boxShadow: 24,
     p: 4,
   };
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "50%",
+    bgcolor: "background.paper",
+    borderRadius: "10px",
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+  useEffect(() => {
+    console.log(ebookId._id);
+    axios
+      .get("http://localhost:90/check/reviewexist/" + ebookId._id, config)
+      .then((res) => {
+        console.log(res.data);
+        setReviewExist(res.data.success);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   const onButtonClick = () => {
     // using Java Script method to get PDF file
@@ -53,12 +90,6 @@ const EbookCard = ({ book }) => {
         alink.click();
       });
     });
-  };
-
-  const config = {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("token"),
-    },
   };
 
   return (
@@ -116,6 +147,28 @@ const EbookCard = ({ book }) => {
             View Pdf
             <AiFillEye className="ms-1 fs-5" />
           </button>
+          {!reviewexist ? (
+            <button
+              className=" btn-review request-btn m-2"
+              onClick={handleOpenreview}
+              data-test="checkout-btn"
+            >
+              Give Review <FiSend className="ms-1 fs-5" />
+            </button>
+          ) : (
+            <div></div>
+          )}
+
+          <Modal
+            open={openreview}
+            onClose={handleClosereview}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <ReviewRating id={book.ebookId} book={"ebook"}></ReviewRating>
+            </Box>
+          </Modal>
         </div>
         <Modal
           open={view}

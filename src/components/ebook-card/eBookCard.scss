@@ -124,4 +124,16 @@
       }
     }
   }
+  .btn-review {
+    border: 3px solid #ffffff;
+    background-color: #ea5b1d;
+    color: rgb(255, 255, 255);
+    @media (max-width: 380px) {
+      font-size: 18px;
+    }
+  }
+  .btn-review:hover {
+    background-color: #96411d;
+    color: #ffffff;
+  }
 }
