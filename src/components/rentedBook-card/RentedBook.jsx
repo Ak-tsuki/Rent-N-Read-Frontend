@@ -175,7 +175,7 @@ const Rentedbook = ({ book }) => {
           )}
         </div>
         <div>
-          {payment_status === "Pending" ? (
+          {payment_status === "Paid" ? (
             !reviewexist ? (
               <button
                 className="btn-review request-btn m-2"
